@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-michroma: 'Michroma', 'Orbitron', 'Space Grotesk', sans-serif;
+  --font-orbitron: 'Orbitron', 'Michroma', sans-serif;
+  --font-deorme: 'Michroma', 'Orbitron', 'Deorme', 'Space Grotesk', sans-serif;
+}
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-michroma: 'Michroma', 'Orbitron', 'Space Grotesk', sans-serif;
+    --font-orbitron: 'Orbitron', 'Michroma', sans-serif;
+    --font-deorme: 'Michroma', 'Orbitron', 'Deorme', 'Space Grotesk', sans-serif;
+    --brand-red: #E5252A;
+    --brand-red-dark: #C91D22;
+    --brand-red-glow: rgba(229, 37, 42, 0.25);
+  }
+
+  /* Light Mode - Exact Flyer Aesthetic (Pure Crisp White, Geometric Accents, Red Branding) */
+  :root, html.light {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-card-hover: #fafafa;
+    --border-color: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --nav-bg: rgba(255, 255, 255, 0.92);
+    --banner-bg: #0f172a;
+    --grid-color: rgba(15, 23, 42, 0.05);
+    --color-canvas: #ffffff;
+    --color-foreground: #0f172a;
+  }
+
+  /* Dark Mode Defaults */
+  html.dark {
+    --bg-primary: #08090d;
+    --bg-secondary: #0d0f14;
+    --bg-tertiary: #141720;
+    --bg-card: #0c0e14;
+    --bg-card-hover: #12151e;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.15);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --nav-bg: rgba(8, 9, 13, 0.85);
+    --banner-bg: #050608;
+    --grid-color: rgba(255, 255, 255, 0.035);
+    --color-canvas: #08090d;
+    --color-foreground: #f8fafc;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Glass & Card styles */
+.glass-nav {
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(229, 37, 42, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(229, 37, 42, 0.15);
+}
+
+.glass-card-active {
+  background: var(--bg-card);
+  border-color: #E5252A;
+  box-shadow: 0 0 25px rgba(229, 37, 42, 0.18);
+}
+
+/* Red brand gradient text */
+html.dark .text-brand-gradient {
+  background: linear-gradient(135deg, #ffffff 25%, #fca5a5 65%, #E5252A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.light .text-brand-gradient {
+  background: linear-gradient(135deg, #0f172a 20%, #E5252A 70%, #b91c1c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E5252A;
+}
+
+/* Tech Grid Pattern */
+.tech-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+}
+
+.tech-dots-pattern {
+  background-size: 24px 24px;
+  background-image: radial-gradient(var(--grid-color) 1.5px, transparent 1px);
+}
+
+/* Flyer tech circuit background styling */
+.flyer-circuit-bg {
+  background-image: radial-gradient(rgba(229, 37, 42, 0.08) 1px, transparent 0), radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 0);
+  background-position: 0 0, 16px 16px;
+  background-size: 32px 32px;
+}
+
+/* Flyer Red Angular Slashes */
+.flyer-accent-edge {
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+}
+
+/* Deorme Display Font for Logotype */
+.font-deorme {
+  font-family: 'Deorme', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}

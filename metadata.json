@@ -1,0 +1,6 @@
+{
+  "name": "Freizy Technologies",
+  "description": "Enterprise AI, Flagship Products (Freizy Omnia Suite ERP, Lavida Health Buddy, KSM Autos), Custom Software, Cybersecurity, Robotics, Hardware Infrastructure, and Network Solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" class="dark scroll-smooth" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Freizy Technologies — Intelligence | Solutions | Beyond</title>
+    <meta
+      name="description"
+      content="Enterprise AI, Flagship Products (Freizy Omnia Suite ERP, Lavida Health Buddy, KSM Autos), Custom Software, Cybersecurity, Robotics, Hardware Infrastructure, and Network Solutions."
+    />
+    <meta
+      property="og:title"
+      content="Freizy Technologies — Intelligence | Solutions | Beyond"
+    />
+    <meta
+      property="og:description"
+      content="Enterprise AI, Flagship Products (Freizy Omnia Suite ERP, Lavida Health Buddy, KSM Autos), Custom Software, Cybersecurity, Robotics, Hardware Infrastructure, and Network Solutions."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Michroma&family=Orbitron:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          const savedTheme = localStorage.getItem("freizy_theme");
+          const root = document.documentElement;
+          if (savedTheme === "dark") {
+            root.classList.remove("light");
+            root.classList.add("dark");
+            root.setAttribute("data-theme", "dark");
+          } else {
+            root.classList.remove("dark");
+            root.classList.add("light");
+            root.setAttribute("data-theme", "light");
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body
+    class="bg-white text-slate-900 dark:bg-[#08090d] dark:text-[#f1f3f5] antialiased selection:bg-[#E5252A] selection:text-white overflow-x-hidden transition-colors duration-200"
+  >
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
