@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TiltCard3D } from './TiltCard3D';
 import {
   Layers,
   Activity,
@@ -251,49 +252,50 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
             const isSelected = activeProductId === product.id;
 
             return (
-              <button
-                key={product.id}
-                onClick={() => setActiveProductId(product.id)}
-                className={`p-6 rounded-2xl text-left transition-all duration-300 relative border flex flex-col justify-between ${
-                  isSelected
-                    ? 'bg-white dark:bg-neutral-900/90 border-[#E5252A] shadow-xl shadow-red-500/10 ring-2 ring-[#E5252A]/30'
-                    : 'bg-white/80 dark:bg-neutral-900/40 border-slate-200 dark:border-neutral-800 hover:border-slate-300 dark:hover:border-neutral-700 hover:bg-white dark:hover:bg-neutral-900/70'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div
-                      className={`p-3 rounded-xl transition-colors ${
-                        isSelected
-                          ? 'bg-[#E5252A] text-white shadow-md shadow-red-500/20'
-                          : 'bg-slate-100 dark:bg-neutral-800 text-slate-700 dark:text-neutral-300'
-                      }`}
-                    >
-                      <Icon className="w-6 h-6" />
+              <TiltCard3D key={product.id} intensity={10} elevation={16}>
+                <button
+                  onClick={() => setActiveProductId(product.id)}
+                  className={`w-full h-full p-6 rounded-2xl text-left transition-all duration-300 relative border flex flex-col justify-between ${
+                    isSelected
+                      ? 'bg-white dark:bg-neutral-900/90 border-[#E5252A] shadow-xl shadow-red-500/10 ring-2 ring-[#E5252A]/30'
+                      : 'bg-white/80 dark:bg-neutral-900/40 border-slate-200 dark:border-neutral-800 hover:border-slate-300 dark:hover:border-neutral-700 hover:bg-white dark:hover:bg-neutral-900/70'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div
+                        className={`p-3 rounded-xl transition-colors ${
+                          isSelected
+                            ? 'bg-[#E5252A] text-white shadow-md shadow-red-500/20'
+                            : 'bg-slate-100 dark:bg-neutral-800 text-slate-700 dark:text-neutral-300'
+                        }`}
+                      >
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-mono border ${product.badgeColor}`}>
+                        {product.badge}
+                      </span>
                     </div>
-                    <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-mono border ${product.badgeColor}`}>
-                      {product.badge}
+
+                    <div className="text-[11px] font-mono text-slate-500 dark:text-neutral-400 uppercase tracking-wider mb-1">
+                      {product.category}
+                    </div>
+                    <h3 className="text-xl font-bold font-heading text-slate-900 dark:text-white mb-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-neutral-400 line-clamp-2 mb-4 leading-relaxed">
+                      {product.tagline}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-neutral-800/80 text-xs font-medium">
+                    <span className={isSelected ? 'text-[#E5252A] font-semibold' : 'text-slate-500 dark:text-neutral-400'}>
+                      {isSelected ? 'Currently Viewing' : 'Explore Interactive Preview'}
                     </span>
+                    <ChevronRight className={`w-4 h-4 transition-transform ${isSelected ? 'translate-x-1 text-[#E5252A]' : 'text-slate-400'}`} />
                   </div>
-
-                  <div className="text-[11px] font-mono text-slate-500 dark:text-neutral-400 uppercase tracking-wider mb-1">
-                    {product.category}
-                  </div>
-                  <h3 className="text-xl font-bold font-heading text-slate-900 dark:text-white mb-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-neutral-400 line-clamp-2 mb-4 leading-relaxed">
-                    {product.tagline}
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-neutral-800/80 text-xs font-medium">
-                  <span className={isSelected ? 'text-[#E5252A] font-semibold' : 'text-slate-500 dark:text-neutral-400'}>
-                    {isSelected ? 'Currently Viewing' : 'Explore Interactive Preview'}
-                  </span>
-                  <ChevronRight className={`w-4 h-4 transition-transform ${isSelected ? 'translate-x-1 text-[#E5252A]' : 'text-slate-400'}`} />
-                </div>
-              </button>
+                </button>
+              </TiltCard3D>
             );
           })}
         </div>

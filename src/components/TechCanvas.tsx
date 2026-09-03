@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { useTheme } from '../context/ThemeContext';
+import React, { useEffect, useRef } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 interface TechCanvasProps {
   interactive?: boolean;
@@ -10,7 +10,7 @@ interface TechCanvasProps {
 export const TechCanvas: React.FC<TechCanvasProps> = ({
   interactive = true,
   density = 45,
-  className = '',
+  className = "",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -19,14 +19,14 @@ export const TechCanvas: React.FC<TechCanvasProps> = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationFrameId: number;
     let width = (canvas.width = canvas.offsetWidth);
     let height = (canvas.height = canvas.offsetHeight);
 
-    const isLight = theme === 'light';
+    const isLight = theme === "light";
 
     const mouse = {
       x: width / 2,
@@ -55,11 +55,15 @@ export const TechCanvas: React.FC<TechCanvasProps> = ({
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
+        vx: (Math.random() - 0.5) * 0.85,
+        vy: (Math.random() - 0.5) * 0.85,
         radius: Math.random() * 1.8 + 0.8,
-        baseAlpha: isLight ? Math.random() * 0.4 + 0.25 : Math.random() * 0.4 + 0.15,
-        alpha: isLight ? Math.random() * 0.4 + 0.25 : Math.random() * 0.4 + 0.15,
+        baseAlpha: isLight
+          ? Math.random() * 0.4 + 0.25
+          : Math.random() * 0.4 + 0.15,
+        alpha: isLight
+          ? Math.random() * 0.4 + 0.25
+          : Math.random() * 0.4 + 0.15,
         isRed: Math.random() > 0.78, // crimson nodes
         pulse: Math.random() * Math.PI * 2,
       });
@@ -91,8 +95,8 @@ export const TechCanvas: React.FC<TechCanvasProps> = ({
     };
 
     if (interactive) {
-      window.addEventListener('mousemove', handleMouseMove);
-      canvas.addEventListener('mouseleave', handleMouseLeave);
+      window.addEventListener("mousemove", handleMouseMove);
+      canvas.addEventListener("mouseleave", handleMouseLeave);
     }
 
     const render = () => {
@@ -162,7 +166,7 @@ export const TechCanvas: React.FC<TechCanvasProps> = ({
         if (p.isRed) {
           ctx.fillStyle = `rgba(229, 37, 42, ${p.baseAlpha + 0.4})`;
           ctx.shadowBlur = isLight ? 4 : 10;
-          ctx.shadowColor = 'rgba(229, 37, 42, 0.8)';
+          ctx.shadowColor = "rgba(229, 37, 42, 0.8)";
         } else {
           ctx.fillStyle = isLight
             ? `rgba(71, 85, 105, ${p.baseAlpha + 0.15})`
@@ -182,14 +186,17 @@ export const TechCanvas: React.FC<TechCanvasProps> = ({
       cancelAnimationFrame(animationFrameId);
       resizeObserver.disconnect();
       if (interactive) {
-        window.removeEventListener('mousemove', handleMouseMove);
-        canvas.removeEventListener('mouseleave', handleMouseLeave);
+        window.removeEventListener("mousemove", handleMouseMove);
+        canvas.removeEventListener("mouseleave", handleMouseLeave);
       }
     };
   }, [interactive, density, theme]);
 
   return (
-    <div ref={containerRef} className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
+    <div
+      ref={containerRef}
+      className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}
+    >
       <canvas ref={canvasRef} className="w-full h-full block" />
     </div>
   );

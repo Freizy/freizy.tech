@@ -12,6 +12,9 @@ import { CaseStudies } from './components/CaseStudies';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ConsultationModal } from './components/ConsultationModal';
+import { ScrollProgress } from './components/ScrollProgress';
+import { ParallaxBackground } from './components/ParallaxBackground';
+import { MotionSection } from './components/MotionSection';
 
 export default function App() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
@@ -36,7 +39,13 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-canvas)] text-[var(--color-foreground)] selection:bg-[#E5252A] selection:text-white font-sans transition-colors duration-300">
+    <div className="min-h-screen bg-[var(--color-canvas)] text-[var(--color-foreground)] selection:bg-[#E5252A] selection:text-white font-sans transition-colors duration-300 relative">
+      {/* 3D Scroll Progress Top Indicator */}
+      <ScrollProgress />
+
+      {/* Spatial Multi-Depth Parallax Background Layer */}
+      <ParallaxBackground />
+
       {/* Navigation */}
       <Navbar
         onOpenConsultation={() => handleOpenConsultation()}
@@ -44,51 +53,69 @@ export default function App() {
       />
 
       {/* Main Content */}
-      <main>
-        {/* Apple-Tier Cinematic Hero */}
+      <main className="relative z-10">
+        {/* Apple-Tier Cinematic Hero with 3D WebGL Core */}
         <Hero
           onOpenConsultation={() => handleOpenConsultation()}
           onOpenConfigurator={handleOpenConfigurator}
         />
 
         {/* 8 Core Pillars */}
-        <ServicePillars
-          onSelectService={(service) => handleOpenConsultation(service)}
-        />
+        <MotionSection id="services-section">
+          <ServicePillars
+            onSelectService={(service) => handleOpenConsultation(service)}
+          />
+        </MotionSection>
 
         {/* Flagship Products Showcase (Freizy Omnia Suite, Lavida Health Buddy, KSM Autos) */}
-        <ProductsShowcase
-          onOpenConsultation={(productName) => handleOpenConsultation(productName)}
-        />
+        <MotionSection id="products-section">
+          <ProductsShowcase
+            onOpenConsultation={(productName) => handleOpenConsultation(productName)}
+          />
+        </MotionSection>
 
         {/* Dedicated Full-Lifecycle Software Development */}
-        <SoftwareShowcase
-          onOpenConsultation={() => handleOpenConsultation('Software Development')}
-        />
+        <MotionSection id="software-section">
+          <SoftwareShowcase
+            onOpenConsultation={() => handleOpenConsultation('Software Development')}
+          />
+        </MotionSection>
 
         {/* Hardware & Network Infrastructure */}
-        <HardwareNetworkShowcase />
+        <MotionSection id="hardware-section">
+          <HardwareNetworkShowcase />
+        </MotionSection>
 
         {/* Interactive Architecture Builder & ROI/Spec Configurator */}
-        <InteractiveSystemBuilder
-          onProceedWithConfig={handleProceedWithConfig}
-        />
+        <MotionSection id="configurator-section">
+          <InteractiveSystemBuilder
+            onProceedWithConfig={handleProceedWithConfig}
+          />
+        </MotionSection>
 
         {/* Developer Sandbox & Multi-Language API Console */}
-        <InteractiveCodeSandbox />
+        <MotionSection id="sandbox-section">
+          <InteractiveCodeSandbox />
+        </MotionSection>
 
         {/* Concept to Code Lifecycle Pipeline */}
-        <ProcessPipeline
-          onOpenConsultation={() => handleOpenConsultation()}
-        />
+        <MotionSection id="pipeline-section">
+          <ProcessPipeline
+            onOpenConsultation={() => handleOpenConsultation()}
+          />
+        </MotionSection>
 
         {/* Enterprise Case Studies & Verifiable Metrics */}
-        <CaseStudies
-          onOpenConsultation={() => handleOpenConsultation()}
-        />
+        <MotionSection id="cases-section">
+          <CaseStudies
+            onOpenConsultation={() => handleOpenConsultation()}
+          />
+        </MotionSection>
 
         {/* Contact & Consultation Booking with Flyer Info */}
-        <ContactSection initialNotes={configNotes} />
+        <MotionSection id="contact-section">
+          <ContactSection initialNotes={configNotes} />
+        </MotionSection>
       </main>
 
       {/* Structured Footer */}
