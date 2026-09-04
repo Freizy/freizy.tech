@@ -38,8 +38,8 @@ const item = {
 
 const stats: { to: number; prefix?: string; suffix?: string; label: string }[] =
   [
-    { to: 8, suffix: "+", label: "service areas, one accountable team" },
-    { to: 6, suffix: "+", label: "maintained products in active use" },
+    { to: 8, label: "service areas, one accountable team" },
+    { to: 6, label: "maintained products in active use" },
     { to: 12, suffix: "hrs", label: "target response on new enquiries" },
     { to: 2022, prefix: "Since ", label: "building and supporting systems" },
   ];
@@ -183,7 +183,7 @@ export const Hero: React.FC<HeroProps> = ({
             variants={item}
             className="text-[40px] leading-[1.05] sm:text-[64px] font-semibold tracking-tight text-[#1d1d1f] dark:text-white max-w-[820px] mx-auto"
           >
-            Software, AI and infrastructure that hold up in production.
+            AI, Software and Infrastructure that hold up in production.
           </motion.h1>
           <motion.p
             variants={item}

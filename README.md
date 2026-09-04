@@ -33,4 +33,4 @@ Company site for Freizy Technologies (Accra, Ghana): applied AI, software develo
 
 - Phone: +233 24 035 2196 · +233 26 624 2703
 - Email: info@freizytech.com
-- Web: https://www.freizytech.com
+- Web: https://freizy.tech

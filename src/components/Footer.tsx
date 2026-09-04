@@ -42,7 +42,7 @@ export const Footer: React.FC = () => {
               <li>Sales: <a href="tel:+233240352196" className="hover:underline">+233 24 035 2196</a></li>
               <li>Support: <a href="tel:+233266242703" className="hover:underline">+233 26 624 2703</a></li>
               <li><a href="mailto:info@freizy.tech" className="hover:underline">info@freizy.tech</a></li>
-              <li><a href="https://www.freizytech.com" className="hover:underline">www.freizytech.com</a></li>
+              <li><a href="https://freizy.tech" target="_blank" rel="noopener noreferrer" className="hover:underline">freizy.tech</a></li>
               <li><a href="#contact" className="hover:underline">Request a call</a></li>
             </ul>
           </div>
