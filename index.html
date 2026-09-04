@@ -3,34 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Freizy Technologies — Intelligence | Solutions | Beyond</title>
+    <title>Freizy Technologies — Software, AI and Infrastructure</title>
     <meta
       name="description"
-      content="Enterprise AI, Flagship Products (Freizy Omnia Suite ERP, Lavida Health Buddy, KSM Autos), Custom Software, Cybersecurity, Robotics, Hardware Infrastructure, and Network Solutions."
+      content="Freizy Technologies designs and builds business software, applied AI, and IT infrastructure. Products include Freizy Omnia Suite, Lavida Health Buddy and KSM Autos."
     />
     <meta
       property="og:title"
-      content="Freizy Technologies — Intelligence | Solutions | Beyond"
+      content="Freizy Technologies — Software, AI and Infrastructure"
     />
     <meta
       property="og:description"
-      content="Enterprise AI, Flagship Products (Freizy Omnia Suite ERP, Lavida Health Buddy, KSM Autos), Custom Software, Cybersecurity, Robotics, Hardware Infrastructure, and Network Solutions."
+      content="Business software, applied AI, and dependable IT infrastructure — designed, built and supported by one team."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://www.freizytech.com/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://www.freizytech.com/og-image.png" />
     <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Michroma&family=Orbitron:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <script>
       (function () {
         try {
           const savedTheme = localStorage.getItem("freizy_theme");
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
           const root = document.documentElement;
-          if (savedTheme === "dark") {
+          if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
             root.classList.remove("light");
             root.classList.add("dark");
             root.setAttribute("data-theme", "dark");

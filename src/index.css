@@ -3,84 +3,82 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-michroma: 'Michroma', 'Orbitron', 'Space Grotesk', sans-serif;
-  --font-orbitron: 'Orbitron', 'Michroma', sans-serif;
-  --font-deorme: 'Michroma', 'Orbitron', 'Deorme', 'Space Grotesk', sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Orbitron', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Orbitron', -apple-system, 'Segoe UI', sans-serif;
 }
 
 @layer base {
   :root {
-    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-heading: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-    --font-michroma: 'Michroma', 'Orbitron', 'Space Grotesk', sans-serif;
-    --font-orbitron: 'Orbitron', 'Michroma', sans-serif;
-    --font-deorme: 'Michroma', 'Orbitron', 'Deorme', 'Space Grotesk', sans-serif;
-    --brand-red: #E5252A;
-    --brand-red-dark: #C91D22;
-    --brand-red-glow: rgba(229, 37, 42, 0.25);
+    /* Flyer-matched brand: vivid flyer red, near-black footer, light gray */
+    --brand-red: #ed1c24;
+    --brand-red-dark: #c41218;
+    --flyer-red: #ed1c24;
+    --flyer-black: #0b0b0d;
+    --flyer-gray: #f4f4f5;
   }
 
-  /* Light Mode - Exact Flyer Aesthetic (Pure Crisp White, Geometric Accents, Red Branding) */
   :root, html.light {
     --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
-    --bg-tertiary: #f1f5f9;
+    --bg-secondary: #f5f5f7;
     --bg-card: #ffffff;
-    --bg-card-hover: #fafafa;
-    --border-color: #e2e8f0;
-    --border-strong: #cbd5e1;
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
-    --text-dim: #94a3b8;
-    --nav-bg: rgba(255, 255, 255, 0.92);
-    --banner-bg: #0f172a;
-    --grid-color: rgba(15, 23, 42, 0.05);
+    --border-color: #e5e5ea;
+    --text-primary: #1d1d1f;
+    --text-secondary: #424245;
+    --text-muted: #6e6e73;
+    --nav-bg: rgba(255, 255, 255, 0.8);
     --color-canvas: #ffffff;
-    --color-foreground: #0f172a;
+    --color-foreground: #1d1d1f;
   }
 
-  /* Dark Mode Defaults */
   html.dark {
-    --bg-primary: #08090d;
-    --bg-secondary: #0d0f14;
-    --bg-tertiary: #141720;
-    --bg-card: #0c0e14;
-    --bg-card-hover: #12151e;
-    --border-color: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.15);
-    --text-primary: #f8fafc;
-    --text-secondary: #cbd5e1;
-    --text-muted: #94a3b8;
-    --text-dim: #64748b;
-    --nav-bg: rgba(8, 9, 13, 0.85);
-    --banner-bg: #050608;
-    --grid-color: rgba(255, 255, 255, 0.035);
-    --color-canvas: #08090d;
-    --color-foreground: #f8fafc;
+    --bg-primary: #000000;
+    --bg-secondary: #0b0b0d;
+    --bg-card: #101013;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-primary: #f5f5f7;
+    --text-secondary: #c7c7cc;
+    --text-muted: #86868b;
+    --nav-bg: rgba(0, 0, 0, 0.72);
+    --color-canvas: #000000;
+    --color-foreground: #f5f5f7;
   }
 
   body {
     font-family: var(--font-sans);
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    transition: background-color 0.25s ease, color 0.25s ease;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.011em;
   }
 
-  h1, h2, h3, h4, .font-heading {
+  h1, h2, .font-heading {
     font-family: var(--font-heading);
+    letter-spacing: 0.01em;
+  }
+
+  h3, h4 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.011em;
   }
 
   code, pre, .font-mono {
     font-family: var(--font-mono);
   }
+
+  ::selection {
+    background: #1d1d1f;
+    color: #fff;
+  }
+  html.dark ::selection {
+    background: #f5f5f7;
+    color: #000;
+  }
 }
 
-/* Glass & Card styles */
+/* Apple-style nav */
 .glass-nav {
   background: var(--nav-bg);
   backdrop-filter: blur(20px) saturate(180%);
@@ -88,84 +86,253 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+/* Calm cards — no glow, no neon */
 .glass-card {
   background: var(--bg-card);
-  backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(229, 37, 42, 0.4);
-  box-shadow: 0 10px 30px -10px rgba(229, 37, 42, 0.15);
+  border-color: #d2d2d7;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+html.dark .glass-card:hover {
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
-.glass-card-active {
+.apple-panel {
+  background: #f5f5f7;
+  border: 1px solid transparent;
+}
+html.dark .apple-panel {
+  background: #0f0f12;
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* Restrained eyebrow label (Nvidia-style) */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ---- Flyer-matched details (picked from official flyer) ---- */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Flyer tagline: INTELLIGENCE | SOLUTIONS | BEYOND with red pipes */
+.flyer-tagline {
+  font-family: var(--font-sans);
+  letter-spacing: 0.22em;
+  font-weight: 500;
+}
+.flyer-tagline .pipe {
+  color: var(--flyer-red);
+  font-weight: 700;
+}
+
+/* Flyer eyebrow: INNOVATION BUILDS TOMORROW — right aligned + red rule */
+.flyer-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.5;
+}
+.flyer-eyebrow::after {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 3px;
+  background: var(--flyer-red);
+  margin-top: 8px;
+  margin-left: auto;
+}
+
+/* Faint circuit background like flyer top-right */
+.circuit-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='320' height='180' viewBox='0 0 320 180' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23000' stroke-opacity='0.07' stroke-width='1'%3E%3Cpath d='M10 10 H110 L140 40 H230'/%3E%3Cpath d='M10 30 H90 L130 70 H250 L280 100'/%3E%3Cpath d='M180 10 V50 L210 80 H300'/%3E%3Ccircle cx='230' cy='40' r='3' fill='%23000' fill-opacity='0.07' stroke='none'/%3E%3Ccircle cx='280' cy='100' r='3' fill='%23000' fill-opacity='0.07' stroke='none'/%3E%3Ccircle cx='130' cy='70' r='3' fill='%23000' fill-opacity='0.07' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 420px auto;
+}
+html.dark .circuit-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='320' height='180' viewBox='0 0 320 180' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23fff' stroke-opacity='0.08' stroke-width='1'%3E%3Cpath d='M10 10 H110 L140 40 H230'/%3E%3Cpath d='M10 30 H90 L130 70 H250 L280 100'/%3E%3Cpath d='M180 10 V50 L210 80 H300'/%3E%3Ccircle cx='230' cy='40' r='3' fill='%23fff' fill-opacity='0.08' stroke='none'/%3E%3Ccircle cx='280' cy='100' r='3' fill='%23fff' fill-opacity='0.08' stroke='none'/%3E%3Ccircle cx='130' cy='70' r='3' fill='%23fff' fill-opacity='0.08' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Diagonal slash accent like flyer red/gray bars */
+.slash-accent {
+  clip-path: polygon(18% 0, 100% 0, 82% 100%, 0 100%);
+}
+.slash-thin {
+  clip-path: polygon(30% 0, 36% 0, 6% 100%, 0 100%);
+}
+
+/* Flyer icon box: white box, gray border, icon left */
+.flyer-icon-box {
   background: var(--bg-card);
-  border-color: #E5252A;
-  box-shadow: 0 0 25px rgba(229, 37, 42, 0.18);
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+}
+html.dark .flyer-icon-box {
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
-/* Red brand gradient text */
+/* Flyer footer bar: near-black with red top rule */
+.flyer-footer-bar {
+  background: var(--flyer-black);
+  border-top: 4px solid var(--flyer-red);
+}
+
+/* Body link style like Apple */
+.link-arrow {
+  color: #1d1d1f;
+  font-weight: 500;
+}
+html.dark .link-arrow {
+  color: #f5f5f7;
+}
+.link-arrow:hover {
+  text-decoration: underline;
+}
+
+/* Hero gradient headline + circuit texture (first-version hero effects) */
 html.dark .text-brand-gradient {
   background: linear-gradient(135deg, #ffffff 25%, #fca5a5 65%, #E5252A 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 html.light .text-brand-gradient {
   background: linear-gradient(135deg, #0f172a 20%, #E5252A 70%, #b91c1c 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #E5252A;
-}
-
-/* Tech Grid Pattern */
-.tech-grid-pattern {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-}
-
-.tech-dots-pattern {
-  background-size: 24px 24px;
-  background-image: radial-gradient(var(--grid-color) 1.5px, transparent 1px);
-}
-
-/* Flyer tech circuit background styling */
 .flyer-circuit-bg {
   background-image: radial-gradient(rgba(229, 37, 42, 0.08) 1px, transparent 0), radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 0);
   background-position: 0 0, 16px 16px;
   background-size: 32px 32px;
 }
 
-/* Flyer Red Angular Slashes */
-.flyer-accent-edge {
-  clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+/* Quiet scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #c7c7cc;
+  border-radius: 8px;
+  border: 2px solid var(--bg-primary);
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #3a3a3c;
 }
 
-/* Deorme Display Font for Logotype */
-.font-deorme {
-  font-family: 'Deorme', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ---- Interactive polish: parallax + clip masks (Apple/Nvidia-restrained) ---- */
+
+/* Smooth parallax layers */
+.parallax-layer {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Clip-mask section edges — subtle Nvidia-style angles */
+.clip-slant-top {
+  clip-path: polygon(0 28px, 100% 0, 100% 100%, 0 100%);
+}
+.clip-slant-both {
+  clip-path: polygon(0 28px, 100% 0, 100% calc(100% - 28px), 0 100%);
+}
+@media (min-width: 640px) {
+  .clip-slant-top {
+    clip-path: polygon(0 48px, 100% 0, 100% 100%, 0 100%);
+  }
+  .clip-slant-both {
+    clip-path: polygon(0 48px, 100% 0, 100% calc(100% - 48px), 0 100%);
+  }
+}
+
+/* Image / panel clip reveal helper (animated via framer-motion clipPath) */
+.clip-reveal {
+  will-change: clip-path, transform;
+  overflow: hidden;
+}
+
+/* Card lift — Apple-like hover, no glow */
+.lift {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.2s ease;
+}
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+html.dark .lift:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Stagger children fade helper */
+.stagger-parent > * {
+  will-change: transform, opacity;
+}
+
+/* Ticker — slow, quiet, pauses on hover */
+@keyframes ticker-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: ticker-x 36s linear infinite;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/* Sharp angular design — ditch rounded rectangles.
+   NOTE: this intentionally flattens every rounded-* utility site-wide
+   (cards, pills, badges, progress bars). Window traffic lights opt back
+   out via .win-controls below. Prefer removing rounded-* classes at the
+   call site over adding more exemptions here. */
+[class*="rounded-"] {
+  border-radius: 0 !important;
+}
+
+/* Telemetry window traffic lights stay round (macOS style) */
+.win-controls .tl {
+  border-radius: 9999px !important;
+}
+
+/* Orbitron main headings: keep tracking open for the wide display face */
+h1, h2 {
+  letter-spacing: 0.015em;
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
