@@ -84,8 +84,7 @@ export function MonitorShell<TabId extends string>({
     <div className="apple-panel rounded-2xl overflow-hidden">
       <div className="px-5 py-3 flex flex-wrap items-center justify-between gap-3 border-b border-black/5 dark:border-white/10">
         <div className="flex items-center gap-2">
-          <WindowControls />
-          <span className="ml-2 text-[12px] text-[#6e6e73] dark:text-neutral-500 font-mono">
+          <span className="text-[12px] text-[#6e6e73] dark:text-neutral-500 font-mono">
             {title}
           </span>
         </div>
@@ -107,6 +106,8 @@ export function MonitorShell<TabId extends string>({
             {paused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
             {paused ? 'Resume' : 'Pause'}
           </button>
+          <span className="w-px self-stretch bg-black/10 dark:bg-white/10" aria-hidden="true" />
+          <WindowControls />
         </div>
       </div>
 

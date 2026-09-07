@@ -319,11 +319,6 @@ html.dark .lift:hover {
   border-radius: 0 !important;
 }
 
-/* Telemetry window traffic lights stay round (macOS style) */
-.win-controls .tl {
-  border-radius: 9999px !important;
-}
-
 /* Orbitron main headings: keep tracking open for the wide display face */
 h1, h2 {
   letter-spacing: 0.015em;
