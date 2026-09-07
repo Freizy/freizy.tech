@@ -1,7 +1,12 @@
 import React from 'react';
 import { BrandLogo } from './BrandLogo';
+import type { LegalKind } from './LegalModal';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenLegal: (kind: LegalKind) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
   return (
     <footer className="bg-[#f5f5f7] dark:bg-[#0b0b0d] border-t border-black/10 dark:border-white/10 transition-colors">
       <div className="max-w-[1120px] mx-auto px-5 py-12">
@@ -50,8 +55,12 @@ export const Footer: React.FC = () => {
         <div className="mt-10 pt-6 border-t border-black/10 dark:border-white/10 flex flex-col sm:flex-row justify-between gap-2 text-[12px] text-[#6e6e73] dark:text-neutral-500">
           <span>© {new Date().getFullYear()} Freizy Technologies. All rights reserved.</span>
           <span className="flex gap-4">
-            <a href="#contact" className="hover:underline">Privacy</a>
-            <a href="#contact" className="hover:underline">Terms</a>
+            <button onClick={() => onOpenLegal('privacy')} className="hover:underline">
+              Privacy
+            </button>
+            <button onClick={() => onOpenLegal('terms')} className="hover:underline">
+              Terms
+            </button>
             <a href="#hero" className="hover:underline">Back to top</a>
           </span>
         </div>

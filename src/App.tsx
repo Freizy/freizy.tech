@@ -12,12 +12,14 @@ import { CaseStudies } from './components/CaseStudies';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ConsultationModal } from './components/ConsultationModal';
+import { LegalModal, type LegalKind } from './components/LegalModal';
 import { ScrollProgress } from './components/ScrollProgress';
 import { ParallaxBackground } from './components/ParallaxBackground';
 
 export default function App() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('General enquiry');
+  const [legalModal, setLegalModal] = useState<LegalKind | null>(null);
 
   const handleOpenConsultation = (serviceName?: string) => {
     if (serviceName) setSelectedService(serviceName);
@@ -54,7 +56,7 @@ export default function App() {
           <ContactSection initialNotes={''} />
         </main>
 
-        <Footer />
+        <Footer onOpenLegal={(kind) => setLegalModal(kind)} />
       </div>
 
       <ConsultationModal
@@ -63,6 +65,8 @@ export default function App() {
         initialService={selectedService}
         initialNotes={''}
       />
+
+      <LegalModal open={legalModal} onClose={() => setLegalModal(null)} />
     </div>
   );
 }
