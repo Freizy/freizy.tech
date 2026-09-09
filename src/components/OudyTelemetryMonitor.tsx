@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import {
   MonitorShell,
@@ -33,7 +33,7 @@ const INITIAL: FeedItem[] = [
   { id: 1, text: 'Check-in burst — 25 in 5 min', detail: 'Gate A · main entrance', time: nowTime() },
 ];
 
-export const OudyTelemetryMonitor: React.FC = () => {
+export const OudyTelemetryMonitor: FC = () => {
   const [tab, setTab] = useState<TabId>('events');
   const [paused, setPaused] = useState(false);
   const [soldToday, setSoldToday] = useState(312);

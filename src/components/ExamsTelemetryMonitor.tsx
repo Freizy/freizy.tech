@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import {
   MonitorShell,
   Kpi,
@@ -32,7 +32,7 @@ const INITIAL: FeedItem[] = [
   { id: 1, text: 'Results released — 120 scripts', detail: 'SMS summaries sent', time: nowTime() },
 ];
 
-export const ExamsTelemetryMonitor: React.FC = () => {
+export const ExamsTelemetryMonitor: FC = () => {
   const [tab, setTab] = useState<TabId>('exams');
   const [paused, setPaused] = useState(false);
   const [gradedToday, setGradedToday] = useState(212);

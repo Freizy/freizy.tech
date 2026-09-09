@@ -62,7 +62,6 @@ export async function submitEnquiry(payload: EnquiryPayload): Promise<void> {
   } catch {
     /* ignore */
   }
-  if (import.meta.env.DEV) console.log('[contact] web3forms response:', res.status, data);
   if (res.ok && data.success) return;
   throw new Error(data.message || 'Something went wrong sending your message.');
 }

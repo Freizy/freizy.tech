@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import {
   MonitorShell,
   Kpi,
@@ -38,7 +38,7 @@ const PARTS = [
   { name: 'Oil filters', left: '6 left · order placed', pct: 15 },
 ];
 
-export const KsmTelemetryMonitor: React.FC = () => {
+export const KsmTelemetryMonitor: FC = () => {
   const [tab, setTab] = useState<TabId>('bookings');
   const [paused, setPaused] = useState(false);
   const [bookings, setBookings] = useState(11);

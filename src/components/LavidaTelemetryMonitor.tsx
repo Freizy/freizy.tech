@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import {
   MonitorShell,
   Kpi,
@@ -38,7 +38,7 @@ const QUEUES = [
   { name: 'Lab queue', status: '4 samples pending', pct: 55 },
 ];
 
-export const LavidaTelemetryMonitor: React.FC = () => {
+export const LavidaTelemetryMonitor: FC = () => {
   const [tab, setTab] = useState<TabId>('appointments');
   const [paused, setPaused] = useState(false);
   const [todayCount, setTodayCount] = useState(24);

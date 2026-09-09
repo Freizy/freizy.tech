@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, type FC } from 'react';
 import { X } from 'lucide-react';
 
 export type LegalKind = 'terms' | 'privacy';
@@ -83,7 +83,7 @@ const CONTENT: Record<LegalKind, { title: string; updated: string; sections: { h
   },
 };
 
-export const LegalModal: React.FC<LegalModalProps> = ({ open, onClose }) => {
+export const LegalModal: FC<LegalModalProps> = ({ open, onClose }) => {
   const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<Element | null>(null);
 

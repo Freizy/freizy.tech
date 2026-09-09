@@ -1,15 +1,14 @@
-import React from "react";
+import { type FC } from "react";
 import logoPng from "../assets/logo.png";
 
 interface BrandLogoProps {
   size?: "sm" | "md" | "lg";
   showText?: boolean;
-  withTagline?: boolean;
   className?: string;
   invertedText?: boolean;
 }
 
-export const BrandLogo: React.FC<BrandLogoProps> = ({
+export const BrandLogo: FC<BrandLogoProps> = ({
   size = "md",
   showText = true,
   className = "",
@@ -28,8 +27,6 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       <img
         src={logoPng}
         alt="Freizy Technologies logo"
-        width={Math.round((s.iconSize * 120) / 171)}
-        height={s.iconSize}
         className="flex-shrink-0 object-contain"
         style={{ height: s.iconSize, width: 'auto' }}
       />

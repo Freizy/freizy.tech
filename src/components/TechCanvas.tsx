@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef, type FC } from "react";
 import { useTheme } from "../context/ThemeContext";
 
 interface TechCanvasProps {
@@ -7,7 +7,7 @@ interface TechCanvasProps {
   className?: string;
 }
 
-export const TechCanvas: React.FC<TechCanvasProps> = ({
+export const TechCanvas: FC<TechCanvasProps> = ({
   interactive = true,
   density = 45,
   className = "",
@@ -121,7 +121,7 @@ export const TechCanvas: React.FC<TechCanvasProps> = ({
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             if (hasRed) {
-              ctx.strokeStyle = `rgba(229, 37, 42, ${alpha * 2})`;
+              ctx.strokeStyle = `rgba(237, 28, 36, ${alpha * 2})`;
             } else {
               ctx.strokeStyle = isLight
                 ? `rgba(100, 116, 139, ${alpha})`
@@ -164,9 +164,9 @@ export const TechCanvas: React.FC<TechCanvasProps> = ({
         ctx.beginPath();
         ctx.arc(p.x, p.y, Math.max(0.6, currentRadius), 0, Math.PI * 2);
         if (p.isRed) {
-          ctx.fillStyle = `rgba(229, 37, 42, ${p.baseAlpha + 0.4})`;
+          ctx.fillStyle = `rgba(237, 28, 36, ${p.baseAlpha + 0.4})`;
           ctx.shadowBlur = isLight ? 4 : 10;
-          ctx.shadowColor = "rgba(229, 37, 42, 0.8)";
+          ctx.shadowColor = "rgba(237, 28, 36, 0.8)";
         } else {
           ctx.fillStyle = isLight
             ? `rgba(71, 85, 105, ${p.baseAlpha + 0.15})`

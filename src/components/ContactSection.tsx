@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState, useEffect, type FC, type FormEvent } from 'react';
 import { motion } from 'motion/react';
 import { MessageCircle } from 'lucide-react';
 import { submitEnquiry } from '../lib/contact';
@@ -7,7 +7,7 @@ interface ContactSectionProps {
   initialNotes?: string;
 }
 
-export const ContactSection: React.FC<ContactSectionProps> = ({ initialNotes = '' }) => {
+export const ContactSection: FC<ContactSectionProps> = ({ initialNotes = '' }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,16 +21,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialNotes = '
   const [honeypot, setHoneypot] = useState('');
   const startedAt = useRef(Date.now());
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (initialNotes) setFormData((prev) => ({ ...prev, message: initialNotes }));
   }, [initialNotes]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setSending(true);
     setSubmitError(null);
     try {
       await submitEnquiry({ ...formData, website: honeypot, startedAt: startedAt.current });
+      setFormData({ name: '', email: '', company: '', topic: 'General enquiry', message: '' });
       setSent(true);
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : 'Something went wrong sending your message.');
@@ -105,22 +106,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialNotes = '
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[13px] text-[#424245] dark:text-neutral-300 mb-1.5">Name</label>
-                      <input required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Your name" className={inputCls} />
+                      <label htmlFor="contact-name" className="block text-[13px] text-[#424245] dark:text-neutral-300 mb-1.5">Name</label>
+                      <input id="contact-name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Your name" className={inputCls} />
                     </div>
                     <div>
-                      <label className="block text-[13px] text-[#424245] dark:text-neutral-300 mb-1.5">Work email</label>
-                      <input required type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="you@company.com" className={inputCls} />
+                      <label htmlFor="contact-email" className="block text-[13px] text-[#424245] dark:text-neutral-300 mb-1.5">Work email</label>
+                      <input id="contact-email" required type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="you@company.com" className={inputCls} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[13px] text-[#424245] dark:text-neutral-300 mb-1.5">Company <span className="text-[#86868b]">(optional)</span></label>
-                      <input value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder="Company" className={inputCls} />
+                      <label htmlFor="contact-company" className="block text-[13px] text-[#424245] dark:text-neutral-300 mb-1.5">Company <span className="text-[#86868b]">(optional)</span></label>
+                      <input id="contact-company" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder="Company" className={inputCls} />
                     </div>
                     <div>
-                      <label className="block text-[13px] text-[#424245] dark:text-neutral-300 mb-1.5">Topic</label>
-                      <select value={formData.topic} onChange={(e) => setFormData({ ...formData, topic: e.target.value })} className={inputCls}>
+                      <label htmlFor="contact-topic" className="block text-[13px] text-[#424245] dark:text-neutral-300 mb-1.5">Topic</label>
+                      <select id="contact-topic" value={formData.topic} onChange={(e) => setFormData({ ...formData, topic: e.target.value })} className={inputCls}>
                         <option>General enquiry</option>
                         <option>Software project</option>
                         <option>Product demo (Omnia / Lavida / KSM)</option>
@@ -130,8 +131,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialNotes = '
                     </div>
                   </div>
                   <div>
-                    <label className="block text-[13px] text-[#424245] dark:text-neutral-300 mb-1.5">Message</label>
-                    <textarea rows={5} required value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="What are you working on, and what does success look like?" className={`${inputCls} resize-none`} />
+                    <label htmlFor="contact-message" className="block text-[13px] text-[#424245] dark:text-neutral-300 mb-1.5">Message</label>
+                    <textarea id="contact-message" rows={5} required value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="What are you working on, and what does success look like?" className={`${inputCls} resize-none`} />
                   </div>
                   <div className="hidden" aria-hidden="true">
                     <label>

@@ -1,4 +1,4 @@
-import React from 'react';
+import { type FC } from 'react';
 import { motion } from 'motion/react';
 import {
   BrainCircuit,
@@ -73,7 +73,7 @@ const card = {
   },
 };
 
-export const ServicePillars: React.FC<ServicePillarsProps> = ({ onSelectService }) => {
+export const ServicePillars: FC<ServicePillarsProps> = ({ onSelectService }) => {
   return (
     <section id="services" className="py-20 sm:py-28 bg-[#f5f5f7] dark:bg-[#0b0b0d] transition-colors relative overflow-hidden">
       <div className="max-w-[1120px] mx-auto px-5">

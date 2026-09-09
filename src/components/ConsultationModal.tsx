@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type FC, type FormEvent } from 'react';
 import { X } from 'lucide-react';
 import { submitEnquiry } from '../lib/contact';
 
@@ -9,7 +9,7 @@ interface ConsultationModalProps {
   initialNotes?: string;
 }
 
-export const ConsultationModal: React.FC<ConsultationModalProps> = ({
+export const ConsultationModal: FC<ConsultationModalProps> = ({
   isOpen,
   onClose,
   initialService = 'General enquiry',
@@ -25,7 +25,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
   const [honeypot, setHoneypot] = useState('');
   const startedAt = useRef(Date.now());
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError(null);
@@ -108,7 +108,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-black/5 dark:bg-white/10 text-[#6e6e73] dark:text-neutral-300"
+          className="absolute top-4 right-4 p-2 rounded-full bg-black/5 dark:bg-white/10 text-[#6e6e73] dark:text-neutral-300 focus-visible:ring-2 focus-visible:ring-[#ed1c24] focus-visible:ring-offset-2"
           aria-label="Close"
         >
           <X className="w-4 h-4" />
@@ -134,9 +134,17 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
               className="mt-6 space-y-3"
               onSubmit={handleSubmit}
             >
-              <input required placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} className={inputCls} />
-              <input required type="email" placeholder="Work email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} />
-              <select value={service} onChange={(e) => setService(e.target.value)} className={inputCls}>
+              <div>
+                <label htmlFor="consult-name" className="sr-only">Your name</label>
+                <input id="consult-name" required placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} className={inputCls} />
+              </div>
+              <div>
+                <label htmlFor="consult-email" className="sr-only">Work email</label>
+                <input id="consult-email" required type="email" placeholder="Work email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} />
+              </div>
+              <div>
+                <label htmlFor="consult-topic" className="sr-only">Service</label>
+                <select id="consult-topic" value={service} onChange={(e) => setService(e.target.value)} className={inputCls}>
                 <option>General enquiry</option>
                 <option>Applied AI</option>
                 <option>Software development</option>
@@ -148,7 +156,11 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                 <option>Digital marketing</option>
                 <option>Product demo</option>
               </select>
-              <textarea rows={4} placeholder="A sentence or two about what you need" value={notes} onChange={(e) => setNotes(e.target.value)} className={`${inputCls} resize-none`} />
+              </div>
+              <div>
+                <label htmlFor="consult-notes" className="sr-only">Message</label>
+                <textarea id="consult-notes" rows={4} placeholder="A sentence or two about what you need" value={notes} onChange={(e) => setNotes(e.target.value)} className={`${inputCls} resize-none`} />
+              </div>
               <div className="hidden" aria-hidden="true">
                 <label>
                   Website

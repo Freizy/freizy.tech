@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'motion/react';
+import { useEffect, useRef, useState, type FC } from 'react';
+import { motion, useInView, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import { TechCanvas } from './TechCanvas';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 
@@ -29,7 +29,7 @@ const stats: { to: number; prefix?: string; suffix?: string; label: string }[] =
   { to: 2022, prefix: 'Since ', label: 'building and supporting systems' },
 ];
 
-const CountUp: React.FC<{ to: number; prefix?: string; suffix?: string }> = ({
+const CountUp: FC<{ to: number; prefix?: string; suffix?: string }> = ({
   to,
   prefix = '',
   suffix = '',
@@ -71,19 +71,20 @@ const CountUp: React.FC<{ to: number; prefix?: string; suffix?: string }> = ({
   );
 };
 
-export const Hero: React.FC<HeroProps> = ({
+export const Hero: FC<HeroProps> = ({
   onOpenConsultation,
   onOpenConfigurator,
 }) => {
   const ref = useRef<HTMLElement>(null);
+  const prefersReduced = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
   });
 
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const copyY = useTransform(scrollYProgress, [0, 1], [0, prefersReduced ? 0 : -70]);
   const copyOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, prefersReduced ? 0 : 90]);
 
   return (
     <section ref={ref} id="hero" className="relative bg-white dark:bg-black transition-colors overflow-hidden">

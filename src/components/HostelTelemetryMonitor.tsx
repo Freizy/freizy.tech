@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import {
   MonitorShell,
@@ -33,7 +33,7 @@ const INITIAL: FeedItem[] = [
   { id: 1, text: 'Viewing booked — Sunday 14:00', detail: '4-bed · Madina · agent assigned', time: nowTime() },
 ];
 
-export const HostelTelemetryMonitor: React.FC = () => {
+export const HostelTelemetryMonitor: FC = () => {
   const [tab, setTab] = useState<TabId>('listings');
   const [paused, setPaused] = useState(false);
   const [occupancy, setOccupancy] = useState(87);

@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef, type FC } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import { ChevronRight } from 'lucide-react';
 
 interface FeatureBandProps {
@@ -10,15 +10,16 @@ interface FeatureBandProps {
  * Nvidia-style dark interlude: parallax backdrop, clip-mask edges,
  * staggered spec columns. Quiet, technical, no neon.
  */
-export const FeatureBand: React.FC<FeatureBandProps> = ({ onOpenConsultation }) => {
+export const FeatureBand: FC<FeatureBandProps> = ({ onOpenConsultation }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const prefersReduced = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ['-12%', '12%']);
-  const fgY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ['-12%', prefersReduced ? '-12%' : '12%']);
+  const fgY = useTransform(scrollYProgress, [0, 1], [30, prefersReduced ? 30 : -30]);
 
   return (
     <div ref={ref} className="relative bg-[#f5f5f7] dark:bg-[#0b0b0d] transition-colors">

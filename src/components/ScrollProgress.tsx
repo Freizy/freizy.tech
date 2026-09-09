@@ -1,7 +1,7 @@
-import React from 'react';
+import { type FC } from 'react';
 import { motion, useScroll, useSpring } from 'motion/react';
 
-export const ScrollProgress: React.FC = () => {
+export const ScrollProgress: FC = () => {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 120,

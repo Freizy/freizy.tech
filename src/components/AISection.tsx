@@ -1,4 +1,4 @@
-import React from 'react';
+import { type FC } from 'react';
 import { motion } from 'motion/react';
 import { ChevronRight } from 'lucide-react';
 
@@ -33,7 +33,7 @@ const capabilities = [
   },
 ];
 
-export const AISection: React.FC<AISectionProps> = ({ onOpenConsultation }) => {
+export const AISection: FC<AISectionProps> = ({ onOpenConsultation }) => {
   return (
     <section id="ai" className="relative bg-[#0b0b0d] text-white overflow-hidden">
       <div className="max-w-[1120px] mx-auto px-5 py-20 sm:py-28">

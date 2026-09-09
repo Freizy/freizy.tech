@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, type FC } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { ChevronRight, ExternalLink } from 'lucide-react';
 import { ProductTelemetryMonitor } from './ProductTelemetryMonitor';
@@ -83,7 +83,7 @@ const products: {
   },
 ];
 
-export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
+export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
   onOpenConsultation,
 }) => {
   const [active, setActive] = useState<ProductId>('omnia');

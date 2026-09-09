@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type FC, type ReactNode } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Pause, Play } from 'lucide-react';
 import { WindowControls } from './WindowControls';
@@ -65,7 +65,7 @@ interface MonitorShellProps<TabId extends string> {
   paused: boolean;
   onTogglePause: () => void;
   feed: FeedItem[];
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 /** Shared window chrome for every product demo-feed: traffic lights, tabs, animated panel swap, activity feed. */
@@ -171,7 +171,7 @@ export function MonitorShell<TabId extends string>({
   );
 }
 
-export const Kpi: React.FC<{ label: string; value: React.ReactNode; sub?: React.ReactNode }> = ({
+export const Kpi: FC<{ label: string; value: ReactNode; sub?: ReactNode }> = ({
   label,
   value,
   sub,
@@ -185,7 +185,7 @@ export const Kpi: React.FC<{ label: string; value: React.ReactNode; sub?: React.
   </div>
 );
 
-export const Meter: React.FC<{ value: number; color?: string; delay?: number }> = ({
+export const Meter: FC<{ value: number; color?: string; delay?: number }> = ({
   value,
   color = 'bg-[#1d1d1f] dark:bg-white',
   delay = 0,

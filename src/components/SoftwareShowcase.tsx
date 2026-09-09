@@ -1,4 +1,4 @@
-import React from 'react';
+import { type FC } from 'react';
 import { motion } from 'motion/react';
 import { ChevronRight } from 'lucide-react';
 
@@ -13,7 +13,7 @@ const items = [
   { title: 'Maintenance', desc: 'Updates, backups and small improvements on a monthly plan. No surprise invoices.' },
 ];
 
-export const SoftwareShowcase: React.FC<SoftwareShowcaseProps> = ({ onOpenConsultation }) => {
+export const SoftwareShowcase: FC<SoftwareShowcaseProps> = ({ onOpenConsultation }) => {
   return (
     <section id="software" className="py-20 sm:py-28 bg-[#f5f5f7] dark:bg-[#0b0b0d] transition-colors overflow-hidden">
       <div className="max-w-[1120px] mx-auto px-5">

@@ -1,4 +1,4 @@
-import React from 'react';
+import { type FC } from 'react';
 import { BrandLogo } from './BrandLogo';
 import type { LegalKind } from './LegalModal';
 
@@ -6,7 +6,7 @@ interface FooterProps {
   onOpenLegal: (kind: LegalKind) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
+export const Footer: FC<FooterProps> = ({ onOpenLegal }) => {
   return (
     <footer className="bg-[#f5f5f7] dark:bg-[#0b0b0d] border-t border-black/10 dark:border-white/10 transition-colors">
       <div className="max-w-[1120px] mx-auto px-5 py-12">

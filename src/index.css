@@ -202,14 +202,14 @@ html.dark .link-arrow {
 
 /* Hero gradient headline + circuit texture (first-version hero effects) */
 html.dark .text-brand-gradient {
-  background: linear-gradient(135deg, #ffffff 25%, #fca5a5 65%, #E5252A 100%);
+  background: linear-gradient(135deg, #ffffff 25%, #fca5a5 65%, #ed1c24 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 html.light .text-brand-gradient {
-  background: linear-gradient(135deg, #0f172a 20%, #E5252A 70%, #b91c1c 100%);
+  background: linear-gradient(135deg, #0f172a 20%, #ed1c24 70%, #b91c1c 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -310,11 +310,7 @@ html.dark .lift:hover {
   }
 }
 
-/* Sharp angular design — ditch rounded rectangles.
-   NOTE: this intentionally flattens every rounded-* utility site-wide
-   (cards, pills, badges, progress bars). Window traffic lights opt back
-   out via .win-controls below. Prefer removing rounded-* classes at the
-   call site over adding more exemptions here. */
+/* Sharp angular design — ditch rounded rectangles. */
 [class*="rounded-"] {
   border-radius: 0 !important;
 }

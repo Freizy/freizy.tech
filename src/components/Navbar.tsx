@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, type FC } from 'react';
 import { BrandLogo } from './BrandLogo';
 import { useTheme } from '../context/ThemeContext';
 import { Menu, X, Sun, Moon } from 'lucide-react';
@@ -7,7 +7,7 @@ interface NavbarProps {
   onOpenConsultation: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({
+export const Navbar: FC<NavbarProps> = ({
   onOpenConsultation,
 }) => {
   const { theme, toggleTheme } = useTheme();
@@ -19,6 +19,11 @@ export const Navbar: React.FC<NavbarProps> = ({
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { name: 'AI', href: '#ai' },

@@ -1,4 +1,4 @@
-import React from 'react';
+import { type FC } from 'react';
 import { motion } from 'motion/react';
 
 interface ProcessPipelineProps {
@@ -13,7 +13,7 @@ const steps = [
   { n: '05', title: 'Support', desc: 'Monthly support for fixes and small improvements. Larger work is quoted separately.' },
 ];
 
-export const ProcessPipeline: React.FC<ProcessPipelineProps> = ({ onOpenConsultation }) => {
+export const ProcessPipeline: FC<ProcessPipelineProps> = ({ onOpenConsultation }) => {
   return (
     <section id="process" className="py-20 sm:py-28 bg-white dark:bg-black transition-colors overflow-hidden">
       <div className="max-w-[1120px] mx-auto px-5">

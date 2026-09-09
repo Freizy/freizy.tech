@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type FC } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import {
   MonitorShell,
@@ -41,7 +41,7 @@ const STOCK = [
 
 const SPARK = [14, 18, 15, 22, 19, 26, 24, 31, 28, 34];
 
-export const ProductTelemetryMonitor: React.FC = () => {
+export const ProductTelemetryMonitor: FC = () => {
   const [tab, setTab] = useState<TabId>('finance');
   const [paused, setPaused] = useState(false);
   const [revenue, setRevenue] = useState(48250);

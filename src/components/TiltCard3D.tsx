@@ -1,15 +1,15 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState, type FC, type ReactNode, type MouseEvent } from 'react';
 import { motion } from 'motion/react';
 
 interface TiltCard3DProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   intensity?: number;
   glareOpacity?: number;
   elevation?: number;
 }
 
-export const TiltCard3D: React.FC<TiltCard3DProps> = ({
+export const TiltCard3D: FC<TiltCard3DProps> = ({
   children,
   className = '',
   intensity = 14,
@@ -22,7 +22,7 @@ export const TiltCard3D: React.FC<TiltCard3DProps> = ({
   const [glarePosition, setGlarePosition] = useState({ x: 50, y: 50 });
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;

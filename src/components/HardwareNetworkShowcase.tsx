@@ -1,11 +1,12 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef, type FC } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 
-export const HardwareNetworkShowcase: React.FC = () => {
+export const HardwareNetworkShowcase: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const prefersReduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const yLeft = useTransform(scrollYProgress, [0, 1], [24, -24]);
-  const yRight = useTransform(scrollYProgress, [0, 1], [48, -48]);
+  const yLeft = useTransform(scrollYProgress, [0, 1], [24, prefersReduced ? 24 : -24]);
+  const yRight = useTransform(scrollYProgress, [0, 1], [48, prefersReduced ? 48 : -48]);
 
   return (
     <section ref={ref} id="hardware" className="py-20 sm:py-28 bg-white dark:bg-black transition-colors overflow-hidden">
