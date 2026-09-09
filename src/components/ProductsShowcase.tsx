@@ -30,7 +30,7 @@ const products: {
     tag: 'Business management',
     desc: 'Accounting, inventory, sales and reporting for small and mid-size companies. Replaces spreadsheets and disconnected tools.',
     points: ['Invoicing and expenses', 'Stock and purchasing', 'Simple, exportable reports'],
-    url: 'https://omnia.freizy.tech',
+    url: 'https://omnia.freizy.com',
     liveTitle: 'Live look: Omnia Suite',
     liveDesc: 'Finance, stock and sales as your team would see them. Pause it, switch tabs — it\'s all sample data.',
   },

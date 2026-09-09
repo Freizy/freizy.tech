@@ -43,7 +43,7 @@ const CONTENT: Record<LegalKind, { title: string; updated: string; sections: { h
       },
       {
         heading: '8. Contact',
-        body: 'Questions about these terms: info@freizy.tech, +233 24 035 2196.',
+        body: 'Questions about these terms: info@freizy.com, +233 24 035 2196.',
       },
     ],
   },
@@ -69,7 +69,7 @@ const CONTENT: Record<LegalKind, { title: string; updated: string; sections: { h
       },
       {
         heading: '5. Your rights',
-        body: 'You may request access, correction or deletion of your personal data at any time by writing to info@freizy.tech. We respond within 30 days.',
+        body: 'You may request access, correction or deletion of your personal data at any time by writing to info@freizy.com. We respond within 30 days.',
       },
       {
         heading: '6. Security',
@@ -77,7 +77,7 @@ const CONTENT: Record<LegalKind, { title: string; updated: string; sections: { h
       },
       {
         heading: '7. Contact',
-        body: 'Privacy questions or requests: info@freizy.tech, +233 24 035 2196.',
+        body: 'Privacy questions or requests: info@freizy.com, +233 24 035 2196.',
       },
     ],
   },

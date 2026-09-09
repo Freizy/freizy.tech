@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'motion/react';
+import { MessageCircle } from 'lucide-react';
+import { submitEnquiry } from '../lib/contact';
 
 interface ContactSectionProps {
   initialNotes?: string;
@@ -14,14 +16,27 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialNotes = '
     message: initialNotes,
   });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState('');
+  const startedAt = useRef(Date.now());
 
   React.useEffect(() => {
     if (initialNotes) setFormData((prev) => ({ ...prev, message: initialNotes }));
   }, [initialNotes]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setSending(true);
+    setSubmitError(null);
+    try {
+      await submitEnquiry({ ...formData, website: honeypot, startedAt: startedAt.current });
+      setSent(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong sending your message.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputCls =
@@ -49,7 +64,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialNotes = '
             <div className="mt-6 space-y-2 text-[14px] text-[#424245] dark:text-neutral-300">
               <div>Sales: <a href="tel:+233240352196" className="link-arrow">+233 24 035 2196</a></div>
               <div>Support: <a href="tel:+233266242703" className="link-arrow">+233 26 624 2703</a></div>
-              <div>Email: <a href="mailto:info@freizy.tech" className="link-arrow">info@freizy.tech</a></div>
+              <a
+                href="https://wa.me/233240352196?text=Hello%20Freizy%20Technologies%2C%20I%27d%20like%20to%20discuss%20a%20project."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366] hover:bg-[#1eb856] text-white text-[14px] font-medium transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Chat on WhatsApp</span>
+              </a>
+              <div>Email: <a href="mailto:info@freizy.com" className="link-arrow">info@freizy.com</a></div>
               <div className="text-[#6e6e73] dark:text-neutral-500 text-[13px] pt-1">
                 Prefer email? Include your timeline and budget range — it helps us reply faster.
               </div>
@@ -109,8 +133,28 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialNotes = '
                     <label className="block text-[13px] text-[#424245] dark:text-neutral-300 mb-1.5">Message</label>
                     <textarea rows={5} required value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="What are you working on, and what does success look like?" className={`${inputCls} resize-none`} />
                   </div>
-                  <button type="submit" className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-[#ed1c24] hover:bg-[#c41218] text-white text-[15px] font-medium transition-colors">
-                    Send message
+                  <div className="hidden" aria-hidden="true">
+                    <label>
+                      Website
+                      <input
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                      />
+                    </label>
+                  </div>
+                  {submitError && (
+                    <div role="alert" className="p-3.5 bg-[#ed1c24]/10 border border-[#ed1c24]/30 text-[13px] leading-relaxed text-[#1d1d1f] dark:text-neutral-200">
+                      {submitError} You can also reach us on{' '}
+                      <a href="https://wa.me/233240352196" target="_blank" rel="noopener noreferrer" className="link-arrow">WhatsApp</a>{' '}
+                      or <a href="mailto:info@freizy.com" className="link-arrow">email</a>.
+                    </div>
+                  )}
+                  <button type="submit" disabled={sending} className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-[#ed1c24] hover:bg-[#c41218] text-white text-[15px] font-medium transition-colors disabled:opacity-60">
+                    {sending ? 'Sending…' : 'Send message'}
                   </button>
                   <p className="text-[12px] text-[#6e6e73] dark:text-neutral-500">
                     We treat enquiries as confidential. No newsletters, no sharing your details.

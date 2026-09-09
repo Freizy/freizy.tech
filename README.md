@@ -25,12 +25,29 @@ Company site for Freizy Technologies (Accra, Ghana): applied AI, software develo
 - `src/components/*TelemetryMonitor.tsx` — live-feel product demos (sample data, pausable, reduced-motion aware)
 - `src/context/ThemeContext.tsx` — light/dark theme with localStorage + OS preference fallback
 
-## Known stub: forms have no backend (yet)
+## Contact backend (Web3Forms, active)
 
-`ContactSection` and `ConsultationModal` currently simulate submission client-side and show a success state. Before launch, wire them to a real endpoint (e.g. Formspree, a serverless function, or `mailto:` fallback) — enquiries submitted today go nowhere.
+Both forms submit through `src/lib/contact.ts`, which POSTs to Web3Forms
+with basic bot screening (honeypot + minimum fill time). No auto-reply on
+the free tier — the visitor just sees the on-site confirmation.
+
+### Going live
+
+1. Get an access key at https://web3forms.com (submit your email, the key
+   arrives in your inbox)
+2. Set `VITE_WEB3FORMS_KEY` on the host **and redeploy** — VITE_ vars bake
+   in at build time (for local dev, copy `.env.example` to `.env`)
+
+### Upgrade path: serverless
+
+`api/contact.ts` is a ready Vercel Edge function (validation, honeypot +
+fill-time + rate limiting, Resend delivery, visitor auto-reply). To switch:
+set `RESEND_API_KEY` / `CONTACT_TO` / `CONTACT_FROM`, verify `freizy.com`
+in Resend, point `submitEnquiry` at `/api/contact`, deploy. For local
+end-to-end testing of that path use `vercel dev`.
 
 ## Contact
 
 - Phone: +233 24 035 2196 · +233 26 624 2703
-- Email: info@freizy.tech
-- Web: https://freizy.tech
+- Email: info@freizy.com
+- Web: https://freizy.com

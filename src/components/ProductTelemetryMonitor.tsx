@@ -76,7 +76,7 @@ export const ProductTelemetryMonitor: React.FC = () => {
 
   return (
     <MonitorShell
-      title="omnia.freizy.tech — live overview"
+      title="omnia.freizy.com — live overview"
       tabs={TABS}
       tab={tab}
       onTab={setTab}

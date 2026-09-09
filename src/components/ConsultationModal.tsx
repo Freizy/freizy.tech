@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
+import { submitEnquiry } from '../lib/contact';
 
 interface ConsultationModalProps {
   isOpen: boolean;
@@ -19,6 +20,31 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
   const [service, setService] = useState(initialService);
   const [notes, setNotes] = useState(initialNotes);
   const [done, setDone] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState('');
+  const startedAt = useRef(Date.now());
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(null);
+    try {
+      await submitEnquiry({
+        name,
+        email,
+        topic: service,
+        message: notes,
+        website: honeypot,
+        startedAt: startedAt.current,
+      });
+      setDone(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong sending your message.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     if (initialService) setService(initialService);
@@ -106,10 +132,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
             </p>
             <form
               className="mt-6 space-y-3"
-              onSubmit={(e) => {
-                e.preventDefault();
-                setDone(true);
-              }}
+              onSubmit={handleSubmit}
             >
               <input required placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} className={inputCls} />
               <input required type="email" placeholder="Work email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} />
@@ -126,8 +149,28 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                 <option>Product demo</option>
               </select>
               <textarea rows={4} placeholder="A sentence or two about what you need" value={notes} onChange={(e) => setNotes(e.target.value)} className={`${inputCls} resize-none`} />
-              <button type="submit" className="w-full py-2.5 rounded-full bg-[#ed1c24] hover:bg-[#c41218] text-white text-[15px] font-medium">
-                Request a call back
+              <div className="hidden" aria-hidden="true">
+                <label>
+                  Website
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
+                </label>
+              </div>
+              {submitError && (
+                <div role="alert" className="p-3.5 bg-[#ed1c24]/10 border border-[#ed1c24]/30 text-[13px] leading-relaxed text-[#1d1d1f] dark:text-neutral-200">
+                  {submitError} You can also reach us on{' '}
+                  <a href="https://wa.me/233240352196" target="_blank" rel="noopener noreferrer" className="link-arrow">WhatsApp</a>{' '}
+                  or <a href="mailto:info@freizy.com" className="link-arrow">email</a>.
+                </div>
+              )}
+              <button type="submit" disabled={isSubmitting} className="w-full py-2.5 rounded-full bg-[#ed1c24] hover:bg-[#c41218] text-white text-[15px] font-medium disabled:opacity-60">
+                {isSubmitting ? 'Sending…' : 'Request a call back'}
               </button>
               <p className="text-center text-[12px] text-[#86868b]">No spam. No shared details. Ever.</p>
             </form>
