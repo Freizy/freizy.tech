@@ -112,7 +112,7 @@ export const Hero: FC<HeroProps> = ({
             variants={item}
             className="text-[40px] leading-[1.05] sm:text-[64px] font-semibold tracking-tight text-[#1d1d1f] dark:text-white max-w-[820px] mx-auto"
           >
-            Software, AI and infrastructure that hold up in production.
+            AI, Software, and infrastructure that hold up in production.
           </motion.h1>
           <motion.p
             variants={item}
