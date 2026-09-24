@@ -27,6 +27,8 @@ export const BrandLogo: FC<BrandLogoProps> = ({
       <img
         src={logoPng}
         alt="Freizy Technologies logo"
+        width={Math.round((s.iconSize * 120) / 171)}
+        height={s.iconSize}
         className="flex-shrink-0 object-contain"
         style={{ height: s.iconSize, width: 'auto' }}
       />

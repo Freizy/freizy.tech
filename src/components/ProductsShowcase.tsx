@@ -1,12 +1,25 @@
-import { useState, type FC } from 'react';
+import { lazy, Suspense, useState, type FC } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { ChevronRight, ExternalLink } from 'lucide-react';
-import { ProductTelemetryMonitor } from './ProductTelemetryMonitor';
-import { LavidaTelemetryMonitor } from './LavidaTelemetryMonitor';
-import { KsmTelemetryMonitor } from './KsmTelemetryMonitor';
-import { ExamsTelemetryMonitor } from './ExamsTelemetryMonitor';
-import { OudyTelemetryMonitor } from './OudyTelemetryMonitor';
-import { HostelTelemetryMonitor } from './HostelTelemetryMonitor';
+
+const ProductTelemetryMonitor = lazy(() =>
+  import('./ProductTelemetryMonitor').then((m) => ({ default: m.ProductTelemetryMonitor }))
+);
+const LavidaTelemetryMonitor = lazy(() =>
+  import('./LavidaTelemetryMonitor').then((m) => ({ default: m.LavidaTelemetryMonitor }))
+);
+const KsmTelemetryMonitor = lazy(() =>
+  import('./KsmTelemetryMonitor').then((m) => ({ default: m.KsmTelemetryMonitor }))
+);
+const ExamsTelemetryMonitor = lazy(() =>
+  import('./ExamsTelemetryMonitor').then((m) => ({ default: m.ExamsTelemetryMonitor }))
+);
+const OudyTelemetryMonitor = lazy(() =>
+  import('./OudyTelemetryMonitor').then((m) => ({ default: m.OudyTelemetryMonitor }))
+);
+const StaysTelemetryMonitor = lazy(() =>
+  import('./StaysTelemetryMonitor').then((m) => ({ default: m.StaysTelemetryMonitor }))
+);
 
 interface ProductsShowcaseProps {
   onOpenConsultation: (productName?: string) => void;
@@ -16,6 +29,7 @@ type ProductId = 'omnia' | 'lavida' | 'ksm' | 'exams' | 'oudy' | 'hostel';
 
 const products: {
   id: ProductId;
+  slug: string;
   name: string;
   tag: string;
   desc: string;
@@ -26,6 +40,7 @@ const products: {
 }[] = [
   {
     id: 'omnia',
+    slug: 'omnia-suite',
     name: 'Freizy Omnia Suite',
     tag: 'Business management',
     desc: 'Accounting, inventory, sales and reporting for small and mid-size companies. Replaces spreadsheets and disconnected tools.',
@@ -36,6 +51,7 @@ const products: {
   },
   {
     id: 'lavida',
+    slug: 'lavida-health-buddy',
     name: 'Lavida Health Buddy',
     tag: 'Patient support',
     desc: 'Appointment reminders, health records and guidance for clinics and patients. Built with privacy reviews from day one.',
@@ -46,6 +62,7 @@ const products: {
   },
   {
     id: 'ksm',
+    slug: 'ksm-autos',
     name: 'KSM Autos',
     tag: 'Garage management',
     desc: 'Bookings, service history and customer messaging for garages and fleets. Keeps the workshop organised.',
@@ -56,6 +73,7 @@ const products: {
   },
   {
     id: 'exams',
+    slug: 'exams-suite',
     name: 'Freizy Exams Suite',
     tag: 'Education',
     desc: 'Practice questions, timed mock exams and instant scoring for schools and candidates.',
@@ -65,6 +83,7 @@ const products: {
   },
   {
     id: 'oudy',
+    slug: 'oudy-events',
     name: 'Oudy',
     tag: 'Events app',
     desc: 'Event discovery, ticketing and gate check-in for organizers and attendees.',
@@ -74,12 +93,13 @@ const products: {
   },
   {
     id: 'hostel',
-    name: 'Freizy Hostel Hub',
-    tag: 'Student housing',
-    desc: 'Room listings, bookings and payments for hostels and student accommodation.',
-    points: ['Room listings & search', 'Bookings & payments', 'Tenant messaging'],
-    liveTitle: 'Freizy Hostel Hub',
-    liveDesc: 'For hostel managers and students looking for a room. Live demo available on request.',
+    slug: 'freizy-stays',
+    name: 'Freizy Stays',
+    tag: 'Mobile app · Student housing',
+    desc: 'Find verified hostels, watch video reviews and book from your phone — with MoMo installment payments.',
+    points: ['Verified listings & 360 tours', 'Video reviews from tenants', 'MoMo installment payments'],
+    liveTitle: 'Live look: Freizy Stays',
+    liveDesc: "Bookings, occupancy and payments as a hostel manager would see them. Pause it, switch tabs — it's all sample data.",
   },
 ];
 
@@ -164,6 +184,10 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
                   <span className={`text-[13px] font-medium ${selected ? 'text-[#1d1d1f] dark:text-white' : 'text-[#6e6e73] dark:text-neutral-500'}`}>
                     {selected ? 'Showing below' : 'See it live'}
                   </span>
+                  <div className="flex items-center gap-3">
+                    <a href={`/products/${p.slug}/`} className="link-arrow text-[14px]">
+                      Details
+                    </a>
                   {p.url ? (
                     <a
                       href={p.url}
@@ -187,6 +211,7 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
                       <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                     </button>
                   )}
+                  </div>
                 </div>
               </motion.div>
             );
@@ -238,12 +263,20 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
-              {current.id === 'omnia' && <ProductTelemetryMonitor />}
-              {current.id === 'lavida' && <LavidaTelemetryMonitor />}
-              {current.id === 'ksm' && <KsmTelemetryMonitor />}
-              {current.id === 'exams' && <ExamsTelemetryMonitor />}
-              {current.id === 'oudy' && <OudyTelemetryMonitor />}
-              {current.id === 'hostel' && <HostelTelemetryMonitor />}
+              <Suspense
+                fallback={
+                  <div aria-busy="true" className="h-[380px] flex items-center justify-center text-[14px] text-[#6e6e73] dark:text-neutral-500">
+                    Loading demo…
+                  </div>
+                }
+              >
+                {current.id === 'omnia' && <ProductTelemetryMonitor />}
+                {current.id === 'lavida' && <LavidaTelemetryMonitor />}
+                {current.id === 'ksm' && <KsmTelemetryMonitor />}
+                {current.id === 'exams' && <ExamsTelemetryMonitor />}
+                {current.id === 'oudy' && <OudyTelemetryMonitor />}
+                {current.id === 'hostel' && <StaysTelemetryMonitor />}
+              </Suspense>
             </motion.div>
           </AnimatePresence>
         </motion.div>

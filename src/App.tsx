@@ -9,6 +9,7 @@ import { SoftwareShowcase } from './components/SoftwareShowcase';
 import { HardwareNetworkShowcase } from './components/HardwareNetworkShowcase';
 import { ProcessPipeline } from './components/ProcessPipeline';
 import { CaseStudies } from './components/CaseStudies';
+import { FaqSection } from './components/FaqSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ConsultationModal } from './components/ConsultationModal';
@@ -53,6 +54,7 @@ export default function App() {
           <HardwareNetworkShowcase />
           <ProcessPipeline onOpenConsultation={() => handleOpenConsultation()} />
           <CaseStudies onOpenConsultation={() => handleOpenConsultation()} />
+          <FaqSection />
           <ContactSection initialNotes={''} />
         </main>
 

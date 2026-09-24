@@ -38,7 +38,7 @@ export const Footer: FC<FooterProps> = ({ onOpenLegal }) => {
               <li><a href="https://ksm.autos" target="_blank" rel="noopener noreferrer" className="hover:underline">KSM Autos</a></li>
               <li><a href="#products" className="hover:underline">Freizy Exams Suite</a></li>
               <li><a href="#products" className="hover:underline">Oudy — Events App</a></li>
-              <li><a href="#products" className="hover:underline">Freizy Hostel Hub</a></li>
+              <li><a href="#products" className="hover:underline">Freizy Stays</a></li>
             </ul>
           </div>
           <div>

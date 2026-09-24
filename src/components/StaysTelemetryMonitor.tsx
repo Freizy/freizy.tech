@@ -33,7 +33,7 @@ const INITIAL: FeedItem[] = [
   { id: 1, text: 'Viewing booked — Sunday 14:00', detail: '4-bed · Madina · agent assigned', time: nowTime() },
 ];
 
-export const HostelTelemetryMonitor: FC = () => {
+export const StaysTelemetryMonitor: FC = () => {
   const [tab, setTab] = useState<TabId>('listings');
   const [paused, setPaused] = useState(false);
   const [occupancy, setOccupancy] = useState(87);
@@ -57,7 +57,7 @@ export const HostelTelemetryMonitor: FC = () => {
 
   return (
     <MonitorShell
-      title="Freizy Hostel Hub — demo overview"
+      title="Freizy Stays — demo overview"
       tabs={TABS}
       tab={tab}
       onTab={setTab}

@@ -17,6 +17,7 @@ Company site for Freizy Technologies (Accra, Ghana): applied AI, software develo
 | `npm run build`  | Production build to `dist/` |
 | `npm run preview`| Serve the production build |
 | `npm run lint`   | `tsc --noEmit` typecheck  |
+| `npm run seo:pages` | Regenerate static product pages into `public/products/` |
 
 ## Project structure
 
@@ -24,6 +25,7 @@ Company site for Freizy Technologies (Accra, Ghana): applied AI, software develo
 - `src/components/` — one component per site section (Hero, AISection, ProductsShowcase, …)
 - `src/components/*TelemetryMonitor.tsx` — live-feel product demos (sample data, pausable, reduced-motion aware)
 - `src/context/ThemeContext.tsx` — light/dark theme with localStorage + OS preference fallback
+- `scripts/product-pages.mjs` — generates static SEO pages (`public/products/*/`) with SoftwareApplication + BreadcrumbList schema; re-run after editing, listed in `public/sitemap.xml`. The Freizy Stays page is app-aware: MobileApplication + FAQPage schema, store badges (currently WhatsApp app-link flow — swap `APP_LINK_IOS` / `APP_LINK_ANDROID` for real store URLs when ready), a CSS phone mockup and a hostel-manager CTA
 
 ## Contact backend (Web3Forms, active)
 
