@@ -1,74 +1,34 @@
-import { useState } from 'react';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { ServicePillars } from './components/ServicePillars';
-import { AISection } from './components/AISection';
-import { ProductsShowcase } from './components/ProductsShowcase';
-import { FeatureBand } from './components/FeatureBand';
-import { SoftwareShowcase } from './components/SoftwareShowcase';
-import { HardwareNetworkShowcase } from './components/HardwareNetworkShowcase';
-import { ProcessPipeline } from './components/ProcessPipeline';
-import { CaseStudies } from './components/CaseStudies';
-import { FaqSection } from './components/FaqSection';
-import { ContactSection } from './components/ContactSection';
-import { Footer } from './components/Footer';
-import { ConsultationModal } from './components/ConsultationModal';
-import { LegalModal, type LegalKind } from './components/LegalModal';
-import { ScrollProgress } from './components/ScrollProgress';
-import { ParallaxBackground } from './components/ParallaxBackground';
+import { Routes, Route } from 'react-router-dom';
+import { RootLayout } from './components/layout/RootLayout';
+import { ConsultationProvider } from './context/ConsultationContext';
+import { Home } from './pages/Home';
+import { About } from './pages/About';
+import { Services } from './pages/Services';
+import { Products } from './pages/Products';
+import { CaseStudiesPage } from './pages/CaseStudies';
+import { Contact } from './pages/Contact';
+import { Privacy } from './pages/Privacy';
+import { Terms } from './pages/Terms';
+import { Refunds } from './pages/Refunds';
+import { NotFound } from './pages/NotFound';
 
 export default function App() {
-  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState('General enquiry');
-  const [legalModal, setLegalModal] = useState<LegalKind | null>(null);
-
-  const handleOpenConsultation = (serviceName?: string) => {
-    if (serviceName) setSelectedService(serviceName);
-    setIsConsultationOpen(true);
-  };
-
-  const handleScrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-[#1d1d1f] dark:text-[#f5f5f7] font-sans antialiased relative">
-      <ScrollProgress />
-      <ParallaxBackground />
-
-      <div className="relative z-10">
-      <Navbar
-        onOpenConsultation={() => handleOpenConsultation()}
-      />
-
-        <main>
-          <Hero
-            onOpenConsultation={() => handleOpenConsultation()}
-            onOpenConfigurator={() => handleScrollTo('services')}
-          />
-          <ServicePillars onSelectService={(s) => handleOpenConsultation(s)} />
-        <AISection onOpenConsultation={() => handleOpenConsultation('Applied AI')} />
-          <ProductsShowcase onOpenConsultation={(p) => handleOpenConsultation(p)} />
-          <FeatureBand onOpenConsultation={() => handleOpenConsultation()} />
-          <SoftwareShowcase onOpenConsultation={() => handleOpenConsultation('Software development')} />
-          <HardwareNetworkShowcase />
-          <ProcessPipeline onOpenConsultation={() => handleOpenConsultation()} />
-          <CaseStudies onOpenConsultation={() => handleOpenConsultation()} />
-          <FaqSection />
-          <ContactSection initialNotes={''} />
-        </main>
-
-        <Footer onOpenLegal={(kind) => setLegalModal(kind)} />
-      </div>
-
-      <ConsultationModal
-        isOpen={isConsultationOpen}
-        onClose={() => setIsConsultationOpen(false)}
-        initialService={selectedService}
-        initialNotes={''}
-      />
-
-      <LegalModal open={legalModal} onClose={() => setLegalModal(null)} />
-    </div>
+    <ConsultationProvider>
+      <Routes>
+        <Route element={<RootLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/case-studies" element={<CaseStudiesPage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/refunds" element={<Refunds />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </ConsultationProvider>
   );
 }

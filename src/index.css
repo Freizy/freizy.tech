@@ -4,19 +4,15 @@
 
 @theme {
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Orbitron', -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-display: 'Orbitron', -apple-system, 'Segoe UI', sans-serif;
 }
 
 @layer base {
   :root {
-    /* Flyer-matched brand: vivid flyer red, near-black footer, light gray */
     --brand-red: #ed1c24;
     --brand-red-dark: #c41218;
-    --flyer-red: #ed1c24;
-    --flyer-black: #0b0b0d;
-    --flyer-gray: #f4f4f5;
+    --brand-black: #0b0b0d;
   }
 
   :root, html.light {
@@ -24,25 +20,21 @@
     --bg-secondary: #f5f5f7;
     --bg-card: #ffffff;
     --border-color: #e5e5ea;
-    --text-primary: #1d1d1f;
-    --text-secondary: #424245;
+    --text-primary: #111114;
+    --text-secondary: #3a3a3e;
     --text-muted: #6e6e73;
-    --nav-bg: rgba(255, 255, 255, 0.8);
-    --color-canvas: #ffffff;
-    --color-foreground: #1d1d1f;
+    --nav-bg: rgba(255, 255, 255, 0.82);
   }
 
   html.dark {
-    --bg-primary: #000000;
+    --bg-primary: #0a0a0c;
     --bg-secondary: #0b0b0d;
-    --bg-card: #101013;
+    --bg-card: #121214;
     --border-color: rgba(255, 255, 255, 0.1);
     --text-primary: #f5f5f7;
     --text-secondary: #c7c7cc;
     --text-muted: #86868b;
-    --nav-bg: rgba(0, 0, 0, 0.72);
-    --color-canvas: #000000;
-    --color-foreground: #f5f5f7;
+    --nav-bg: rgba(10, 10, 12, 0.78);
   }
 
   body {
@@ -51,17 +43,13 @@
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    letter-spacing: -0.011em;
   }
 
-  h1, h2, .font-heading {
-    font-family: var(--font-heading);
-    letter-spacing: 0.01em;
-  }
-
-  h3, h4 {
+  h1, h2, h3, h4 {
     font-family: var(--font-sans);
-    letter-spacing: -0.011em;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
   }
 
   code, pre, .font-mono {
@@ -69,16 +57,22 @@
   }
 
   ::selection {
-    background: #1d1d1f;
+    background: #ed1c24;
     color: #fff;
   }
-  html.dark ::selection {
-    background: #f5f5f7;
-    color: #000;
+
+  :focus-visible {
+    outline: 2px solid #ed1c24;
+    outline-offset: 2px;
   }
 }
 
-/* Apple-style nav */
+/* Sharp angular design — no rounded corners anywhere. */
+[class*="rounded-"] {
+  border-radius: 0 !important;
+}
+
+/* Sticky glass nav */
 .glass-nav {
   background: var(--nav-bg);
   backdrop-filter: blur(20px) saturate(180%);
@@ -86,214 +80,153 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-/* Calm cards — no glow, no neon */
+/* Cards — flat, bordered, red edge on hover */
 .glass-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
-
 .glass-card:hover {
-  border-color: #d2d2d7;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border-color: #ed1c24;
 }
 html.dark .glass-card:hover {
-  border-color: rgba(255,255,255,0.18);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  border-color: #ed1c24;
 }
 
 .apple-panel {
-  background: #f5f5f7;
+  background: var(--bg-secondary);
   border: 1px solid transparent;
 }
 html.dark .apple-panel {
-  background: #0f0f12;
-  border-color: rgba(255,255,255,0.08);
+  background: #101012;
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
-/* Restrained eyebrow label (Nvidia-style) */
+/* Eyebrow label — mono, uppercase, red tick */
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-muted);
   font-weight: 500;
+  position: relative;
+  padding-left: 16px;
 }
-
-/* ---- Flyer-matched details (picked from official flyer) ---- */
-.font-display {
-  font-family: var(--font-display);
-}
-
-/* Flyer tagline: INTELLIGENCE | SOLUTIONS | BEYOND with red pipes */
-.flyer-tagline {
-  font-family: var(--font-sans);
-  letter-spacing: 0.22em;
-  font-weight: 500;
-}
-.flyer-tagline .pipe {
-  color: var(--flyer-red);
-  font-weight: 700;
-}
-
-/* Flyer eyebrow: INNOVATION BUILDS TOMORROW — right aligned + red rule */
-.flyer-eyebrow {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  line-height: 1.5;
-}
-.flyer-eyebrow::after {
+.eyebrow::before {
   content: '';
-  display: block;
-  width: 44px;
-  height: 3px;
-  background: var(--flyer-red);
-  margin-top: 8px;
-  margin-left: auto;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--brand-red);
+}
+.eyebrow-dim {
+  color: #a1a1aa;
 }
 
-/* Faint circuit background like flyer top-right */
-.circuit-bg {
-  background-image: url("data:image/svg+xml,%3Csvg width='320' height='180' viewBox='0 0 320 180' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23000' stroke-opacity='0.07' stroke-width='1'%3E%3Cpath d='M10 10 H110 L140 40 H230'/%3E%3Cpath d='M10 30 H90 L130 70 H250 L280 100'/%3E%3Cpath d='M180 10 V50 L210 80 H300'/%3E%3Ccircle cx='230' cy='40' r='3' fill='%23000' fill-opacity='0.07' stroke='none'/%3E%3Ccircle cx='280' cy='100' r='3' fill='%23000' fill-opacity='0.07' stroke='none'/%3E%3Ccircle cx='130' cy='70' r='3' fill='%23000' fill-opacity='0.07' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: 420px auto;
-}
-html.dark .circuit-bg {
-  background-image: url("data:image/svg+xml,%3Csvg width='320' height='180' viewBox='0 0 320 180' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23fff' stroke-opacity='0.08' stroke-width='1'%3E%3Cpath d='M10 10 H110 L140 40 H230'/%3E%3Cpath d='M10 30 H90 L130 70 H250 L280 100'/%3E%3Cpath d='M180 10 V50 L210 80 H300'/%3E%3Ccircle cx='230' cy='40' r='3' fill='%23fff' fill-opacity='0.08' stroke='none'/%3E%3Ccircle cx='280' cy='100' r='3' fill='%23fff' fill-opacity='0.08' stroke='none'/%3E%3Ccircle cx='130' cy='70' r='3' fill='%23fff' fill-opacity='0.08' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+/* Red-edged panel accent */
+.edge-red {
+  border-left: 2px solid var(--brand-red);
 }
 
-/* Diagonal slash accent like flyer red/gray bars */
-.slash-accent {
-  clip-path: polygon(18% 0, 100% 0, 82% 100%, 0 100%);
-}
-.slash-thin {
-  clip-path: polygon(30% 0, 36% 0, 6% 100%, 0 100%);
-}
-
-/* Flyer icon box: white box, gray border, icon left */
-.flyer-icon-box {
-  background: var(--bg-card);
-  border: 1.5px solid #d1d5db;
-  border-radius: 10px;
-}
-html.dark .flyer-icon-box {
-  border-color: rgba(255, 255, 255, 0.16);
-}
-
-/* Flyer footer bar: near-black with red top rule */
-.flyer-footer-bar {
-  background: var(--flyer-black);
-  border-top: 4px solid var(--flyer-red);
-}
-
-/* Body link style like Apple */
-.link-arrow {
-  color: #1d1d1f;
+/* Nav links */
+.nav-link {
+  position: relative;
+  font-size: 13px;
   font-weight: 500;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  transition: color 0.15s ease;
 }
-html.dark .link-arrow {
-  color: #f5f5f7;
+.nav-link:hover {
+  color: var(--text-primary);
 }
-.link-arrow:hover {
-  text-decoration: underline;
+.nav-link.active {
+  color: var(--text-primary);
 }
-
-/* Hero gradient headline + circuit texture (first-version hero effects) */
-html.dark .text-brand-gradient {
-  background: linear-gradient(135deg, #ffffff 25%, #fca5a5 65%, #ed1c24 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-html.light .text-brand-gradient {
-  background: linear-gradient(135deg, #0f172a 20%, #ed1c24 70%, #b91c1c 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--brand-red);
 }
 
-.flyer-circuit-bg {
-  background-image: radial-gradient(rgba(229, 37, 42, 0.08) 1px, transparent 0), radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 0);
-  background-position: 0 0, 16px 16px;
-  background-size: 32px 32px;
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.35rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
-
-/* Quiet scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+.btn-primary {
+  background: var(--brand-red);
+  color: #fff;
 }
-::-webkit-scrollbar-track {
+.btn-primary:hover {
+  background: var(--brand-red-dark);
+}
+.btn-outline {
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   background: transparent;
 }
-::-webkit-scrollbar-thumb {
-  background: #c7c7cc;
-  border-radius: 8px;
-  border: 2px solid var(--bg-primary);
-}
-html.dark ::-webkit-scrollbar-thumb {
-  background: #3a3a3c;
+.btn-outline:hover {
+  border-color: var(--brand-red);
+  color: var(--brand-red);
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* Inline link with arrow hover */
+.link-arrow {
+  color: var(--text-primary);
+  font-weight: 500;
 }
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* ---- Interactive polish: parallax + clip masks (Apple/Nvidia-restrained) ---- */
-
-/* Smooth parallax layers */
-.parallax-layer {
-  will-change: transform;
-  backface-visibility: hidden;
+.link-arrow:hover {
+  color: var(--brand-red);
 }
 
-/* Clip-mask section edges — subtle Nvidia-style angles */
-.clip-slant-top {
-  clip-path: polygon(0 28px, 100% 0, 100% 100%, 0 100%);
-}
-.clip-slant-both {
-  clip-path: polygon(0 28px, 100% 0, 100% calc(100% - 28px), 0 100%);
-}
-@media (min-width: 640px) {
-  .clip-slant-top {
-    clip-path: polygon(0 48px, 100% 0, 100% 100%, 0 100%);
-  }
-  .clip-slant-both {
-    clip-path: polygon(0 48px, 100% 0, 100% calc(100% - 48px), 0 100%);
-  }
-}
-
-/* Image / panel clip reveal helper (animated via framer-motion clipPath) */
-.clip-reveal {
-  will-change: clip-path, transform;
-  overflow: hidden;
-}
-
-/* Card lift — Apple-like hover, no glow */
+/* Card lift */
 .lift {
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.2s ease;
 }
 .lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-}
-html.dark .lift:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
 }
 
-/* Stagger children fade helper */
 .stagger-parent > * {
   will-change: transform, opacity;
 }
 
-/* Ticker — slow, quiet, pauses on hover */
+.parallax-layer {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.clip-slant-both {
+  clip-path: polygon(0 28px, 100% 0, 100% calc(100% - 28px), 0 100%);
+}
+@media (min-width: 640px) {
+  .clip-slant-both {
+    clip-path: polygon(0 48px, 100% 0, 100% calc(100% - 48px), 0 100%);
+  }
+}
+
+.clip-reveal {
+  will-change: clip-path, transform;
+  overflow: hidden;
+}
+
+/* Ticker — slow, pauses on hover */
 @keyframes ticker-x {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -310,14 +243,34 @@ html.dark .lift:hover {
   }
 }
 
-/* Sharp angular design — ditch rounded rectangles. */
-[class*="rounded-"] {
-  border-radius: 0 !important;
+/* Quiet scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #c7c7cc;
+  border: 2px solid var(--bg-primary);
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #3a3a3c;
 }
 
-/* Orbitron main headings: keep tracking open for the wide display face */
-h1, h2 {
-  letter-spacing: 0.015em;
+/* Legal prose */
+.prose-legal h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--text-primary);
+}
+.prose-legal p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 0.9rem;
 }
 
 /* Respect reduced motion globally */

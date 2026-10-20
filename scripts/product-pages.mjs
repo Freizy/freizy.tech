@@ -2,7 +2,7 @@
  * Generates one static, indexable HTML page per product into public/products/.
  * Re-run with `npm run seo:pages` after editing the data below, then rebuild.
  * These pages are pure static HTML (no JS required) so crawlers see full
- * content; the interactive demos live on the main SPA at /#products.
+ * content; the interactive demos live on the main SPA at /products.
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -203,7 +203,7 @@ ${items}
 
 function standardPage(p, features, live) {
   return `
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> / <a href="${SITE}/#products">Products</a> / ${p.name}</nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> / <a href="${SITE}/products">Products</a> / ${p.name}</nav>
     <span class="tag">${p.tag}</span>
     <h1>${p.name}</h1>
     <p class="lede">${p.lede}</p>
@@ -218,7 +218,7 @@ function standardPage(p, features, live) {
       <h2>Talk to the people who built it</h2>
       <p>Every Freizy product is maintained by our own engineers in Accra — support comes from the people who wrote the code.</p>
       <p>
-        <a class="btn" href="${SITE}/#contact">Contact us</a>
+        <a class="btn" href="${SITE}/contact">Contact us</a>
         &nbsp;&nbsp;<a href="${WHATSAPP}" target="_blank" rel="noopener noreferrer">WhatsApp: +233 24 035 2196</a>
       </p>
     </div>`;
@@ -306,7 +306,7 @@ function appPage(p) {
   </div></header>
   <section class="hero"><div class="wrap wide hero-grid">
     <div>
-      <nav class="crumbs dark" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> / <a href="${SITE}/#products">Products</a> / ${p.name}</nav>
+      <nav class="crumbs dark" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> / <a href="${SITE}/products">Products</a> / ${p.name}</nav>
       <p class="eyebrow">Freizy Stays · Student housing app</p>
       <h1>Find a hostel you can trust.</h1>
       <p class="lede">${p.lede}</p>
@@ -370,7 +370,7 @@ ${faqs}
     <h2>Your next room is in your pocket.</h2>
     <p>Download Freizy Stays free and start with verified hostels near your campus today.</p>
     ${storeBadges()}
-    <p class="micro">Free download · ${p.app.availability} · <a href="${SITE}/#contact">Contact us</a> · <a href="${WHATSAPP}" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+    <p class="micro">Free download · ${p.app.availability} · <a href="${SITE}/contact">Contact us</a> · <a href="${WHATSAPP}" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
   </div></section>`;
 }
 
@@ -432,7 +432,7 @@ ${p.appFaq ? faqSchema(p) : ''}  <script type="application/ld+json">
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "${SITE}/" },
-      { "@type": "ListItem", "position": 2, "name": "Products", "item": "${SITE}/#products" },
+      { "@type": "ListItem", "position": 2, "name": "Products", "item": "${SITE}/products" },
       { "@type": "ListItem", "position": 3, "name": "${p.name}", "item": "${url}" }
     ]
   }
