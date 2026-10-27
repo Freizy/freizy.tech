@@ -12,6 +12,10 @@ export interface EnquiryPayload {
 
 const ENDPOINT = 'https://api.web3forms.com/submit';
 
+/** Trim + hard-cap every field so tampered clients can't send oversized payloads. */
+const clip = (value: string | undefined, max: number): string =>
+  (value ?? '').trim().slice(0, max);
+
 /**
  * POST an enquiry via Web3Forms (current active backend).
  * Silent success is returned for bot-like submissions (honeypot filled
@@ -42,12 +46,12 @@ export async function submitEnquiry(payload: EnquiryPayload): Promise<void> {
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         access_key: accessKey,
-        subject: `New enquiry — ${payload.topic} — ${payload.name}`,
-        name: payload.name,
-        email: payload.email,
-        company: payload.company || '',
-        topic: payload.topic,
-        message: payload.message,
+        subject: `New enquiry — ${clip(payload.topic, 80)} — ${clip(payload.name, 120)}`,
+        name: clip(payload.name, 120),
+        email: clip(payload.email, 160),
+        company: clip(payload.company, 160),
+        topic: clip(payload.topic, 80),
+        message: clip(payload.message, 5000),
       }),
     });
   } catch {

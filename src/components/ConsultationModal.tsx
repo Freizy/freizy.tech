@@ -136,11 +136,11 @@ export const ConsultationModal: FC<ConsultationModalProps> = ({
             >
               <div>
                 <label htmlFor="consult-name" className="sr-only">Your name</label>
-                <input id="consult-name" required placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} className={inputCls} />
+                <input id="consult-name" required maxLength={120} placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} className={inputCls} />
               </div>
               <div>
                 <label htmlFor="consult-email" className="sr-only">Work email</label>
-                <input id="consult-email" required type="email" placeholder="Work email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} />
+                <input id="consult-email" required maxLength={160} type="email" placeholder="Work email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} />
               </div>
               <div>
                 <label htmlFor="consult-topic" className="sr-only">Service</label>
@@ -159,7 +159,7 @@ export const ConsultationModal: FC<ConsultationModalProps> = ({
               </div>
               <div>
                 <label htmlFor="consult-notes" className="sr-only">Message</label>
-                <textarea id="consult-notes" rows={4} placeholder="A sentence or two about what you need" value={notes} onChange={(e) => setNotes(e.target.value)} className={`${inputCls} resize-none`} />
+                <textarea id="consult-notes" rows={4} maxLength={5000} placeholder="A sentence or two about what you need" value={notes} onChange={(e) => setNotes(e.target.value)} className={`${inputCls} resize-none`} />
               </div>
               <div className="hidden" aria-hidden="true">
                 <label>
