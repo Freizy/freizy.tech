@@ -64,8 +64,9 @@
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- Privacy-friendly analytics (no cookies, no banner needed). Requires a Plausible account for freizy.com. -->
-    <script defer data-domain="freizy.com" src="https://plausible.io/js/script.js"></script>
+    <!-- Privacy-friendly analytics (no cookies, no banner needed). Proxied
+         through Netlify so the browser only ever talks to freizy.com. -->
+    <script defer data-domain="freizy.com" data-api="/api/event" src="/js/plausible.js"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -122,12 +123,7 @@
         ]
       }
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
     <script src="/theme-init.js"></script>
   </head>
   <body

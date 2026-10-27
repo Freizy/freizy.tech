@@ -1,3 +1,9 @@
+# Subdomain: serve the Stays page (and its relative assets) at the root.
 https://stays.freizy.com/*  /products/freizy-stays/:splat  200!
+
+# First-party proxy for Plausible (removes the last third-party JS/CSS request
+# and makes SRI unnecessary). Must come before the SPA fallback.
+/js/plausible.js  https://plausible.io/js/script.js  200
+/api/event        https://plausible.io/api/event     200
 
 /*  /index.html  200
