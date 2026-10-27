@@ -3,9 +3,13 @@
 # via _redirects), so script-src/font-src need no third-party origins.
 # `unsafe-inline` remains for style only: the static product pages use inline
 # <style> blocks and React sets inline style attributes.
+# CSP reports go to the first-party Netlify edge function via `report-uri`.
+# `report-to` is deliberately omitted: when both are present browsers ignore
+# `report-uri`, and report-to delivery proved unreliable in testing, so a
+# misconfigured endpoint would silence every report.
 /*
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://api.web3forms.com; media-src 'self'; manifest-src 'self'; upgrade-insecure-requests
-  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://api.web3forms.com; media-src 'self'; manifest-src 'self'; upgrade-insecure-requests; report-uri /api/csp-report
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
