@@ -98,6 +98,7 @@ const products: {
     tag: 'Mobile app · Student housing',
     desc: 'Find verified hostels, watch video reviews and book from your phone — with MoMo installment payments.',
     points: ['Verified listings & 360 tours', 'Video reviews from tenants', 'MoMo installment payments'],
+    url: 'https://stays.freizy.com',
     liveTitle: 'Live look: Freizy Stays',
     liveDesc: "Bookings, occupancy and payments as a hostel manager would see them. Pause it, switch tabs — it's all sample data.",
   },
