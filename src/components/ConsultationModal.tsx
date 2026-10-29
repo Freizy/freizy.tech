@@ -2,6 +2,19 @@ import { useState, useEffect, useRef, type FC, type FormEvent } from 'react';
 import { X } from 'lucide-react';
 import { submitEnquiry } from '../lib/contact';
 
+export const consultationTopics = [
+  'General enquiry',
+  'Applied AI',
+  'Software development',
+  'Cybersecurity',
+  'Robotics & automation',
+  'Hardware & servers',
+  'Networks',
+  'Project management',
+  'Digital marketing',
+  'Product demo',
+] as const;
+
 interface ConsultationModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -23,7 +36,11 @@ export const ConsultationModal: FC<ConsultationModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [honeypot, setHoneypot] = useState('');
-  const startedAt = useRef(Date.now());
+  const startedAt = useRef(0);
+
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -45,11 +62,6 @@ export const ConsultationModal: FC<ConsultationModalProps> = ({
       setIsSubmitting(false);
     }
   };
-
-  useEffect(() => {
-    if (initialService) setService(initialService);
-    if (initialNotes) setNotes(initialNotes);
-  }, [initialService, initialNotes]);
 
   const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<Element | null>(null);
@@ -160,17 +172,10 @@ export const ConsultationModal: FC<ConsultationModalProps> = ({
               <div>
                 <label htmlFor="consult-topic" className="sr-only">Service</label>
                 <select id="consult-topic" value={service} onChange={(e) => setService(e.target.value)} className={inputCls}>
-                <option>General enquiry</option>
-                <option>Applied AI</option>
-                <option>Software development</option>
-                <option>Cybersecurity</option>
-                <option>Robotics & automation</option>
-                <option>Hardware & servers</option>
-                <option>Networks</option>
-                <option>Project management</option>
-                <option>Digital marketing</option>
-                <option>Product demo</option>
-              </select>
+                  {consultationTopics.map((topic) => (
+                    <option key={topic}>{topic}</option>
+                  ))}
+                </select>
               </div>
               <div>
                 <label htmlFor="consult-notes" className="sr-only">Message</label>

@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# CSP reports are handled by netlify/edge-functions/csp-report.js, whose
+# exported config declares /api/csp-report. Netlify auto-discovers that
+# directory, so no extra wiring is needed here.

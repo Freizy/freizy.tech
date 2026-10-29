@@ -25,10 +25,6 @@ const clip = (value: string | undefined, max: number): string =>
  * SECURITY NOTE: the Web3Forms key is public by design and submissions go
  * straight to their API, so the honeypot is best-effort only. See README
  * "Accepted risk" before replacing this with a server-side proxy.
- *
- * NOTE: the serverless endpoint in api/contact.ts is the planned upgrade
- * path (adds auto-replies, topic routing, no submission caps). Switching
- * back is a one-line change here.
  */
 export async function submitEnquiry(payload: EnquiryPayload): Promise<void> {
   // Honeypot only: filled means bot — silent success so spammers can't probe.

@@ -2,6 +2,21 @@ import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { BrandLogo } from '../BrandLogo';
 
+/**
+ * Product links for the footer. Stays first, Omnia last, matching the
+ * showcase order. Live products go to their own site; the rest go to their
+ * static product page. Plain anchors are required here: the /products/{slug}/
+ * pages are prerendered HTML, not React Router routes.
+ */
+const products = [
+  { name: 'Stays', href: 'https://stays.freizy.com', external: true },
+  { name: 'Lavida Health Buddy', href: 'https://lavida2.netlify.app', external: true },
+  { name: 'KSM Autos', href: 'https://ksm.autos', external: true },
+  { name: 'Exams Suite', href: '/products/exams-suite/', external: false },
+  { name: 'Oudy', href: '/products/oudy-events/', external: false },
+  { name: 'Omnia Suite', href: '/products/omnia-suite/', external: false },
+];
+
 export const Footer: FC = () => {
   return (
     <footer className="bg-[#0b0b0d] text-white border-t-2 border-[#ed1c24] transition-colors">
@@ -16,21 +31,28 @@ export const Footer: FC = () => {
           <div>
             <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#ff6b70] mb-4">Services</div>
             <ul className="space-y-2.5 text-neutral-400">
-              <li><Link to="/services" className="hover:text-white transition-colors">Applied AI</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Software development</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Cybersecurity</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Hardware & networks</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Project management</Link></li>
+              <li><Link to="/services#ai" className="hover:text-white transition-colors">Applied AI</Link></li>
+              <li><Link to="/services#software" className="hover:text-white transition-colors">Software development</Link></li>
+              <li><Link to="/services#services" className="hover:text-white transition-colors">Cybersecurity</Link></li>
+              <li><Link to="/services#hardware" className="hover:text-white transition-colors">Hardware & networks</Link></li>
+              <li><Link to="/services#process" className="hover:text-white transition-colors">Project management</Link></li>
             </ul>
           </div>
           <div>
             <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#ff6b70] mb-4">Products</div>
             <ul className="space-y-2.5 text-neutral-400">
-              <li><Link to="/products" className="hover:text-white transition-colors">Omnia Suite</Link></li>
-              <li><Link to="/products" className="hover:text-white transition-colors">Lavida Health Buddy</Link></li>
-              <li><Link to="/products" className="hover:text-white transition-colors">KSM Autos</Link></li>
-              <li><Link to="/products" className="hover:text-white transition-colors">Exams Suite</Link></li>
-              <li><Link to="/products" className="hover:text-white transition-colors">Oudy & Stays</Link></li>
+              {products.map((product) => (
+                <li key={product.name}>
+                  <a
+                    href={product.href}
+                    target={product.external ? '_blank' : undefined}
+                    rel={product.external ? 'noopener noreferrer' : undefined}
+                    className="hover:text-white transition-colors"
+                  >
+                    {product.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
           <div>

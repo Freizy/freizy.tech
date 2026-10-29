@@ -12,7 +12,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: 'Can I try your products before committing?',
-    a: 'Yes. Every product page on this site includes a live demo running on sample data, and three products (Omnia Suite, Lavida Health Buddy and KSM Autos) have public sites you can open. For the rest, request a demo and we will walk through your own workflow on a call.',
+    a: 'Yes. Every product page includes a sample preview running on representative data, and Stays, Lavida Health Buddy and KSM Autos have public sites you can open. For the rest, request a demo and we will walk through your own workflow on a call.',
   },
   {
     q: 'Do you provide support after delivery?',

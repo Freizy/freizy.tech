@@ -17,7 +17,7 @@ export const Products: FC = () => {
       <PageHeader
         eyebrow="Products"
         title="Built by us. Used every day."
-        lede="Six products we maintain ourselves — so the support you get comes from the people who wrote the code. Select one to see it live."
+        lede="Six products we maintain ourselves - so the support you get comes from the people who wrote the code. Select one to preview its workflow."
       >
         <div className="flex flex-wrap gap-3">
           <button onClick={() => openConsultation('Product demo')} className="btn btn-primary">

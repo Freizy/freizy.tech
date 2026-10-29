@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState, type FC, type ReactNode } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type FC,
+  type ReactNode,
+} from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Pause, Play } from 'lucide-react';
 import { WindowControls } from './WindowControls';
@@ -11,15 +18,15 @@ export interface FeedItem {
 }
 
 export function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const q = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReduced(q.matches);
-    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
-    q.addEventListener('change', onChange);
-    return () => q.removeEventListener('change', onChange);
-  }, []);
-  return reduced;
+  return useSyncExternalStore(
+    (onChange) => {
+      const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+      query.addEventListener('change', onChange);
+      return () => query.removeEventListener('change', onChange);
+    },
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    () => false
+  );
 }
 
 export function nowTime() {

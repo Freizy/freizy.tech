@@ -1,74 +1,137 @@
 # Freizy Technologies — Marketing Site
 
-Company site for Freizy Technologies (Accra, Ghana): applied AI, software development, cybersecurity, robotics, hardware and networks. Includes product showcases for Freizy Omnia Suite, Lavida Health Buddy and KSM Autos.
+The company site for [Freizy Technologies](https://freizy.com) in Accra, Ghana:
+software development, applied AI, cybersecurity, hardware and networks. It also
+hosts the product pages for the six products we maintain:
+
+| Product | Where it lives |
+| --- | --- |
+| Stays | Live at [stays.freizy.com](https://stays.freizy.com); hand-built page in `public/products/freizy-stays/` |
+| Lavida Health Buddy | Live at [lavida2.netlify.app](https://lavida2.netlify.app) |
+| KSM Autos | Live at [ksm.autos](https://ksm.autos) |
+| Freizy Exams Suite | Static page at `/products/exams-suite/` |
+| Oudy | Static page at `/products/oudy-events/` |
+| Freizy Omnia Suite | Static page at `/products/omnia-suite/` |
 
 ## Stack
 
-- React 19 + TypeScript + Vite 6
+- React 19 + TypeScript (strict) + Vite 6
 - Tailwind CSS v4
-- `motion` for scroll reveals / parallax, `lucide-react` icons
-- Canvas particle field in the hero (no WebGL dependency)
+- `motion` for scroll reveals and transitions, `lucide-react` for icons
+- React Router 7 for the SPA routes
+- Web3Forms for contact submissions
+- Self-hosted fonts (Inter, JetBrains Mono, Orbitron)
+- Netlify for hosting, redirects, cache headers and the CSP report endpoint
+
+## Requirements
+
+- Node 22 (see `.nvmrc`)
+- npm (the project uses `package-lock.json`; do not add a second lockfile)
 
 ## Scripts
 
-| Command          | What it does              |
-| ---------------- | ------------------------- |
-| `npm run dev`    | Local dev server (:3000)  |
-| `npm run build`  | Production build + prerender to `dist/` |
-| `npm run preview`| Serve the production build |
-| `npm run lint`   | `tsc --noEmit` typecheck  |
-| `npm run seo:pages` | Regenerate static product pages into `public/products/` |
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Dev server on `http://localhost:3000` |
+| `npm run dev:host` | Dev server exposed on the local network |
+| `npm run build` | Production build, then prerender route HTML and `404.html` |
+| `npm run preview` | Serve the production build locally |
+| `npm run clean` | Delete `dist/` and `server.js` (cross-platform) |
+| `npm run lint` | ESLint over the repo |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run format` | Prettier write (optional; not enforced in CI) |
+| `npm run seo:pages` | Regenerate the five generated product pages in `public/products/` |
+
+`npm run seo:pages` deliberately skips `public/products/freizy-stays/`. That page
+is hand-built; running the generator must never overwrite it.
 
 ## Project structure
 
-- `src/App.tsx` — page composition + consultation modal state
-- `src/components/` — one component per site section (Hero, AISection, ProductsShowcase, …)
-- `src/components/*TelemetryMonitor.tsx` — live-feel product demos (sample data, pausable, reduced-motion aware)
-- `src/context/ThemeContext.tsx` — light/dark theme with localStorage + OS preference fallback
-- `scripts/product-pages.mjs` — generates static SEO pages (`public/products/*/`) with SoftwareApplication + BreadcrumbList schema; re-run after editing, listed in `public/sitemap.xml`. The Stays page is app-aware: MobileApplication + FAQPage schema, store badges (currently WhatsApp app-link flow — swap `APP_LINK_IOS` / `APP_LINK_ANDROID` for real store URLs when ready), a CSS phone mockup and a hostel-manager CTA. `freizy-stays` is hand-built and skipped by the generator — edit `public/products/freizy-stays/index.html` directly
-- `src/data/page-meta.json` — canonical title, description and path for every app route. Both the React pages and the prerender step read it, so edit it once
-- `scripts/prerender.mjs` — post-build step that writes `dist/about.html`, `dist/404.html`, etc., strips the home-only FAQ schema from other routes, and appends the matching Netlify rewrite/redirect rules to `dist/_redirects`. Adding a route means adding it to `App.tsx` and `page-meta.json`
+```
+src/
+  App.tsx                 route table; Home is eager, every other page is lazy
+  main.tsx                React root, router, theme and error boundary
+  components/             layout, sections, product demos
+  context/                theme and consultation-modal providers
+  data/page-meta.json     per-route title/description/canonical/og:url
+  hooks/usePageMeta.ts    applies the same metadata on client navigation
+  lib/contact.ts          Web3Forms submission + honeypot handling
+  pages/                  one component per SPA route
+  index.css               design tokens, shared utility classes
+public/
+  _headers                security + cache headers
+  _redirects              Stays subdomain rewrite and Plausible proxy
+  products/               static product pages and their assets
+scripts/
+  prerender.mjs           writes per-route HTML and Netlify redirects
+  product-pages.mjs       generates the non-Stays product pages
+  clean.mjs               cross-platform clean
+netlify/edge-functions/
+  csp-report.js           accepts CSP reports at /api/csp-report
+```
 
-## Contact backend (Web3Forms, active)
+## Routing and metadata
 
-Both forms submit through `src/lib/contact.ts`, which POSTs directly to
-Web3Forms with a honeypot and hard field caps. No auto-reply on the free
-tier — the visitor just sees the on-site confirmation.
+`src/data/page-meta.json` is the single source of truth for route metadata.
+`scripts/prerender.mjs` runs after Vite and:
 
-### Going live
+1. Copies the built app shell into one HTML file per SPA route.
+2. Replaces title, description, Open Graph, Twitter and canonical tags.
+3. Removes the home-only FAQ JSON-LD from other routes.
+4. Writes a real `404.html` with `noindex`.
+5. Appends the route rewrites and trailing-slash redirects to `dist/_redirects`.
 
-1. Get an access key at https://web3forms.com (submit your email, the key
-   arrives in your inbox)
-2. Set `VITE_WEB3FORMS_KEY` on the host **and redeploy** — VITE_ vars bake
-   in at build time (for local dev, copy `.env.example` to `.env`)
+There is no SPA catch-all. Unknown paths get a real 404 response.
 
-### Upgrade path: serverless
+The product pages under `public/products/<slug>/` are plain HTML and are linked
+with normal `<a href>` elements, not React Router `Link`s.
 
-`api/contact.ts` is a ready Vercel Edge function (validation, honeypot +
-fill-time + rate limiting, Resend delivery, visitor auto-reply). To switch:
-set `RESEND_API_KEY` / `CONTACT_TO` / `CONTACT_FROM`, verify `freizy.com`
-in Resend, point `submitEnquiry` at `/api/contact`, deploy. For local
-end-to-end testing of that path use `vercel dev`.
+## Stays
 
-### Accepted risk: public key and client-side spam checks
+`public/products/freizy-stays/index.html` is hand-built and intentionally
+excluded from `seo:pages`. Its CSS lives in `stays.css`, fonts in `fonts.css` /
+`fonts/`, and images in `public/images/`.
 
-The Web3Forms access key ships in the public JS bundle. These keys are
-designed for client-side use, but anyone can copy this one and POST to the
-API directly, bypassing the site entirely.
+`public/_redirects` maps `https://stays.freizy.com/*` to
+`/products/freizy-stays/:splat` with a 200 rewrite, preserving every path. The
+Stays folder therefore also contains `robots.txt`, `sitemap.xml`,
+`.well-known/security.txt`, and `favicon.ico` for the subdomain.
 
-What protects us today: the honeypot, Web3Forms' own spam filtering, and
-the free-plan submission cap. A successful abuse attempt creates noise in
-the inbox or burns quota; it does not expose customer data. What does
-**not** protect us: origin checks, rate limiting, or a server-side
-fill-time gate — none can be enforced on the direct Web3Forms path.
+## Contact forms
 
-This is accepted for a low-volume marketing form. Revisit if junk mail or
-quota exhaustion appears: enable CAPTCHA/domain restrictions in the
-Web3Forms dashboard, rotate the key, or switch to `api/contact.ts` or a
-Netlify Edge Function proxy that keeps the key out of the bundle.
+The forms post to Web3Forms at `https://api.web3forms.com/submit`. The access key
+is supplied at build time via `VITE_WEB3FORMS_KEY`; without it, submissions show
+the error state. The key is public by design (it is shipped to the browser).
 
-## Contact
+**Accepted risk:** Web3Forms has submission caps and no server-side validation.
+The honeypot and fill-time check are best-effort only. If spam becomes a
+problem, put a server-side proxy in front of Web3Forms or switch providers; do
+not assume the client-side checks are a security boundary.
 
-- Phone: +233 24 035 2196 · +233 26 624 2703
-- Email: info@freizy.com
-- Web: https://freizy.com
+## Security and caching
+
+- `public/_headers` sets CSP, HSTS, frame and permission policies.
+- `script-src` is `'self'`; Plausible is proxied through Netlify so there is no
+  third-party script origin.
+- CSP reports go to `netlify/edge-functions/csp-report.js` (204 for valid
+  reports, 405 for other methods).
+- Fingerprinted assets and fonts are cached for a year. Stays images use `?v=`
+  in the markup, so bump the version when replacing one.
+- `netlify.toml` holds the build command, publish directory and Node version.
+  `public/_headers` and `public/_redirects` remain the source of truth for
+  headers and redirects.
+
+## CI
+
+`.github/workflows/ci.yml` runs `npm ci`, `npm run lint`, `npm run typecheck`
+and `npm run build` on pushes to `main` and on pull requests.
+
+## Deployment
+
+1. Set `VITE_WEB3FORMS_KEY` in the Netlify build environment.
+2. Deploy with `npm run build` and publish `dist/`.
+3. Verify `/`, `/products`, `/contact`, `/products/freizy-stays/` and the five
+   generated product pages after changing routing, headers or assets.
+
+No automated browser tests are included yet. The CI build catches type, lint,
+prerender and broken-import failures; visual and Lighthouse checks are manual.

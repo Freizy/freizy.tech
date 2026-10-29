@@ -159,12 +159,12 @@ const products = [
     app: {
       category: 'LifestyleApplication',
       os: 'iOS',
-      availability: 'iOS available now · Android coming soon',
+      availability: 'iPhone early access · Android in development',
     },
     appFaq: [
       {
         q: 'Is Stays free to use?',
-        a: 'Yes — downloading the app and browsing hostels costs nothing. You only pay the hostel when you book, either in full or in MoMo installments.',
+        a: 'Yes — joining early access and browsing hostels costs nothing. You only pay the hostel when you book, either in full or in MoMo installments.',
       },
       {
         q: 'What does Freizy Verified mean?',
@@ -228,8 +228,8 @@ function standardPage(p, features, live) {
 
 function storeBadges() {
   return `<p class="badges">
-      <a class="store" href="${APP_LINK_IOS}" target="_blank" rel="noopener noreferrer"><small>Download on the</small>App Store</a>
-      <a class="store ghost" href="${APP_LINK_ANDROID}" target="_blank" rel="noopener noreferrer"><small>Get it on</small>Google Play</a>
+      <a class="store" href="${APP_LINK_IOS}" target="_blank" rel="noopener noreferrer"><small>Early access on</small>iPhone</a>
+      <a class="store ghost" href="${APP_LINK_ANDROID}" target="_blank" rel="noopener noreferrer"><small>Coming soon to</small>Google Play</a>
     </p>`;
 }
 
@@ -304,7 +304,7 @@ function appPage(p) {
   <header class="bar"><div class="wrap wide bar-in">
     <a class="brand" href="${SITE}/">FREIZY<span>.</span> <em>STAYS</em></a>
     <nav aria-label="On this page"><a href="#features">Features</a><a href="#reviews">Reviews</a><a href="#managers">Managers</a><a href="#faq-app">FAQ</a></nav>
-    <a class="btn sm" href="#get-the-app">Get the app</a>
+    <a class="btn sm" href="#get-the-app">Get early access</a>
   </div></header>
   <section class="hero"><div class="wrap wide hero-grid">
     <div>
@@ -313,7 +313,7 @@ function appPage(p) {
       <h1>Find a hostel you can trust.</h1>
       <p class="lede">${p.lede}</p>
       ${storeBadges()}
-      <p class="micro">Free download · ${p.app.availability}</p>
+      <p class="micro">Free to browse · ${p.app.availability}</p>
     </div>
     <div class="hero-visual">
       ${phoneMockup()}
@@ -370,9 +370,9 @@ ${faqs}
   </div>
   <section class="final" id="get-the-app"><div class="wrap">
     <h2>Your next room is in your pocket.</h2>
-    <p>Download Stays free and start with verified hostels near your campus today.</p>
+    <p>Stays is rolling out to students in Accra. Join early access and start with verified hostels near your campus.</p>
     ${storeBadges()}
-    <p class="micro">Free download · ${p.app.availability} · <a href="${SITE}/contact">Contact us</a> · <a href="${WHATSAPP}" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+    <p class="micro">Free to browse · ${p.app.availability} · <a href="${SITE}/contact">Contact us</a> · <a href="${WHATSAPP}" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
   </div></section>`;
 }
 

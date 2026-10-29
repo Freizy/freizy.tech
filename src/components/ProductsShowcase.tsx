@@ -46,7 +46,7 @@ const products: {
     desc: 'Find verified hostels, watch video reviews and book from your phone — with MoMo installment payments.',
     points: ['Verified listings & 360 tours', 'Video reviews from tenants', 'MoMo installment payments'],
     url: 'https://stays.freizy.com',
-    liveTitle: 'Live look: Stays',
+    liveTitle: 'Preview: Stays',
     liveDesc: "Bookings, occupancy and payments as a hostel manager would see them. Pause it, switch tabs — it's all sample data.",
   },
   {
@@ -57,7 +57,7 @@ const products: {
     desc: 'Appointment reminders, health records and guidance for clinics and patients. Built with privacy reviews from day one.',
     points: ['Appointment management', 'Secure patient records', 'Clinic dashboards'],
     url: 'https://lavida2.netlify.app',
-    liveTitle: 'Live look: Lavida Health Buddy',
+    liveTitle: 'Preview: Lavida Health Buddy',
     liveDesc: 'Today\u2019s clinic queue — appointments, check-ins and reminders. Pause it, switch tabs — it\'s all sample data.',
   },
   {
@@ -68,7 +68,7 @@ const products: {
     desc: 'Bookings, service history and customer messaging for garages and fleets. Keeps the workshop organised.',
     points: ['Online bookings', 'Service history per vehicle', 'Parts and job tracking'],
     url: 'https://ksm.autos',
-    liveTitle: 'Live look: KSM Autos',
+    liveTitle: 'Preview: KSM Autos',
     liveDesc: 'Bookings, workshop load and parts as the front desk would see them. Pause it, switch tabs — it\'s all sample data.',
   },
   {
@@ -98,7 +98,7 @@ const products: {
     tag: 'Business management',
     desc: 'Accounting, inventory, sales and reporting for small and mid-size companies. Replaces spreadsheets and disconnected tools.',
     points: ['Invoicing and expenses', 'Stock and purchasing', 'Simple, exportable reports'],
-    liveTitle: 'Live look: Omnia Suite',
+    liveTitle: 'Preview: Omnia Suite',
     liveDesc: 'Finance, stock and sales as your team would see them. Pause it, switch tabs — it\'s all sample data.',
   },
 ];
@@ -125,7 +125,7 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
           </h2>
           <p className="mt-4 text-[17px] text-[#424245] dark:text-neutral-400 leading-relaxed">
             Six products we maintain ourselves — so the support you get comes
-            from the people who wrote the code. Select one to see it live.
+            from the people who wrote the code. Select one to preview its workflow.
           </p>
         </motion.div>
 
@@ -162,7 +162,7 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
                   </div>
                   {selected && (
                     <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
-                      Viewing live
+                      Sample preview
                     </span>
                   )}
                 </div>
@@ -182,7 +182,7 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
                 </ul>
                 <div className="mt-auto pt-2 flex items-center justify-between gap-2">
                   <span className={`text-[13px] font-medium ${selected ? 'text-[#1d1d1f] dark:text-white' : 'text-[#6e6e73] dark:text-neutral-400'}`}>
-                    {selected ? 'Showing below' : 'See it live'}
+                    {selected ? 'Showing below' : 'Preview it'}
                   </span>
                   <div className="flex items-center gap-3">
                     <a href={`/products/${p.slug}/`} className="link-arrow text-[14px]">
@@ -246,13 +246,15 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
                   <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
               )}
-              <button
-                onClick={() => onOpenConsultation(current.name)}
-                className="link-arrow text-[14px] inline-flex items-center gap-0.5 group"
-              >
-                Request a demo
-                <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-              </button>
+              {!current.url && (
+                <button
+                  onClick={() => onOpenConsultation(current.name)}
+                  className="link-arrow text-[14px] inline-flex items-center gap-0.5 group"
+                >
+                  Request a demo
+                  <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                </button>
+              )}
             </div>
           </div>
           <AnimatePresence mode="wait">

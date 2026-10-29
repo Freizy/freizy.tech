@@ -1,16 +1,23 @@
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { RootLayout } from './components/layout/RootLayout';
 import { ConsultationProvider } from './context/ConsultationContext';
 import { Home } from './pages/Home';
-import { About } from './pages/About';
-import { Services } from './pages/Services';
-import { Products } from './pages/Products';
-import { CaseStudiesPage } from './pages/CaseStudies';
-import { Contact } from './pages/Contact';
-import { Privacy } from './pages/Privacy';
-import { Terms } from './pages/Terms';
-import { Refunds } from './pages/Refunds';
-import { NotFound } from './pages/NotFound';
+
+// Home stays in the entry chunk; every other page is fetched on first visit.
+// The Suspense boundary lives inside RootLayout so the header and footer do
+// not disappear while a route chunk loads.
+const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About })));
+const Services = lazy(() => import('./pages/Services').then((m) => ({ default: m.Services })));
+const Products = lazy(() => import('./pages/Products').then((m) => ({ default: m.Products })));
+const CaseStudiesPage = lazy(() =>
+  import('./pages/CaseStudies').then((m) => ({ default: m.CaseStudiesPage }))
+);
+const Contact = lazy(() => import('./pages/Contact').then((m) => ({ default: m.Contact })));
+const Privacy = lazy(() => import('./pages/Privacy').then((m) => ({ default: m.Privacy })));
+const Terms = lazy(() => import('./pages/Terms').then((m) => ({ default: m.Terms })));
+const Refunds = lazy(() => import('./pages/Refunds').then((m) => ({ default: m.Refunds })));
+const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })));
 
 export default function App() {
   return (

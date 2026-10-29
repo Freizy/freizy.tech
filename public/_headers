@@ -1,8 +1,8 @@
 # Security headers — applied by Netlify to freizy.com and stays.freizy.com.
 # Scripts, fonts and analytics are all first-party now (Plausible is proxied
 # via _redirects), so script-src/font-src need no third-party origins.
-# `unsafe-inline` remains for style only: the static product pages use inline
-# <style> blocks and React sets inline style attributes.
+# `unsafe-inline` remains for style only: React sets inline style attributes
+# for the few values that cannot live in a utility class.
 # CSP reports go to the first-party Netlify edge function via `report-uri`.
 # `report-to` is deliberately omitted: when both are present browsers ignore
 # `report-uri`, and report-to delivery proved unreliable in testing, so a
@@ -50,4 +50,9 @@
 /products/freizy-stays/fonts.css
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 /fonts.css
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/products/freizy-stays/stays.css
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/stays.css
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800

@@ -20,11 +20,11 @@ export const ContactSection: FC<ContactSectionProps> = ({ initialNotes = '' }) =
   const [sending, setSending] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [honeypot, setHoneypot] = useState('');
-  const startedAt = useRef(Date.now());
+  const startedAt = useRef(0);
 
   useEffect(() => {
-    if (initialNotes) setFormData((prev) => ({ ...prev, message: initialNotes }));
-  }, [initialNotes]);
+    startedAt.current = Date.now();
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -129,7 +129,8 @@ export const ContactSection: FC<ContactSectionProps> = ({ initialNotes = '' }) =
                       <select id="contact-topic" value={formData.topic} onChange={(e) => setFormData({ ...formData, topic: e.target.value })} className={inputCls}>
                         <option>General enquiry</option>
                         <option>Software project</option>
-                        <option>Product demo (Omnia / Lavida / KSM)</option>
+                        <option>Stays early access</option>
+                        <option>Product demo (Omnia / Lavida / KSM / Exams / Oudy)</option>
                         <option>Hardware or network</option>
                         <option>Support for existing work</option>
                       </select>

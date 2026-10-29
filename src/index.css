@@ -106,6 +106,12 @@ html.dark .text-brand-red {
   border-bottom: 1px solid var(--border-color);
 }
 
+/* Keep in-page anchors clear of the sticky header. */
+section[id],
+main[id] {
+  scroll-margin-top: 96px;
+}
+
 /* Cards — flat, bordered, red edge on hover */
 .glass-card {
   background: var(--bg-card);
