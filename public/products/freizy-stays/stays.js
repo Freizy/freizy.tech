@@ -18,6 +18,16 @@
     menuIcon.innerHTML = isOpen ? '<path d="m6 6 12 12M18 6 6 18"/>' : '<path d="M4 7h16M4 12h16M4 17h16"/>';
   });
   nav.querySelectorAll('a').forEach(function (link) { link.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && nav.classList.contains('open')) {
+      closeMenu();
+      menuBtn.focus();
+    }
+  });
+  var desktopQuery = window.matchMedia('(min-width: 801px)');
+  desktopQuery.addEventListener('change', function (event) {
+    if (event.matches) closeMenu();
+  });
 
   var search = document.getElementById('hostelSearch');
   var listings = Array.prototype.slice.call(document.querySelectorAll('.listing'));

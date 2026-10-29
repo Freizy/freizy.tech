@@ -5,13 +5,12 @@ import { PageHeader } from './PageHeader';
 interface LegalPageProps {
   title: string;
   updated: string;
-  description: string;
-  path: string;
+  meta: { title: string; description: string; path: string };
   sections: { heading: string; body: string | ReactNode }[];
 }
 
-export const LegalPage: FC<LegalPageProps> = ({ title, updated, description, path, sections }) => {
-  usePageMeta({ title: `${title} | Freizy Technologies`, description, path });
+export const LegalPage: FC<LegalPageProps> = ({ title, updated, meta, sections }) => {
+  usePageMeta(meta);
 
   return (
     <>
@@ -24,7 +23,7 @@ export const LegalPage: FC<LegalPageProps> = ({ title, updated, description, pat
               <p>{s.body}</p>
             </div>
           ))}
-          <div className="mt-10 pt-6 border-t border-black/10 dark:border-white/10 text-[13px] text-[#6e6e73] dark:text-neutral-500">
+          <div className="mt-10 pt-6 border-t border-black/10 dark:border-white/10 text-[13px] text-[#6e6e73] dark:text-neutral-400">
             Questions:{' '}
             <a href="mailto:info@freizy.com" className="link-arrow">info@freizy.com</a>
             {' · '}

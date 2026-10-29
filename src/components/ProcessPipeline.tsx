@@ -46,7 +46,7 @@ export const ProcessPipeline: FC<ProcessPipelineProps> = ({ onOpenConsultation }
               whileHover={{ y: -4 }}
               className="apple-panel lift rounded-2xl p-5"
             >
-              <div className="text-[13px] font-mono text-[#6e6e73] dark:text-neutral-500 mb-2">{s.n}</div>
+              <div className="text-[13px] font-mono text-[#6e6e73] dark:text-neutral-400 mb-2">{s.n}</div>
               <h3 className="text-[16px] font-semibold text-[#1d1d1f] dark:text-white mb-1.5">{s.title}</h3>
               <p className="text-[13px] text-[#424245] dark:text-neutral-400 leading-relaxed">{s.desc}</p>
             </motion.div>

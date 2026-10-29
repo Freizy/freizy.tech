@@ -56,7 +56,7 @@ export const CaseStudies: FC<CaseStudiesProps> = ({ onOpenConsultation }) => {
               whileHover={{ y: -4 }}
               className="glass-card lift rounded-2xl p-6 flex flex-col"
             >
-              <div className="text-[12px] font-medium uppercase tracking-wide text-[#6e6e73] dark:text-neutral-500 mb-2">
+              <div className="text-[12px] font-medium uppercase tracking-wide text-[#6e6e73] dark:text-neutral-400 mb-2">
                 {c.industry}
               </div>
               <h3 className="text-[17px] font-semibold text-[#1d1d1f] dark:text-white mb-2 leading-snug">

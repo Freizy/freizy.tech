@@ -1,5 +1,6 @@
 import { type FC } from 'react';
 import { usePageMeta } from '../hooks/usePageMeta';
+import pageMeta from '../data/page-meta.json';
 import { useConsultation } from '../context/ConsultationContext';
 import { PageHeader } from '../components/layout/PageHeader';
 import { CtaBand } from '../components/layout/CtaBand';
@@ -7,12 +8,7 @@ import { CaseStudies } from '../components/CaseStudies';
 
 export const CaseStudiesPage: FC = () => {
   const { openConsultation } = useConsultation();
-  usePageMeta({
-    title: 'Case Studies — Recent projects | Freizy Technologies',
-    description:
-      'Recent Freizy Technologies projects in plain terms: reconciliation automation for a lender, stock visibility across warehouses, and patient follow-up for a clinic group.',
-    path: '/case-studies',
-  });
+  usePageMeta(pageMeta.caseStudies);
 
   return (
     <>

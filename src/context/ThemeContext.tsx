@@ -10,15 +10,24 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+const readStoredTheme = (): Theme | null => {
+  try {
+    const saved = localStorage.getItem('freizy_theme');
+    return saved === 'light' || saved === 'dark' ? saved : null;
+  } catch {
+    return null;
+  }
+};
+
+const getInitialTheme = (): Theme => {
+  if (typeof window === 'undefined') return 'light';
+  const stored = readStoredTheme();
+  if (stored) return stored;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+
 export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Check saved theme or default to light mode
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('freizy_theme') as Theme | null;
-      if (saved === 'light' || saved === 'dark') return saved;
-    }
-    return 'light';
-  });
+  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -31,11 +40,19 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
       root.classList.remove('light');
       root.setAttribute('data-theme', 'dark');
     }
-    localStorage.setItem('freizy_theme', theme);
   }, [theme]);
 
+  const setTheme = (next: Theme) => {
+    setThemeState(next);
+    try {
+      localStorage.setItem('freizy_theme', next);
+    } catch {
+      // Storage can be unavailable (private mode); the in-memory theme still applies.
+    }
+  };
+
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (

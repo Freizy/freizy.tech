@@ -53,6 +53,20 @@ export const ConsultationModal: FC<ConsultationModalProps> = ({
 
   const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<Element | null>(null);
+  const doneButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (done) doneButtonRef.current?.focus();
+  }, [done]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -97,12 +111,13 @@ export const ConsultationModal: FC<ConsultationModalProps> = ({
     <div
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 bg-black/40"
       onClick={onClose}
-      role="dialog"
-      aria-modal="true"
     >
       <div
         ref={panelRef}
         tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="consult-title"
         className="relative w-full max-w-[520px] rounded-t-2xl sm:rounded-2xl bg-white dark:bg-[#1d1d1f] shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto focus:outline-none"
         onClick={(e) => e.stopPropagation()}
       >
@@ -116,17 +131,17 @@ export const ConsultationModal: FC<ConsultationModalProps> = ({
 
         {done ? (
           <div className="py-8 text-center">
-            <h3 className="text-[20px] font-semibold text-[#1d1d1f] dark:text-white">Thanks{name ? `, ${name}` : ''}.</h3>
+            <h3 id="consult-title" className="text-[20px] font-semibold text-[#1d1d1f] dark:text-white">Thanks{name ? `, ${name}` : ''}.</h3>
             <p className="mt-2 text-[14px] text-[#424245] dark:text-neutral-400">
               We'll reply to {email || 'your email'} within one business day.
             </p>
-            <button onClick={onClose} className="mt-6 px-5 py-2 rounded-full bg-[#ed1c24] text-white text-[14px] font-medium">
+            <button ref={doneButtonRef} onClick={onClose} className="mt-6 px-5 py-2 rounded-full bg-[#c41218] hover:bg-[#a50e13] text-white text-[14px] font-medium">
               Done
             </button>
           </div>
         ) : (
           <>
-            <h3 className="text-[22px] font-semibold tracking-tight text-[#1d1d1f] dark:text-white">Talk to our team</h3>
+            <h3 id="consult-title" className="text-[22px] font-semibold tracking-tight text-[#1d1d1f] dark:text-white">Talk to our team</h3>
             <p className="mt-1 text-[14px] text-[#6e6e73] dark:text-neutral-400">
               Leave your details — a real person replies, usually within a day.
             </p>
@@ -181,7 +196,7 @@ export const ConsultationModal: FC<ConsultationModalProps> = ({
                   or <a href="mailto:info@freizy.com" className="link-arrow">email</a>.
                 </div>
               )}
-              <button type="submit" disabled={isSubmitting} className="w-full py-2.5 rounded-full bg-[#ed1c24] hover:bg-[#c41218] text-white text-[15px] font-medium disabled:opacity-60">
+              <button type="submit" disabled={isSubmitting} className="w-full py-2.5 rounded-full bg-[#c41218] hover:bg-[#a50e13] text-white text-[15px] font-medium disabled:opacity-60">
                 {isSubmitting ? 'Sending…' : 'Request a call back'}
               </button>
               <p className="text-center text-[12px] text-[#86868b]">No spam. No shared details. Ever.</p>

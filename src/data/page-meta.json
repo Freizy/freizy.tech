@@ -1,0 +1,52 @@
+{
+  "home": {
+    "title": "Freizy Technologies — Software, AI & IT Company in Ghana",
+    "description": "Freizy Technologies in Accra, Ghana designs and builds business software, applied AI, and IT infrastructure. Six products, eight services, one accountable team.",
+    "path": "/"
+  },
+  "about": {
+    "title": "About — Freizy Technologies, Accra, Ghana",
+    "description": "Freizy Technologies designs, builds and supports business software, applied AI and IT infrastructure from Accra, Ghana. One accountable team since 2022.",
+    "path": "/about"
+  },
+  "services": {
+    "title": "Services — Applied AI, Software, Cybersecurity & IT | Freizy Technologies",
+    "description": "Eight services from one accountable team in Accra, Ghana: applied AI, software development, cybersecurity, robotics, hardware, networks, project management and digital marketing.",
+    "path": "/services"
+  },
+  "products": {
+    "title": "Products — Omnia, Lavida, KSM, Exams, Oudy, Stays | Freizy Technologies",
+    "description": "Six products built and maintained by Freizy Technologies: Omnia Suite, Lavida Health Buddy, KSM Autos, Exams Suite, Oudy and Stays. Live demos available.",
+    "path": "/products"
+  },
+  "caseStudies": {
+    "title": "Case Studies — Recent projects | Freizy Technologies",
+    "description": "Recent Freizy Technologies projects in plain terms: reconciliation automation for a lender, stock visibility across warehouses, and patient follow-up for a clinic group.",
+    "path": "/case-studies"
+  },
+  "contact": {
+    "title": "Contact — Sales & Support | Freizy Technologies, Accra",
+    "description": "Reach Freizy Technologies in Accra, Ghana: sales +233 24 035 2196, support +233 26 624 2703, info@freizy.com or WhatsApp. Response within one business day.",
+    "path": "/contact"
+  },
+  "privacy": {
+    "title": "Privacy Policy | Freizy Technologies",
+    "description": "How Freizy Technologies collects, uses, shares and protects personal data — and your rights to access, correct or delete it.",
+    "path": "/privacy"
+  },
+  "terms": {
+    "title": "Terms of Service | Freizy Technologies",
+    "description": "Terms governing Freizy Technologies services: quotes and payment, your responsibilities, intellectual property, confidentiality, liability and governing law (Ghana).",
+    "path": "/terms"
+  },
+  "refunds": {
+    "title": "Refund & Cancellation Policy | Freizy Technologies",
+    "description": "Freizy Technologies refund rules for services, subscriptions, Stays, Oudy and other products — how to request one and when refunds are refused.",
+    "path": "/refunds"
+  },
+  "notFound": {
+    "title": "Page not found | Freizy Technologies",
+    "description": "This page does not exist. Head back to the Freizy Technologies home page.",
+    "path": "/404"
+  }
+}

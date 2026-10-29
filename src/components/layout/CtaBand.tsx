@@ -22,7 +22,7 @@ export const CtaBand: FC<{ title?: string; text?: string }> = ({
             Talk to engineers
             <ArrowRight className="w-4 h-4" />
           </button>
-          <Link to="/contact" className="btn border border-white/25 text-white hover:border-[#ed1c24] hover:text-[#ed1c24] transition-colors">
+          <Link to="/contact" className="btn border border-white/25 text-white hover:border-[#ff6b70] hover:text-[#ff6b70] transition-colors">
             Contact page
           </Link>
         </div>

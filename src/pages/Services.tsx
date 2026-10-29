@@ -1,5 +1,6 @@
 import { type FC } from 'react';
 import { usePageMeta } from '../hooks/usePageMeta';
+import pageMeta from '../data/page-meta.json';
 import { useConsultation } from '../context/ConsultationContext';
 import { PageHeader } from '../components/layout/PageHeader';
 import { CtaBand } from '../components/layout/CtaBand';
@@ -11,12 +12,7 @@ import { ProcessPipeline } from '../components/ProcessPipeline';
 
 export const Services: FC = () => {
   const { openConsultation } = useConsultation();
-  usePageMeta({
-    title: 'Services — Applied AI, Software, Cybersecurity & IT | Freizy Technologies',
-    description:
-      'Eight services from one accountable team in Accra, Ghana: applied AI, software development, cybersecurity, robotics, hardware, networks, project management and digital marketing.',
-    path: '/services',
-  });
+  usePageMeta(pageMeta.services);
 
   return (
     <>

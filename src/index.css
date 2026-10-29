@@ -11,7 +11,9 @@
 @layer base {
   :root {
     --brand-red: #ed1c24;
-    --brand-red-dark: #c41218;
+    --brand-red-ink: #c41218;
+    --brand-red-on-dark: #ff6b70;
+    --brand-red-dark: #a50e13;
     --brand-black: #0b0b0d;
   }
 
@@ -70,6 +72,30 @@
 /* Sharp angular design — no rounded corners anywhere. */
 [class*="rounded-"] {
   border-radius: 0 !important;
+}
+
+/* Brand red for text: darker on light surfaces, lighter on dark ones. */
+.text-brand-red {
+  color: var(--brand-red-ink);
+}
+html.dark .text-brand-red {
+  color: var(--brand-red-on-dark);
+}
+
+/* Skip link — visible only when focused. */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  padding: 0.65rem 1.1rem;
+  background: var(--brand-red-ink);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 0.75rem;
 }
 
 /* Sticky glass nav */
@@ -170,7 +196,7 @@ html.dark .apple-panel {
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 .btn-primary {
-  background: var(--brand-red);
+  background: var(--brand-red-ink);
   color: #fff;
 }
 .btn-primary:hover {

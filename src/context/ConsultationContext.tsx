@@ -19,12 +19,14 @@ export const ConsultationProvider: FC<{ children: ReactNode }> = ({ children }) 
   return (
     <ConsultationContext.Provider value={{ openConsultation }}>
       {children}
-      <ConsultationModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        initialService={topic}
-        initialNotes=""
-      />
+      {open && (
+        <ConsultationModal
+          isOpen
+          onClose={() => setOpen(false)}
+          initialService={topic}
+          initialNotes=""
+        />
+      )}
     </ConsultationContext.Provider>
   );
 };

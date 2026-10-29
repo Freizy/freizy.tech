@@ -39,15 +39,15 @@ const products: {
   liveDesc: string;
 }[] = [
   {
-    id: 'omnia',
-    slug: 'omnia-suite',
-    name: 'Freizy Omnia Suite',
-    tag: 'Business management',
-    desc: 'Accounting, inventory, sales and reporting for small and mid-size companies. Replaces spreadsheets and disconnected tools.',
-    points: ['Invoicing and expenses', 'Stock and purchasing', 'Simple, exportable reports'],
-    url: 'https://omnia.freizy.com',
-    liveTitle: 'Live look: Omnia Suite',
-    liveDesc: 'Finance, stock and sales as your team would see them. Pause it, switch tabs — it\'s all sample data.',
+    id: 'hostel',
+    slug: 'freizy-stays',
+    name: 'Stays',
+    tag: 'Mobile app · Student housing',
+    desc: 'Find verified hostels, watch video reviews and book from your phone — with MoMo installment payments.',
+    points: ['Verified listings & 360 tours', 'Video reviews from tenants', 'MoMo installment payments'],
+    url: 'https://stays.freizy.com',
+    liveTitle: 'Live look: Stays',
+    liveDesc: "Bookings, occupancy and payments as a hostel manager would see them. Pause it, switch tabs — it's all sample data.",
   },
   {
     id: 'lavida',
@@ -92,22 +92,21 @@ const products: {
     liveDesc: 'For organizers filling seats and attendees finding things to do. Live demo available on request.',
   },
   {
-    id: 'hostel',
-    slug: 'freizy-stays',
-    name: 'Freizy Stays',
-    tag: 'Mobile app · Student housing',
-    desc: 'Find verified hostels, watch video reviews and book from your phone — with MoMo installment payments.',
-    points: ['Verified listings & 360 tours', 'Video reviews from tenants', 'MoMo installment payments'],
-    url: 'https://stays.freizy.com',
-    liveTitle: 'Live look: Freizy Stays',
-    liveDesc: "Bookings, occupancy and payments as a hostel manager would see them. Pause it, switch tabs — it's all sample data.",
+    id: 'omnia',
+    slug: 'omnia-suite',
+    name: 'Freizy Omnia Suite',
+    tag: 'Business management',
+    desc: 'Accounting, inventory, sales and reporting for small and mid-size companies. Replaces spreadsheets and disconnected tools.',
+    points: ['Invoicing and expenses', 'Stock and purchasing', 'Simple, exportable reports'],
+    liveTitle: 'Live look: Omnia Suite',
+    liveDesc: 'Finance, stock and sales as your team would see them. Pause it, switch tabs — it\'s all sample data.',
   },
 ];
 
 export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
   onOpenConsultation,
 }) => {
-  const [active, setActive] = useState<ProductId>('omnia');
+  const [active, setActive] = useState<ProductId>('hostel');
   const current = products.find((p) => p.id === active) ?? products[0];
 
   return (
@@ -158,11 +157,11 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <div className="text-[12px] font-medium text-[#6e6e73] dark:text-neutral-500 uppercase tracking-wide">
+                  <div className="text-[12px] font-medium text-[#6e6e73] dark:text-neutral-400 uppercase tracking-wide">
                     {p.tag}
                   </div>
                   {selected && (
-                    <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                    <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
                       Viewing live
                     </span>
                   )}
@@ -182,7 +181,7 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
                   ))}
                 </ul>
                 <div className="mt-auto pt-2 flex items-center justify-between gap-2">
-                  <span className={`text-[13px] font-medium ${selected ? 'text-[#1d1d1f] dark:text-white' : 'text-[#6e6e73] dark:text-neutral-500'}`}>
+                  <span className={`text-[13px] font-medium ${selected ? 'text-[#1d1d1f] dark:text-white' : 'text-[#6e6e73] dark:text-neutral-400'}`}>
                     {selected ? 'Showing below' : 'See it live'}
                   </span>
                   <div className="flex items-center gap-3">
@@ -231,7 +230,7 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
               <h3 className="text-[21px] font-semibold tracking-tight text-[#1d1d1f] dark:text-white">
                 {current.liveTitle}
               </h3>
-              <p className="text-[14px] text-[#6e6e73] dark:text-neutral-500 mt-1">
+              <p className="text-[14px] text-[#6e6e73] dark:text-neutral-400 mt-1">
                 {current.liveDesc}
               </p>
             </div>
@@ -266,7 +265,7 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
             >
               <Suspense
                 fallback={
-                  <div aria-busy="true" className="h-[380px] flex items-center justify-center text-[14px] text-[#6e6e73] dark:text-neutral-500">
+                  <div aria-busy="true" className="h-[380px] flex items-center justify-center text-[14px] text-[#6e6e73] dark:text-neutral-400">
                     Loading demo…
                   </div>
                 }
@@ -282,7 +281,7 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
           </AnimatePresence>
         </motion.div>
 
-        <p className="mt-6 text-[13px] text-[#6e6e73] dark:text-neutral-500">
+        <p className="mt-6 text-[13px] text-[#6e6e73] dark:text-neutral-400">
           Demos use sample data. We can walk through your own workflow on a call if that's more useful.
         </p>
       </div>

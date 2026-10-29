@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 
-interface PageMeta {
+export interface PageMeta {
   title: string;
   description: string;
   path: string;
+  /** Keep the page out of search results (used by the 404 page). */
+  noindex?: boolean;
 }
 
 const setMeta = (selector: string, attr: 'name' | 'property', key: string, content: string) => {
@@ -18,9 +20,10 @@ const setMeta = (selector: string, attr: 'name' | 'property', key: string, conte
 
 /**
  * Per-route title / description / canonical / OG tags.
- * Home defaults live in index.html; every other page calls this on mount.
+ * The same values live in src/data/page-meta.json so the post-build
+ * prerender step can write them into static HTML for crawlers.
  */
-export function usePageMeta({ title, description, path }: PageMeta) {
+export function usePageMeta({ title, description, path, noindex = false }: PageMeta) {
   useEffect(() => {
     document.title = title;
     setMeta('meta', 'name', 'description', description);
@@ -30,12 +33,28 @@ export function usePageMeta({ title, description, path }: PageMeta) {
     setMeta('meta', 'name', 'twitter:title', title);
     setMeta('meta', 'name', 'twitter:description', description);
 
+    let robots = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    if (noindex) {
+      if (!robots) {
+        robots = document.createElement('meta');
+        robots.setAttribute('name', 'robots');
+        document.head.appendChild(robots);
+      }
+      robots.setAttribute('content', 'noindex, follow');
+    } else if (robots) {
+      robots.setAttribute('content', 'index, follow');
+    }
+
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (noindex) {
+      canonical?.remove();
+      return;
+    }
     if (!canonical) {
       canonical = document.createElement('link');
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', `https://freizy.com${path}`);
-  }, [title, description, path]);
+  }, [title, description, path, noindex]);
 }

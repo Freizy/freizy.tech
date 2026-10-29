@@ -26,7 +26,7 @@ export const BrandLogo: FC<BrandLogoProps> = ({
     <div className={`flex items-center gap-2.5 select-none ${className}`}>
       <img
         src={logoPng}
-        alt="Freizy Technologies logo"
+        alt={showText ? '' : 'Freizy Technologies'}
         width={Math.round((s.iconSize * 120) / 171)}
         height={s.iconSize}
         className="flex-shrink-0 object-contain"

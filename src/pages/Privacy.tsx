@@ -1,12 +1,12 @@
 import { type FC } from 'react';
 import { LegalPage } from '../components/layout/LegalPage';
+import pageMeta from '../data/page-meta.json';
 
 export const Privacy: FC = () => (
   <LegalPage
     title="Privacy Policy"
     updated="Last updated: October 2026"
-    description="How Freizy Technologies collects, uses, shares and protects personal data — and your rights to access, correct or delete it."
-    path="/privacy"
+    meta={pageMeta.privacy}
     sections={[
       {
         heading: '1. What we collect',

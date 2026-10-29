@@ -99,7 +99,7 @@ export const FeatureBand: FC<FeatureBandProps> = ({ onOpenConsultation }) => {
 
       {/* Quiet capability ticker */}
       <div className="overflow-hidden border-b border-black/5 dark:border-white/10 py-4">
-        <div className="ticker-track flex gap-10 whitespace-nowrap w-max px-5 text-[13px] text-[#6e6e73] dark:text-neutral-500">
+        <div className="ticker-track flex gap-10 whitespace-nowrap w-max px-5 text-[13px] text-[#6e6e73] dark:text-neutral-400">
           {[...Array(2)].flatMap((_, dup) =>
             [
               'ERP & invoicing',

@@ -28,3 +28,26 @@
 
 /products/freizy-stays/fonts/files/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Stays is also served at the root of stays.freizy.com, so cover both the
+# apex path and the rewritten subdomain path. Images/logo are versioned with
+# ?v= in the markup, so a year is safe; JS/CSS keep a day and revalidate.
+/products/freizy-stays/public/images/*
+  Cache-Control: public, max-age=31536000, immutable
+/public/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/products/freizy-stays/public/logo.webp
+  Cache-Control: public, max-age=31536000, immutable
+/logo.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/products/freizy-stays/stays.js
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/stays.js
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/products/freizy-stays/fonts.css
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/fonts.css
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

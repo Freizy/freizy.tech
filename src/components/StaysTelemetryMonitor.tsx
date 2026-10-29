@@ -57,7 +57,7 @@ export const StaysTelemetryMonitor: FC = () => {
 
   return (
     <MonitorShell
-      title="Freizy Stays — demo overview"
+      title="Stays — demo overview"
       tabs={TABS}
       tab={tab}
       onTab={setTab}

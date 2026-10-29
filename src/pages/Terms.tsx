@@ -1,12 +1,12 @@
 import { type FC } from 'react';
 import { LegalPage } from '../components/layout/LegalPage';
+import pageMeta from '../data/page-meta.json';
 
 export const Terms: FC = () => (
   <LegalPage
     title="Terms of Service"
     updated="Last updated: October 2026"
-    description="Terms governing Freizy Technologies services: quotes and payment, your responsibilities, intellectual property, confidentiality, liability and governing law (Ghana)."
-    path="/terms"
+    meta={pageMeta.terms}
     sections={[
       {
         heading: '1. Our services',

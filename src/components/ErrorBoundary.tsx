@@ -31,7 +31,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 href="https://wa.me/233240352196"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-5 py-2.5 text-[14px] font-medium text-white bg-[#ed1c24] hover:bg-[#c41218] transition-colors"
+                className="inline-block px-5 py-2.5 text-[14px] font-medium text-white bg-[#c41218] hover:bg-[#a50e13] transition-colors"
               >
                 WhatsApp us
               </a>

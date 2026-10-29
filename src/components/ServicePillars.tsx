@@ -106,6 +106,7 @@ export const ServicePillars: FC<ServicePillarsProps> = ({ onSelectService }) => 
             return (
               <motion.button
                 key={s.title}
+                type="button"
                 variants={card}
                 onClick={() => onSelectService(s.title)}
                 whileHover={{ y: -4 }}
@@ -113,12 +114,12 @@ export const ServicePillars: FC<ServicePillarsProps> = ({ onSelectService }) => 
                 className="glass-card lift rounded-2xl p-6 text-left group"
               >
                 <Icon className="w-6 h-6 text-[#1d1d1f] dark:text-white mb-4" strokeWidth={1.75} />
-                <h3 className="text-[17px] font-semibold text-[#1d1d1f] dark:text-white mb-1.5">
+                <span className="block text-[17px] font-semibold text-[#1d1d1f] dark:text-white mb-1.5">
                   {s.title}
-                </h3>
-                <p className="text-[14px] leading-relaxed text-[#6e6e73] dark:text-neutral-400 mb-4">
+                </span>
+                <span className="block text-[14px] leading-relaxed text-[#6e6e73] dark:text-neutral-400 mb-4">
                   {s.desc}
-                </p>
+                </span>
                 <span className="link-arrow text-[14px] inline-flex items-center gap-0.5">
                   Discuss a project
                   <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -133,7 +134,7 @@ export const ServicePillars: FC<ServicePillarsProps> = ({ onSelectService }) => 
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-8 text-[13px] text-[#6e6e73] dark:text-neutral-500"
+          className="mt-8 text-[13px] text-[#6e6e73] dark:text-neutral-400"
         >
           Need design or project management with it? That's part of every engagement — branding, UI design and delivery planning are included, not upsold.
         </motion.p>

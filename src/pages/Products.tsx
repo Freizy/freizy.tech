@@ -2,6 +2,7 @@ import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { usePageMeta } from '../hooks/usePageMeta';
+import pageMeta from '../data/page-meta.json';
 import { useConsultation } from '../context/ConsultationContext';
 import { PageHeader } from '../components/layout/PageHeader';
 import { CtaBand } from '../components/layout/CtaBand';
@@ -9,12 +10,7 @@ import { ProductsShowcase } from '../components/ProductsShowcase';
 
 export const Products: FC = () => {
   const { openConsultation } = useConsultation();
-  usePageMeta({
-    title: 'Products — Omnia, Lavida, KSM, Exams, Oudy, Stays | Freizy Technologies',
-    description:
-      'Six products built and maintained by Freizy Technologies: Omnia Suite, Lavida Health Buddy, KSM Autos, Exams Suite, Oudy and Freizy Stays. Live demos available.',
-    path: '/products',
-  });
+  usePageMeta(pageMeta.products);
 
   return (
     <>
@@ -28,7 +24,7 @@ export const Products: FC = () => {
             Request a demo
             <ArrowRight className="w-4 h-4" />
           </button>
-          <Link to="/case-studies" className="btn border border-white/25 text-white hover:border-[#ed1c24] hover:text-[#ed1c24] transition-colors">
+          <Link to="/case-studies" className="btn border border-white/25 text-white hover:border-[#ff6b70] hover:text-[#ff6b70] transition-colors">
             See case studies
           </Link>
         </div>

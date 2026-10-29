@@ -1,12 +1,12 @@
 import { type FC } from 'react';
 import { LegalPage } from '../components/layout/LegalPage';
+import pageMeta from '../data/page-meta.json';
 
 export const Refunds: FC = () => (
   <LegalPage
     title="Refund & Cancellation Policy"
     updated="Last updated: October 2026"
-    description="Freizy Technologies refund rules for services, subscriptions, Freizy Stays, Oudy and other products — how to request one and when refunds are refused."
-    path="/refunds"
+    meta={pageMeta.refunds}
     sections={[
       {
         heading: 'General principles',
@@ -21,7 +21,7 @@ export const Refunds: FC = () => (
         body: 'Monthly plans: cancel any time before the next billing date; the current month is non-refundable and service continues to period end. Annual plans: full refund if requested within 14 days of first payment with minimal usage; after 14 days, refunds for unused full months are considered at our discretion for genuine issues only. Setup and migration fees are non-refundable once work begins.',
       },
       {
-        heading: '3. Freizy Stays',
+        heading: '3. Stays',
         body: 'Booking and deposit rules are stated in the Stays terms at checkout. Refunds follow the published cancellation window and property-partner policy shown before payment; where a listing is materially misrepresented, we mediate a fair resolution.',
       },
       {

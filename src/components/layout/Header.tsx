@@ -1,4 +1,4 @@
-import { useState, useEffect, type FC } from 'react';
+import { useState, useEffect, useRef, type FC } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { BrandLogo } from '../BrandLogo';
 import { useTheme } from '../../context/ThemeContext';
@@ -14,7 +14,7 @@ const navLinks: NavItem[] = [
   { name: 'About', kind: 'route', to: '/about' },
   { name: 'Services', kind: 'route', to: '/services' },
   { name: 'Products', kind: 'route', to: '/products' },
-  { name: 'Stays', kind: 'static', href: '/products/freizy-stays/' },
+  { name: 'Stays', kind: 'static', href: 'https://stays.freizy.com/' },
   { name: 'Case Studies', kind: 'route', to: '/case-studies' },
   { name: 'Contact', kind: 'route', to: '/contact' },
 ];
@@ -24,6 +24,8 @@ export const Header: FC = () => {
   const { openConsultation } = useConsultation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 8);
@@ -36,6 +38,45 @@ export const Header: FC = () => {
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const panel = mobileMenuRef.current;
+    panel?.querySelector<HTMLElement>('a[href], button:not([disabled])')?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (e.key !== 'Tab' || !panel) return;
+      const items = Array.from(
+        panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+      );
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const onDesktop = (e: MediaQueryListEvent) => {
+      if (e.matches) setMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    desktop.addEventListener('change', onDesktop);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      desktop.removeEventListener('change', onDesktop);
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-200 ${
@@ -43,7 +84,7 @@ export const Header: FC = () => {
       }`}
     >
       <div className="max-w-[1160px] mx-auto px-5 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center" aria-label="Freizy Technologies home">
+        <Link to="/" className="flex items-center">
           <BrandLogo size="sm" />
         </Link>
 
@@ -88,10 +129,12 @@ export const Header: FC = () => {
             {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
           <button
+            ref={menuButtonRef}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 text-[#1d1d1f] dark:text-white"
-            aria-label="Menu"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -99,7 +142,12 @@ export const Header: FC = () => {
       </div>
 
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-16 z-40 bg-white dark:bg-[#0a0a0c] border-b border-black/10 dark:border-white/10 px-5 py-4">
+        <nav
+          ref={mobileMenuRef}
+          id="mobile-menu"
+          aria-label="Mobile"
+          className="lg:hidden fixed inset-x-0 top-16 z-40 bg-white dark:bg-[#0a0a0c] border-b border-black/10 dark:border-white/10 px-5 py-4"
+        >
           <div className="flex flex-col">
             {navLinks.map((link) =>
               link.kind === 'static' ? (
@@ -119,7 +167,7 @@ export const Header: FC = () => {
                   onClick={() => setMobileMenuOpen(false)}
                   className={({ isActive }) =>
                     `py-3 text-[15px] border-b border-black/5 dark:border-white/5 last:border-0 ${
-                      isActive ? 'text-[#ed1c24] font-medium' : 'text-[#1d1d1f] dark:text-white'
+                      isActive ? 'text-brand-red font-medium' : 'text-[#1d1d1f] dark:text-white'
                     }`
                   }
                 >
@@ -137,7 +185,7 @@ export const Header: FC = () => {
               Talk to engineers
             </button>
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );

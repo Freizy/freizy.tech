@@ -16,6 +16,7 @@ export const ContactSection: FC<ContactSectionProps> = ({ initialNotes = '' }) =
     message: initialNotes,
   });
   const [sent, setSent] = useState(false);
+  const [sentTo, setSentTo] = useState({ name: '', email: '' });
   const [sending, setSending] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [honeypot, setHoneypot] = useState('');
@@ -31,6 +32,7 @@ export const ContactSection: FC<ContactSectionProps> = ({ initialNotes = '' }) =
     setSubmitError(null);
     try {
       await submitEnquiry({ ...formData, website: honeypot, startedAt: startedAt.current });
+      setSentTo({ name: formData.name, email: formData.email });
       setFormData({ name: '', email: '', company: '', topic: 'General enquiry', message: '' });
       setSent(true);
     } catch (err) {
@@ -48,8 +50,8 @@ export const ContactSection: FC<ContactSectionProps> = ({ initialNotes = '' }) =
       <div className="max-w-[1120px] mx-auto px-5">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ x: -24 }}
+            whileInView={{ x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-5"
@@ -69,21 +71,21 @@ export const ContactSection: FC<ContactSectionProps> = ({ initialNotes = '' }) =
                 href="https://wa.me/233240352196?text=Hello%20Freizy%20Technologies%2C%20I%27d%20like%20to%20discuss%20a%20project."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366] hover:bg-[#1eb856] text-white text-[14px] font-medium transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366] hover:bg-[#1eb856] text-[#0b0b0d] text-[14px] font-medium transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Chat on WhatsApp</span>
               </a>
               <div>Email: <a href="mailto:info@freizy.com" className="link-arrow">info@freizy.com</a></div>
-              <div className="text-[#6e6e73] dark:text-neutral-500 text-[13px] pt-1">
+              <div className="text-[#6e6e73] dark:text-neutral-400 text-[13px] pt-1">
                 Prefer email? Include your timeline and budget range — it helps us reply faster.
               </div>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 24, clipPath: 'inset(4% 3% 4% 3%)' }}
-            whileInView={{ opacity: 1, x: 0, clipPath: 'inset(0% 0% 0% 0%)' }}
+            initial={{ x: 24, clipPath: 'inset(4% 3% 4% 3%)' }}
+            whileInView={{ x: 0, clipPath: 'inset(0% 0% 0% 0%)' }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-7 clip-reveal"
@@ -93,10 +95,13 @@ export const ContactSection: FC<ContactSectionProps> = ({ initialNotes = '' }) =
                 <div className="py-10 text-center">
                   <h3 className="text-[20px] font-semibold text-[#1d1d1f] dark:text-white">Thanks — message noted.</h3>
                   <p className="mt-2 text-[14px] text-[#424245] dark:text-neutral-400">
-                    Hi {formData.name || 'there'}, we'll get back to {formData.email || 'you'} within one business day.
+                    Hi {sentTo.name || 'there'}, we'll get back to {sentTo.email || 'you'} within one business day.
                   </p>
                   <button
-                    onClick={() => setSent(false)}
+                    onClick={() => {
+                      setSent(false);
+                      startedAt.current = Date.now();
+                    }}
                     className="mt-6 text-[14px] link-arrow"
                   >
                     Send another message
@@ -154,10 +159,10 @@ export const ContactSection: FC<ContactSectionProps> = ({ initialNotes = '' }) =
                       or <a href="mailto:info@freizy.com" className="link-arrow">email</a>.
                     </div>
                   )}
-                  <button type="submit" disabled={sending} className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-[#ed1c24] hover:bg-[#c41218] text-white text-[15px] font-medium transition-colors disabled:opacity-60">
+                  <button type="submit" disabled={sending} className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-[#c41218] hover:bg-[#a50e13] text-white text-[15px] font-medium transition-colors disabled:opacity-60">
                     {sending ? 'Sending…' : 'Send message'}
                   </button>
-                  <p className="text-[12px] text-[#6e6e73] dark:text-neutral-500">
+                  <p className="text-[12px] text-[#6e6e73] dark:text-neutral-400">
                     We treat enquiries as confidential. No newsletters, no sharing your details.
                   </p>
                 </form>

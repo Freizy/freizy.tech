@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { usePageMeta } from '../hooks/usePageMeta';
+import pageMeta from '../data/page-meta.json';
 import { useConsultation } from '../context/ConsultationContext';
 import { ServicePillars } from '../components/ServicePillars';
 import { FeatureBand } from '../components/FeatureBand';
@@ -34,12 +35,7 @@ const stats: { to: string; label: string }[] = [
 
 export const Home: FC = () => {
   const { openConsultation } = useConsultation();
-  usePageMeta({
-    title: 'Freizy Technologies — Software, AI & IT Company in Ghana',
-    description:
-      'Freizy Technologies in Accra, Ghana designs and builds business software, applied AI, and IT infrastructure. Six products, eight services, one accountable team.',
-    path: '/',
-  });
+  usePageMeta(pageMeta.home);
 
   return (
     <>
@@ -72,7 +68,7 @@ export const Home: FC = () => {
             className="text-[38px] sm:text-[58px] lg:text-[68px] font-semibold tracking-tight leading-[1.04] max-w-[900px]"
           >
             Systems that hold up{' '}
-            <span className="text-[#ed1c24]">in production</span>.
+            <span className="text-brand-red">in production</span>.
           </motion.h1>
           <motion.p
             variants={item}
@@ -93,7 +89,7 @@ export const Home: FC = () => {
             </Link>
           </motion.div>
 
-          <motion.p variants={item} className="mt-5 text-[13px] text-[#6e6e73] dark:text-neutral-500">
+          <motion.p variants={item} className="mt-5 text-[13px] text-[#6e6e73] dark:text-neutral-400">
             Based in Accra, working with teams worldwide. Response within one business day.
           </motion.p>
         </motion.div>
@@ -115,7 +111,7 @@ export const Home: FC = () => {
                 <div className="text-[26px] font-semibold tracking-tight text-[#111114] dark:text-white tabular-nums">
                   {s.to}
                 </div>
-                <div className="text-[13px] text-[#6e6e73] dark:text-neutral-500 mt-1.5 leading-snug">
+                <div className="text-[13px] text-[#6e6e73] dark:text-neutral-400 mt-1.5 leading-snug">
                   {s.label}
                 </div>
               </motion.div>

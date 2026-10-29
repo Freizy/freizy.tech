@@ -84,7 +84,7 @@ export function MonitorShell<TabId extends string>({
     <div className="apple-panel rounded-2xl overflow-hidden">
       <div className="px-5 py-3 flex flex-wrap items-center justify-between gap-3 border-b border-black/5 dark:border-white/10">
         <div className="flex items-center gap-2">
-          <span className="text-[12px] text-[#6e6e73] dark:text-neutral-500 font-mono">
+          <span className="text-[12px] text-[#6e6e73] dark:text-neutral-400 font-mono">
             {title}
           </span>
         </div>
@@ -158,9 +158,9 @@ export function MonitorShell<TabId extends string>({
                 >
                   <div className="min-w-0">
                     <div className="text-[13px] font-medium text-[#1d1d1f] dark:text-white truncate">{f.text}</div>
-                    <div className="text-[12px] text-[#6e6e73] dark:text-neutral-500 truncate">{f.detail}</div>
+                    <div className="text-[12px] text-[#6e6e73] dark:text-neutral-400 truncate">{f.detail}</div>
                   </div>
-                  <div className="text-[11px] font-mono text-[#6e6e73] dark:text-neutral-500 flex-shrink-0 tabular-nums">{f.time}</div>
+                  <div className="text-[11px] font-mono text-[#6e6e73] dark:text-neutral-400 flex-shrink-0 tabular-nums">{f.time}</div>
                 </motion.li>
               ))}
             </AnimatePresence>
@@ -177,11 +177,11 @@ export const Kpi: FC<{ label: string; value: ReactNode; sub?: ReactNode }> = ({
   sub,
 }) => (
   <div className="bg-white dark:bg-[#0f0f12] rounded-xl border border-black/5 dark:border-white/10 p-5">
-    <div className="text-[12px] text-[#6e6e73] dark:text-neutral-500 mb-1">{label}</div>
+    <div className="text-[12px] text-[#6e6e73] dark:text-neutral-400 mb-1">{label}</div>
     <div className="text-[26px] font-semibold tracking-tight text-[#1d1d1f] dark:text-white tabular-nums">
       {value}
     </div>
-    {sub && <div className="text-[13px] text-[#6e6e73] dark:text-neutral-500 mt-1">{sub}</div>}
+    {sub && <div className="text-[13px] text-[#6e6e73] dark:text-neutral-400 mt-1">{sub}</div>}
   </div>
 );
 

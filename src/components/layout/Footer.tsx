@@ -14,7 +14,7 @@ export const Footer: FC = () => {
             </p>
           </div>
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#ed1c24] mb-4">Services</div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#ff6b70] mb-4">Services</div>
             <ul className="space-y-2.5 text-neutral-400">
               <li><Link to="/services" className="hover:text-white transition-colors">Applied AI</Link></li>
               <li><Link to="/services" className="hover:text-white transition-colors">Software development</Link></li>
@@ -24,17 +24,17 @@ export const Footer: FC = () => {
             </ul>
           </div>
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#ed1c24] mb-4">Products</div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#ff6b70] mb-4">Products</div>
             <ul className="space-y-2.5 text-neutral-400">
               <li><Link to="/products" className="hover:text-white transition-colors">Omnia Suite</Link></li>
               <li><Link to="/products" className="hover:text-white transition-colors">Lavida Health Buddy</Link></li>
               <li><Link to="/products" className="hover:text-white transition-colors">KSM Autos</Link></li>
               <li><Link to="/products" className="hover:text-white transition-colors">Exams Suite</Link></li>
-              <li><Link to="/products" className="hover:text-white transition-colors">Oudy & Freizy Stays</Link></li>
+              <li><Link to="/products" className="hover:text-white transition-colors">Oudy & Stays</Link></li>
             </ul>
           </div>
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#ed1c24] mb-4">Company</div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#ff6b70] mb-4">Company</div>
             <ul className="space-y-2.5 text-neutral-400">
               <li>Sales: <a href="tel:+233240352196" className="hover:text-white transition-colors">+233 24 035 2196</a></li>
               <li>Support: <a href="tel:+233266242703" className="hover:text-white transition-colors">+233 26 624 2703</a></li>
@@ -45,7 +45,7 @@ export const Footer: FC = () => {
             </ul>
           </div>
         </div>
-        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-3 text-[12px] text-neutral-500">
+        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-3 text-[12px] text-neutral-400">
           <span>© {new Date().getFullYear()} Freizy Technologies. All rights reserved.</span>
           <span className="flex gap-5">
             <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>

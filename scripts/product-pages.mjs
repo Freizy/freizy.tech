@@ -17,10 +17,10 @@ const WHATSAPP = 'https://wa.me/233240352196';
 // opens WhatsApp with a prefilled message so the team can send the link.
 const APP_LINK_IOS =
   'https://wa.me/233240352196?text=' +
-  encodeURIComponent('Hi Freizy! Please send me the Freizy Stays app link for iPhone.');
+  encodeURIComponent('Hi Freizy! Please send me the Stays app link for iPhone.');
 const APP_LINK_ANDROID =
   'https://wa.me/233240352196?text=' +
-  encodeURIComponent('Hi Freizy! Please notify me when Freizy Stays lands on Android.');
+  encodeURIComponent('Hi Freizy! Please notify me when Stays lands on Android.');
 
 const products = [
   {
@@ -41,8 +41,10 @@ const products = [
     ],
     forWho:
       'Built for retailers, distributors, pharmacies, restaurants and service companies in Ghana that need reliable records without enterprise complexity. It runs in the browser on phones and computers, works on modest connections, and every deployment is supported directly by the Freizy engineers who built it.',
-    liveUrl: 'https://omnia.freizy.com',
-    liveLabel: 'Open the live Omnia Suite site',
+    liveUrl: null,
+    liveLabel: null,
+    ctaUrl: SITE + '/contact',
+    ctaLabel: 'Request an Omnia Suite walkthrough',
     related: ['lavida-health-buddy', 'ksm-autos'],
   },
   {
@@ -135,13 +137,13 @@ const products = [
   },
   {
     slug: 'freizy-stays',
-    name: 'Freizy Stays',
+    name: 'Stays',
     tag: 'Mobile app · Student housing',
-    metaTitle: 'Freizy Stays — Student Hostel App in Ghana | Freizy',
+    metaTitle: 'Stays — Student Hostel App in Ghana | Freizy',
     metaDesc:
-      'Freizy Stays is a mobile app for finding trusted student hostels in Ghana: verified listings, 360 tours, video reviews, booking and MoMo installments.',
+      'Stays is a mobile app for finding trusted student hostels in Ghana: verified listings, 360 tours, video reviews, booking and MoMo installments.',
     lede:
-      'Freizy Stays is a mobile app for finding student accommodation you can actually trust. Verified hostel listings with photos and 360-degree tours, video reviews from real tenants, and in-app booking with MoMo installment payments — the whole search, from first look to first payment, happens on your phone.',
+      'Stays is a mobile app for finding student accommodation you can actually trust. Verified hostel listings with photos and 360-degree tours, video reviews from real tenants, and in-app booking with MoMo installment payments — the whole search, from first look to first payment, happens on your phone.',
     features: [
       'Freizy Verified listings — checked photos, amenities and utility ratings',
       '360-degree tours and video reviews from real tenants',
@@ -161,7 +163,7 @@ const products = [
     },
     appFaq: [
       {
-        q: 'Is Freizy Stays free to use?',
+        q: 'Is Stays free to use?',
         a: 'Yes — downloading the app and browsing hostels costs nothing. You only pay the hostel when you book, either in full or in MoMo installments.',
       },
       {
@@ -232,7 +234,7 @@ function storeBadges() {
 }
 
 function phoneMockup() {
-  return `<div class="phone" role="img" aria-label="Sample Freizy Stays listing: Oak Court Hostel, GH₵ 3500 per semester, with amenities, video reviews and MoMo installment booking.">
+  return `<div class="phone" role="img" aria-label="Sample Stays listing: Oak Court Hostel, GH₵ 3500 per semester, with amenities, video reviews and MoMo installment booking.">
       <div class="ph-status"><span>9:41</span><span>5G &#9646;&#9646;&#9646;</span></div>
       <div class="ph-head"><span>&#8249;</span><span class="ph-brand">FREIZY <b>STAYS</b></span><span>&#8599; &#128278;</span></div>
       <div class="ph-photo">
@@ -259,27 +261,27 @@ function phoneMockup() {
 
 function mini(kind) {
   if (kind === 'verified')
-    return `<div class="mini" role="img" aria-label="Verified listing card in the Freizy Stays app.">
+    return `<div class="mini" role="img" aria-label="Verified listing card in the Stays app.">
       <div class="mn-photo"><span class="ph-chip ok">Freizy Verified</span></div>
       <p class="mn-t"><b>Oak Court Hostel</b><span>Legon, Accra</span></p>
       <p class="mn-t"><b class="red">GH&#8373; 3500<small>/semester</small></b><span class="pill y">Light 4.8</span></p>
     </div>`;
   if (kind === 'reviews')
-    return `<div class="mini" role="img" aria-label="Tenant video reviews in the Freizy Stays app.">
+    return `<div class="mini" role="img" aria-label="Tenant video reviews in the Stays app.">
       <p class="mn-h">Video Reviews</p>
       <div class="mn-rev"><i>&#9654;</i><div><b>Clean &amp; safe</b><small>Ama K. · Legon</small></div></div>
       <div class="mn-rev"><i>&#9654;</i><div><b>Great water supply</b><small>Kwame · Kumasi</small></div></div>
       <div class="mn-tags"><span class="pill y">Light 4.8</span><span class="pill b">Water 4.6</span></div>
     </div>`;
   if (kind === 'momo')
-    return `<div class="mini" role="img" aria-label="MoMo installment plan: 875 cedis times 4 in the Freizy Stays app.">
+    return `<div class="mini" role="img" aria-label="MoMo installment plan: 875 cedis times 4 in the Stays app.">
       <p class="mn-h">MoMo Installment</p>
       <p class="mn-big">GH&#8373; 875 <span>&times; 4</span></p>
       <div class="mn-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
       <p class="mn-t"><small>3 of 4 paid · receipt for every payment</small></p>
       <div class="mn-btn">Pay with MoMo</div>
     </div>`;
-  return `<div class="mini" role="img" aria-label="Booking confirmation with digital receipt in the Freizy Stays app.">
+  return `<div class="mini" role="img" aria-label="Booking confirmation with digital receipt in the Stays app.">
       <p class="mn-check">&#10003;</p>
       <p class="mn-h center">Booking confirmed</p>
       <p class="mn-t center"><small>Room B12 · 2-bed · 2 terms</small></p>
@@ -307,7 +309,7 @@ function appPage(p) {
   <section class="hero"><div class="wrap wide hero-grid">
     <div>
       <nav class="crumbs dark" aria-label="Breadcrumb"><a href="${SITE}/">Home</a> / <a href="${SITE}/products">Products</a> / ${p.name}</nav>
-      <p class="eyebrow">Freizy Stays · Student housing app</p>
+      <p class="eyebrow">Stays · Student housing app</p>
       <h1>Find a hostel you can trust.</h1>
       <p class="lede">${p.lede}</p>
       ${storeBadges()}
@@ -325,7 +327,7 @@ function appPage(p) {
     <div><b>4×</b><span>monthly MoMo installments</span></div>
     <div><b>1</b><span>team that builds &amp; supports the app</span></div>
   </div>
-  <p class="avail center">The Freizy Stays platform at a glance.</p></section>
+  <p class="avail center">The Stays platform at a glance.</p></section>
   <div class="wrap wide" id="features">
     <div class="frow">
       <div><p class="eyebrow">Verified listings</p><h2>Every room checked before it lists.</h2><p>No more paying for a room you have never seen. Our team verifies photos, confirms amenities, and publishes honest utility ratings — so the room you book is the room you get.</p></div>
@@ -336,7 +338,7 @@ function appPage(p) {
       ${mini('reviews')}
     </div>
     <div class="frow">
-      <div><p class="eyebrow">MoMo installments</p><h2>Split the semester into four.</h2><p>Big upfront fees lock students out. Freizy Stays splits the semester into four monthly MoMo payments inside the app — with a digital receipt for every single one.</p></div>
+      <div><p class="eyebrow">MoMo installments</p><h2>Split the semester into four.</h2><p>Big upfront fees lock students out. Stays splits the semester into four monthly MoMo payments inside the app — with a digital receipt for every single one.</p></div>
       ${mini('momo')}
     </div>
     <div class="frow flip">
@@ -352,7 +354,7 @@ function appPage(p) {
       <figure><blockquote>“Great water supply, which is rare. The rating told the truth.”</blockquote><figcaption>Kwame · Kumasi</figcaption></figure>
       <figure><blockquote>“Nice study space. Booked and paid without visiting twice.”</blockquote><figcaption>Efe · Cape Coast</figcaption></figure>
     </div>
-    <p class="avail">Sample reviews shown inside Freizy Stays.</p>
+    <p class="avail">Sample reviews shown inside Stays.</p>
   </div></section>
   <div class="wrap">
     <h2>Who it is for</h2>
@@ -368,7 +370,7 @@ ${faqs}
   </div>
   <section class="final" id="get-the-app"><div class="wrap">
     <h2>Your next room is in your pocket.</h2>
-    <p>Download Freizy Stays free and start with verified hostels near your campus today.</p>
+    <p>Download Stays free and start with verified hostels near your campus today.</p>
     ${storeBadges()}
     <p class="micro">Free download · ${p.app.availability} · <a href="${SITE}/contact">Contact us</a> · <a href="${WHATSAPP}" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
   </div></section>`;
@@ -384,7 +386,9 @@ function page(p) {
     .join('\n      ');
   const live = p.liveUrl
     ? `<p><a class="btn" href="${p.liveUrl}" target="_blank" rel="noopener noreferrer">${p.liveLabel}</a></p>`
-    : `<p>There is no public demo site for ${p.name} yet — <a href="${WHATSAPP}" target="_blank" rel="noopener noreferrer">message us on WhatsApp</a> and we will walk you through it on a call.</p>`;
+    : p.ctaUrl
+      ? `<p><a class="btn" href="${p.ctaUrl}">${p.ctaLabel}</a></p>`
+      : `<p>There is no public demo site for ${p.name} yet — <a href="${WHATSAPP}" target="_blank" rel="noopener noreferrer">message us on WhatsApp</a> and we will walk you through it on a call.</p>`;
   const features = p.features.map((f) => `<li>${f}</li>`).join('\n      ');
 
   return `<!doctype html>
@@ -438,7 +442,8 @@ ${p.appFaq ? faqSchema(p) : ''}  <script type="application/ld+json">
   }
   </script>
   <style>
-    :root { --red: #ed1c24; --ink: #1d1d1f; --muted: #6e6e73; }
+    :root { --red: #ed1c24; --red-ink: #c41218; --red-on-dark: #ff6b70; --ink: #1d1d1f; --muted: #6e6e73; }
+    @media (prefers-color-scheme: dark) { :root { --muted: #a1a1a6; } }
     * { box-sizing: border-box; margin: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; color: var(--ink); line-height: 1.65; background: #fff; }
     @media (prefers-color-scheme: dark) { body { background: #000; color: #f5f5f7; } }
@@ -448,15 +453,17 @@ ${p.appFaq ? faqSchema(p) : ''}  <script type="application/ld+json">
     header.top a.brand span { color: var(--red); }
     nav.crumbs { font-size: 13px; color: var(--muted); margin: 28px 0 8px; }
     nav.crumbs a { color: var(--muted); }
-    .tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+    .tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red-ink); margin-bottom: 10px; }
+    @media (prefers-color-scheme: dark) { .tag { color: var(--red-on-dark); } }
     h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; }
     .lede { font-size: 18px; margin-bottom: 28px; }
     h2 { font-size: 22px; margin: 36px 0 12px; letter-spacing: -0.01em; }
     ul.feats { padding-left: 20px; margin-bottom: 8px; }
     ul.feats li { margin-bottom: 8px; }
     p { margin-bottom: 14px; }
-    a { color: var(--red); }
-    .btn { display: inline-block; background: var(--red); color: #fff !important; text-decoration: none; font-weight: 600; padding: 10px 22px; margin: 6px 0 4px; }
+    a { color: var(--red-ink); }
+    @media (prefers-color-scheme: dark) { a { color: var(--red-on-dark); } }
+    .btn { display: inline-block; background: var(--red-ink); color: #fff !important; text-decoration: none; font-weight: 600; padding: 10px 22px; margin: 6px 0 4px; }
     .cta { border: 1px solid #e5e5e5; padding: 24px; margin: 32px 0; }
     .cta h2 { margin-top: 0; }
     ul.related { padding-left: 20px; }
@@ -496,7 +503,7 @@ ${p.appFaq ? faqSchema(p) : ''}  <script type="application/ld+json">
     .ph-rev small { color: #666; font-size: 11px; }
     .ph-momo { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 12px; }
     .ph-momo small { display: block; color: #666; }
-    .ph-book { background: var(--red); color: #fff; text-align: center; font-weight: 700; border-radius: 24px; padding: 12px; margin-top: 10px; }
+    .ph-book { background: var(--red-ink); color: #fff; text-align: center; font-weight: 700; border-radius: 24px; padding: 12px; margin-top: 10px; }
     .mgr { border: 1px solid #e5e5e5; padding: 24px; margin: 32px 0; }
     .mgr h2 { margin-top: 0; }
     details.faq { border-top: 1px solid #e5e5e5; padding: 14px 0; }
@@ -517,7 +524,8 @@ ${p.appFaq ? faqSchema(p) : ''}  <script type="application/ld+json">
     .hero::before { content: ""; position: absolute; top: -200px; right: -150px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(237,28,36,0.28), transparent 65%); pointer-events: none; }
     .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; padding-top: 72px; padding-bottom: 72px; }
     @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; padding-top: 48px; padding-bottom: 48px; } }
-    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red-ink); margin-bottom: 14px; }
+    .hero .eyebrow { color: var(--red-on-dark); }
     .hero h1 { font-size: clamp(40px, 6vw, 68px); line-height: 1.04; letter-spacing: -0.03em; margin-bottom: 18px; font-weight: 800; }
     .hero .lede { font-size: 18px; color: #c9c9d1; max-width: 520px; }
     .hero .crumbs.dark, .hero .crumbs.dark a { color: #8e8e96; }
@@ -551,14 +559,14 @@ ${p.appFaq ? faqSchema(p) : ''}  <script type="application/ld+json">
     .mn-h.center, .mn-t.center { text-align: center; }
     .mn-t { margin-bottom: 8px; }
     .mn-t small { color: #666; }
-    .mn-t .red { color: var(--red); }
+    .mn-t .red { color: var(--red-ink); }
     .mn-photo { height: 110px; border-radius: 10px; background: linear-gradient(135deg, #3f4a5a, #9aa3ad 60%, #4a5568); position: relative; margin-bottom: 10px; }
     .mn-big { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
     .mn-big span { font-size: 16px; color: #555; }
     .mn-dots { display: flex; gap: 6px; margin: 10px 0; }
     .mn-dots i { width: 34px; height: 8px; border-radius: 4px; background: #e5e5e5; }
     .mn-dots i.on { background: #16a34a; }
-    .mn-btn { background: var(--red); color: #fff; text-align: center; font-weight: 700; border-radius: 20px; padding: 10px; margin-top: 10px; }
+    .mn-btn { background: var(--red-ink); color: #fff; text-align: center; font-weight: 700; border-radius: 20px; padding: 10px; margin-top: 10px; }
     .mn-check { width: 44px; height: 44px; border-radius: 50%; background: #16a34a; color: #fff; font-size: 22px; line-height: 44px; text-align: center; margin: 4px auto 10px; }
     .mn-rcpt { display: flex; justify-content: space-between; border-top: 1px dashed #ddd; padding: 8px 0; font-size: 12px; }
     .mn-rev { display: flex; gap: 8px; align-items: center; background: #f6f6f7; border-radius: 10px; padding: 8px; margin-bottom: 8px; }
@@ -609,7 +617,14 @@ ${p.appFaq ? faqSchema(p) : ''}  <script type="application/ld+json">
 `;
 }
 
+// Hand-built pages that this generator must never overwrite.
+const HAND_BUILT = new Set(['freizy-stays']);
+
 for (const p of products) {
+  if (HAND_BUILT.has(p.slug)) {
+    console.log('skipped public/products/' + p.slug + '/index.html (hand-built)');
+    continue;
+  }
   const dir = join(outDir, p.slug);
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, 'index.html'), page(p));

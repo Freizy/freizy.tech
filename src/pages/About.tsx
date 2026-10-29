@@ -2,6 +2,7 @@ import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { usePageMeta } from '../hooks/usePageMeta';
+import pageMeta from '../data/page-meta.json';
 import { useConsultation } from '../context/ConsultationContext';
 import { PageHeader } from '../components/layout/PageHeader';
 import { CtaBand } from '../components/layout/CtaBand';
@@ -33,12 +34,7 @@ const timeline = [
 
 export const About: FC = () => {
   const { openConsultation } = useConsultation();
-  usePageMeta({
-    title: 'About — Freizy Technologies, Accra, Ghana',
-    description:
-      'Freizy Technologies designs, builds and supports business software, applied AI and IT infrastructure from Accra, Ghana. One accountable team since 2022.',
-    path: '/about',
-  });
+  usePageMeta(pageMeta.about);
 
   return (
     <>
@@ -83,7 +79,7 @@ export const About: FC = () => {
                   key={t.year}
                   className="grid grid-cols-[90px_1fr] gap-4 py-5 border-b border-black/10 dark:border-white/10"
                 >
-                  <div className="font-mono text-[12px] uppercase tracking-wider text-[#ed1c24] pt-0.5">
+                  <div className="font-mono text-[12px] uppercase tracking-wider text-brand-red pt-0.5">
                     {t.year}
                   </div>
                   <div className="text-[15px] text-[#3a3a3e] dark:text-neutral-400 leading-relaxed">
@@ -112,7 +108,7 @@ export const About: FC = () => {
                   ['Reach', 'Ghana and remote teams worldwide'],
                 ].map(([k, v]) => (
                   <div key={k}>
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#6e6e73] dark:text-neutral-500">
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#6e6e73] dark:text-neutral-400">
                       {k}
                     </dt>
                     <dd className="text-[15px] text-[#111114] dark:text-white mt-1 leading-snug">
@@ -142,7 +138,7 @@ export const About: FC = () => {
                 transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
                 className="glass-card lift p-7"
               >
-                <div className="font-mono text-[11px] text-[#ed1c24] mb-3">
+                <div className="font-mono text-[11px] text-brand-red mb-3">
                   {String(i + 1).padStart(2, '0')}
                 </div>
                 <h3 className="text-[18px] font-semibold tracking-tight mb-2">{v.title}</h3>

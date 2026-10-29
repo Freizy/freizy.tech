@@ -2,8 +2,10 @@
 https://stays.freizy.com/*  /products/freizy-stays/:splat  200!
 
 # First-party proxy for Plausible (removes the last third-party JS/CSS request
-# and makes SRI unnecessary). Must come before the SPA fallback.
+# and makes SRI unnecessary).
 /js/plausible.js  https://plausible.io/js/script.js  200
 /api/event        https://plausible.io/api/event     200
 
-/*  /index.html  200
+# Per-route HTML rewrites and trailing-slash redirects are generated from
+# src/data/page-meta.json by scripts/prerender.mjs and appended to dist/_redirects.
+# Do not add them here by hand.

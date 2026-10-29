@@ -1,13 +1,10 @@
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { usePageMeta } from '../hooks/usePageMeta';
+import pageMeta from '../data/page-meta.json';
 
 export const NotFound: FC = () => {
-  usePageMeta({
-    title: 'Page not found | Freizy Technologies',
-    description: 'This page does not exist. Head back to the Freizy Technologies home page.',
-    path: '/404',
-  });
+  usePageMeta({ ...pageMeta.notFound, noindex: true });
 
   return (
     <section className="py-28 sm:py-36 bg-white dark:bg-[#0a0a0c] transition-colors">

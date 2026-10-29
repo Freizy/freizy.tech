@@ -76,7 +76,7 @@ export const ProductTelemetryMonitor: FC = () => {
 
   return (
     <MonitorShell
-      title="omnia.freizy.com — live overview"
+      title="Omnia Suite — sample preview"
       tabs={TABS}
       tab={tab}
       onTab={setTab}
@@ -136,7 +136,7 @@ export const ProductTelemetryMonitor: FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Kpi label="Orders · today" value={orders} sub="Across Accra + Kumasi stores" />
           <div className="bg-white dark:bg-[#0f0f12] rounded-xl border border-black/5 dark:border-white/10 p-5">
-            <div className="text-[12px] text-[#6e6e73] dark:text-neutral-500 mb-2">Last 10 days</div>
+            <div className="text-[12px] text-[#6e6e73] dark:text-neutral-400 mb-2">Last 10 days</div>
             <svg viewBox="0 0 220 56" className="w-full h-[56px]" role="img" aria-label="Sales trend, rising">
               <motion.polyline
                 points={sparkPoints}

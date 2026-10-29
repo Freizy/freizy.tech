@@ -44,7 +44,7 @@ export const AISection: FC<AISectionProps> = ({ onOpenConsultation }) => {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-[720px] mb-12"
         >
-          <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-neutral-500 font-medium mb-3">
+          <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-neutral-400 font-medium mb-3">
             Artificial intelligence
           </p>
           <h2 className="text-[32px] sm:text-[48px] font-semibold leading-[1.08]">
@@ -90,14 +90,14 @@ export const AISection: FC<AISectionProps> = ({ onOpenConsultation }) => {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="bg-[#0b0b0d] p-6 sm:p-8"
           >
-            <div className="text-[12px] font-mono text-neutral-500 mb-3">SAMPLE INTERACTION — OMNIA ASSISTANT PILOT</div>
+            <div className="text-[12px] font-mono text-neutral-400 mb-3">SAMPLE INTERACTION — OMNIA ASSISTANT PILOT</div>
             <div className="space-y-3 text-[14px] leading-relaxed">
               <p className="text-white">
-                <span className="text-neutral-500 font-mono text-[12px] block mb-1">YOU ASK</span>
+                <span className="text-neutral-400 font-mono text-[12px] block mb-1">YOU ASK</span>
                 Which invoices are overdue, and who owes the most?
               </p>
               <p className="text-neutral-300 border-l-2 border-[#ed1c24] pl-4">
-                <span className="text-neutral-500 font-mono text-[12px] block mb-1">ASSISTANT</span>
+                <span className="text-neutral-400 font-mono text-[12px] block mb-1">ASSISTANT</span>
                 9 invoices totalling GH₵ 64,200. Largest: Apex Traders — GH₵ 18,400, 23 days overdue. Draft reminders?
               </p>
             </div>
@@ -110,7 +110,7 @@ export const AISection: FC<AISectionProps> = ({ onOpenConsultation }) => {
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="bg-[#0b0b0d] p-6 sm:p-8 flex flex-col"
           >
-            <div className="text-[12px] font-mono text-neutral-500 mb-3">TOOLING WE USE</div>
+            <div className="text-[12px] font-mono text-neutral-400 mb-3">TOOLING WE USE</div>
             <div className="flex flex-wrap gap-2">
               {['Python', 'PyTorch', 'scikit-learn', 'Hugging Face', 'CUDA', 'TensorRT', 'LangChain', 'FastAPI', 'ONNX', 'ROS 2', 'OpenCV', 'Docker'].map((t) => (
                 <span
@@ -122,12 +122,12 @@ export const AISection: FC<AISectionProps> = ({ onOpenConsultation }) => {
               ))}
             </div>
             <p className="mt-5 text-[14px] text-neutral-400 leading-relaxed">
-              Pilot-first, NDA-friendly. If the pilot doesn\u2019t prove value on
+              Pilot-first, NDA-friendly. If the pilot doesn't prove value on
               your data, you keep everything we built and we part ways.
             </p>
             <button
               onClick={onOpenConsultation}
-              className="mt-6 self-start px-6 py-2.5 bg-[#ed1c24] hover:bg-[#c41218] text-white text-[15px] font-medium transition-all hover:scale-[1.02] active:scale-[0.98] inline-flex items-center gap-1.5"
+              className="mt-6 self-start px-6 py-2.5 bg-[#c41218] hover:bg-[#a50e13] text-white text-[15px] font-medium transition-all hover:scale-[1.02] active:scale-[0.98] inline-flex items-center gap-1.5"
             >
               <span>Discuss an AI project</span>
               <ChevronRight className="w-4 h-4" />

@@ -22,6 +22,10 @@ const clip = (value: string | undefined, max: number): string =>
  * or submitted implausibly fast) so spammers can't probe the form.
  * Throws an Error with a human-readable message on any real failure.
  *
+ * SECURITY NOTE: the Web3Forms key is public by design and submissions go
+ * straight to their API, so the honeypot is best-effort only. See README
+ * "Accepted risk" before replacing this with a server-side proxy.
+ *
  * NOTE: the serverless endpoint in api/contact.ts is the planned upgrade
  * path (adds auto-replies, topic routing, no submission caps). Switching
  * back is a one-line change here.
