@@ -10,20 +10,12 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const readStoredTheme = (): Theme | null => {
-  try {
-    const saved = localStorage.getItem('freizy_theme');
-    return saved === 'light' || saved === 'dark' ? saved : null;
-  } catch {
-    return null;
-  }
-};
-
 const getInitialTheme = (): Theme => {
-  if (typeof window === 'undefined') return 'light';
-  const stored = readStoredTheme();
-  if (stored) return stored;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  // theme-init.js runs before React and has already applied the stored or
+  // system preference to <html>. Reading that class keeps the provider and
+  // the hydrated markup in agreement.
+  if (typeof document === 'undefined') return 'dark';
+  return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 };
 
 export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {

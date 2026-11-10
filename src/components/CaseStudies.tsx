@@ -1,4 +1,5 @@
 import { type FC } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 
 interface CaseStudiesProps {
@@ -69,6 +70,12 @@ export const CaseStudies: FC<CaseStudiesProps> = ({ onOpenConsultation }) => {
           ))}
         </motion.div>
         <p className="mt-8 text-[14px] text-[#424245] dark:text-neutral-400">
+          <Link to="/case-studies" className="link-arrow">
+            Read the full case studies
+          </Link>
+          <span aria-hidden="true" className="mx-2">
+            ·
+          </span>
           References available on request.{' '}
           <button onClick={onOpenConsultation} className="link-arrow">
             Ask about a similar project

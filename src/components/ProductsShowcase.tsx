@@ -1,6 +1,8 @@
 import { lazy, Suspense, useState, type FC } from 'react';
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { ChevronRight, ExternalLink } from 'lucide-react';
+import { useHasHydrated } from '../hooks/useHasHydrated';
 
 const ProductTelemetryMonitor = lazy(() =>
   import('./ProductTelemetryMonitor').then((m) => ({ default: m.ProductTelemetryMonitor }))
@@ -103,10 +105,23 @@ const products: {
   },
 ];
 
+const DemoPlaceholder: FC = () => (
+  <div
+    role="status"
+    className="h-[380px] flex items-center justify-center text-[14px] text-[#6e6e73] dark:text-neutral-400"
+  >
+    Loading demo…
+  </div>
+);
+
 export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
   onOpenConsultation,
 }) => {
   const [active, setActive] = useState<ProductId>('hostel');
+  // The monitors run live timers and random sample values from module load,
+  // which cannot match between the prerender and the browser. Render the
+  // stable placeholder on the server and hydrate it, then mount the demo.
+  const demosReady = useHasHydrated();
   const current = products.find((p) => p.id === active) ?? products[0];
 
   return (
@@ -127,6 +142,13 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
             Six products we maintain ourselves — so the support you get comes
             from the people who wrote the code. Select one to preview its workflow.
           </p>
+          <Link
+            to="/products"
+            className="mt-4 inline-flex items-center gap-1 text-[14px] font-medium link-arrow"
+          >
+            See all six products
+            <ChevronRight className="w-4 h-4" />
+          </Link>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="tablist" aria-label="Products">
@@ -265,20 +287,18 @@ export const ProductsShowcase: FC<ProductsShowcaseProps> = ({
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Suspense
-                fallback={
-                  <div aria-busy="true" className="h-[380px] flex items-center justify-center text-[14px] text-[#6e6e73] dark:text-neutral-400">
-                    Loading demo…
-                  </div>
-                }
-              >
-                {current.id === 'omnia' && <ProductTelemetryMonitor />}
-                {current.id === 'lavida' && <LavidaTelemetryMonitor />}
-                {current.id === 'ksm' && <KsmTelemetryMonitor />}
-                {current.id === 'exams' && <ExamsTelemetryMonitor />}
-                {current.id === 'oudy' && <OudyTelemetryMonitor />}
-                {current.id === 'hostel' && <StaysTelemetryMonitor />}
-              </Suspense>
+              {demosReady ? (
+                <Suspense fallback={<DemoPlaceholder />}>
+                  {current.id === 'omnia' && <ProductTelemetryMonitor />}
+                  {current.id === 'lavida' && <LavidaTelemetryMonitor />}
+                  {current.id === 'ksm' && <KsmTelemetryMonitor />}
+                  {current.id === 'exams' && <ExamsTelemetryMonitor />}
+                  {current.id === 'oudy' && <OudyTelemetryMonitor />}
+                  {current.id === 'hostel' && <StaysTelemetryMonitor />}
+                </Suspense>
+              ) : (
+                <DemoPlaceholder />
+              )}
             </motion.div>
           </AnimatePresence>
         </motion.div>

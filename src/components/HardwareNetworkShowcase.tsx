@@ -1,12 +1,17 @@
 import { useRef, type FC } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
+import { useHasHydrated } from '../hooks/useHasHydrated';
 
 export const HardwareNetworkShowcase: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReduced = useReducedMotion();
+  const hydrated = useHasHydrated();
+  // The server renders the animated values; switch to the reduced-motion
+  // branch only after hydration so the style attributes match.
+  const reduceMotion = hydrated && prefersReduced === true;
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const yLeft = useTransform(scrollYProgress, [0, 1], [24, prefersReduced ? 24 : -24]);
-  const yRight = useTransform(scrollYProgress, [0, 1], [48, prefersReduced ? 48 : -48]);
+  const yLeft = useTransform(scrollYProgress, [0, 1], [24, reduceMotion ? 24 : -24]);
+  const yRight = useTransform(scrollYProgress, [0, 1], [48, reduceMotion ? 48 : -48]);
 
   return (
     <section ref={ref} id="hardware" className="py-20 sm:py-28 bg-white dark:bg-black transition-colors overflow-hidden">

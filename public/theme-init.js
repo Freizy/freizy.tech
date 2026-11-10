@@ -1,6 +1,7 @@
 // Theme bootstrap — runs before first paint to avoid a light/dark flash.
 // External file (not inline) so the CSP can forbid inline scripts.
 (function () {
+  document.documentElement.classList.add('js');
   try {
     var savedTheme = localStorage.getItem('freizy_theme');
     var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;

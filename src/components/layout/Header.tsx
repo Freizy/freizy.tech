@@ -20,7 +20,7 @@ const navLinks: NavItem[] = [
 ];
 
 export const Header: FC = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { toggleTheme } = useTheme();
   const { openConsultation } = useConsultation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -113,7 +113,11 @@ export const Header: FC = () => {
             className="p-2 text-[#6e6e73] hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
             aria-label="Toggle appearance"
           >
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            {/* Both icons are always in the markup and CSS picks one from the
+                html.dark class. That keeps server and client output identical
+                even when the visitor's saved theme differs from the default. */}
+            <Sun className="w-4 h-4 hidden dark:block" />
+            <Moon className="w-4 h-4 dark:hidden" />
           </button>
           <button onClick={() => openConsultation()} className="btn btn-primary">
             Talk to engineers
@@ -126,7 +130,8 @@ export const Header: FC = () => {
             className="p-2 text-[#6e6e73] dark:text-neutral-400"
             aria-label="Toggle appearance"
           >
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            <Sun className="w-4 h-4 hidden dark:block" />
+            <Moon className="w-4 h-4 dark:hidden" />
           </button>
           <button
             ref={menuButtonRef}

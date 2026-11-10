@@ -1,6 +1,8 @@
 import { useRef, type FC } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import { ChevronRight } from 'lucide-react';
+import { useHasHydrated } from '../hooks/useHasHydrated';
 
 interface FeatureBandProps {
   onOpenConsultation: () => void;
@@ -13,13 +15,18 @@ interface FeatureBandProps {
 export const FeatureBand: FC<FeatureBandProps> = ({ onOpenConsultation }) => {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReduced = useReducedMotion();
+  const hydrated = useHasHydrated();
+  // Keep the server render (and the hydration pass) on the animated values;
+  // only apply the reduced-motion branch after hydration so the style
+  // attributes cannot disagree.
+  const reduceMotion = hydrated && prefersReduced === true;
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ['-12%', prefersReduced ? '-12%' : '12%']);
-  const fgY = useTransform(scrollYProgress, [0, 1], [30, prefersReduced ? 30 : -30]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ['-12%', reduceMotion ? '-12%' : '12%']);
+  const fgY = useTransform(scrollYProgress, [0, 1], [30, reduceMotion ? 30 : -30]);
 
   return (
     <div ref={ref} className="relative bg-[#f5f5f7] dark:bg-[#0b0b0d] transition-colors">
@@ -88,12 +95,20 @@ export const FeatureBand: FC<FeatureBandProps> = ({ onOpenConsultation }) => {
             ))}
           </motion.div>
 
-          <button
-            onClick={onOpenConsultation}
-            className="mt-8 inline-flex items-center gap-1 text-[15px] font-medium text-white hover:underline"
-          >
-            Talk through your setup <ChevronRight className="w-4 h-4" />
-          </button>
+          <div className="mt-8 flex flex-wrap items-center gap-6">
+            <button
+              onClick={onOpenConsultation}
+              className="inline-flex items-center gap-1 text-[15px] font-medium text-white hover:underline"
+            >
+              Talk through your setup <ChevronRight className="w-4 h-4" />
+            </button>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-1 text-[15px] font-medium text-neutral-300 hover:text-white hover:underline"
+            >
+              Meet the team <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
         </motion.div>
       </div>
 

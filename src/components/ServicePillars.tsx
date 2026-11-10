@@ -1,4 +1,5 @@
 import { type FC } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
   BrainCircuit,
@@ -92,6 +93,13 @@ export const ServicePillars: FC<ServicePillarsProps> = ({ onSelectService }) => 
             Most projects touch more than one area. You get a single point of
             contact and a plan that covers software, hardware and support together.
           </p>
+          <Link
+            to="/services"
+            className="mt-4 inline-flex items-center gap-1 text-[14px] font-medium link-arrow"
+          >
+            See all eight services
+            <ChevronRight className="w-4 h-4" />
+          </Link>
         </motion.div>
 
         <motion.div

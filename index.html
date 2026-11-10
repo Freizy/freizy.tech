@@ -39,9 +39,13 @@
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Freizy Technologies",
+        "legalName": "Freizy Technologies",
         "url": "https://freizy.com/",
-        "logo": "https://freizy.com/og-image.png",
+        "logo": "https://freizy.com/logo-512.png",
         "description": "Business software, applied AI, robotics, and IT infrastructure designed, built and supported by one team in Accra, Ghana.",
+        "foundingDate": "2022",
+        "email": "info@freizy.com",
+        "areaServed": ["Ghana", "Worldwide"],
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Accra",
@@ -67,6 +71,23 @@
     <!-- Privacy-friendly analytics (no cookies, no banner needed). Proxied
          through Netlify so the browser only ever talks to freizy.com. -->
     <script defer data-domain="freizy.com" data-api="/api/event" src="/js/plausible.js"></script>
+    <!-- Declares the primary navigation as an ItemList. Google does not
+         guarantee sitelinks from this, but it makes the site hierarchy
+         explicit to crawlers that read JSON-LD without executing JavaScript. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Freizy Technologies primary navigation",
+        "itemListElement": [
+          { "@type": "SiteNavigationElement", "position": 1, "name": "Services", "url": "https://freizy.com/services" },
+          { "@type": "SiteNavigationElement", "position": 2, "name": "Products", "url": "https://freizy.com/products" },
+          { "@type": "SiteNavigationElement", "position": 3, "name": "Case Studies", "url": "https://freizy.com/case-studies" },
+          { "@type": "SiteNavigationElement", "position": 4, "name": "About", "url": "https://freizy.com/about" },
+          { "@type": "SiteNavigationElement", "position": 5, "name": "Contact", "url": "https://freizy.com/contact" }
+        ]
+      }
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -156,10 +177,25 @@
   >
     <div id="root"></div>
     <noscript>
-      <div style="max-width:640px;margin:80px auto;padding:0 20px;font-family:system-ui,sans-serif;color:#1d1d1f;">
-        <h1>Freizy Technologies</h1>
-        <p>This site needs JavaScript to run. To reach us directly:</p>
-        <p>
+      <div style="max-width:640px;margin:64px auto;padding:0 20px;font-family:system-ui,sans-serif;color:#1d1d1f;line-height:1.6;">
+        <h1 style="font-size:32px;line-height:1.1;margin:0 0 12px;">Freizy Technologies</h1>
+        <p style="margin:0 0 8px;">
+          Business software, applied AI and IT infrastructure — designed, built and
+          supported by one team in Accra, Ghana.
+        </p>
+        <p style="margin:0 0 20px;">
+          This site uses JavaScript for interactive product previews. You can still
+          reach us directly using the details below.
+        </p>
+        <nav aria-label="Site" style="display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 24px;">
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/products">Products</a>
+          <a href="/case-studies">Case Studies</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+        </nav>
+        <p style="margin:0;">
           Email <a href="mailto:info@freizy.com">info@freizy.com</a><br />
           Sales <a href="tel:+233240352196">+233 24 035 2196</a><br />
           Support <a href="tel:+233266242703">+233 26 624 2703</a>

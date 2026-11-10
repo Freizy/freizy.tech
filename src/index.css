@@ -82,6 +82,22 @@ html.dark .text-brand-red {
   color: var(--brand-red-on-dark);
 }
 
+/* Motion components write their hidden entrance state into Prerendered HTML.
+   theme-init.js sets .js before paint; without JavaScript the animations
+   never run, so reveal that content instead of leaving it invisible. */
+html:not(.js) [style*="opacity:0"],
+html:not(.js) [style*="opacity: 0"] {
+  opacity: 1 !important;
+}
+html:not(.js) [style*="transform:translate"],
+html:not(.js) [style*="transform: translate"] {
+  transform: none !important;
+}
+html:not(.js) [style*="clip-path:inset"],
+html:not(.js) [style*="clip-path: inset"] {
+  clip-path: none !important;
+}
+
 /* Skip link — visible only when focused. */
 .skip-link {
   position: absolute;

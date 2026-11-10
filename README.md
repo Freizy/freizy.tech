@@ -34,9 +34,11 @@ hosts the product pages for the six products we maintain:
 | --- | --- |
 | `npm run dev` | Dev server on `http://localhost:3000` |
 | `npm run dev:host` | Dev server exposed on the local network |
-| `npm run build` | Production build, then prerender route HTML and `404.html` |
+| `npm run build` | Client build, SSR build, then prerender route HTML and `404.html` |
+| `npm run build:client` | Client bundle only (writes `dist/`) |
+| `npm run build:server` | Build the build-time renderer (writes `dist-server/`) |
 | `npm run preview` | Serve the production build locally |
-| `npm run clean` | Delete `dist/` and `server.js` (cross-platform) |
+| `npm run clean` | Delete `dist/`, `dist-server/` and `server.js` (cross-platform) |
 | `npm run lint` | ESLint over the repo |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run format` | Prettier write (optional; not enforced in CI) |
@@ -49,13 +51,16 @@ is hand-built; running the generator must never overwrite it.
 
 ```
 src/
-  App.tsx                 route table; Home is eager, every other page is lazy
-  main.tsx                React root, router, theme and error boundary
+  App.tsx                 route table; Home/404 are eager, other pages use lazyRoute
+  entry-server.tsx        build-time render of every route to HTML
+  main.tsx                preloads the current route, then hydrates the server HTML
   components/             layout, sections, product demos
   context/                theme and consultation-modal providers
   data/page-meta.json     per-route title/description/canonical/og:url
   hooks/usePageMeta.ts    applies the same metadata on client navigation
+  hooks/useHasHydrated.ts avoids hydrating client-only live demos
   lib/contact.ts          Web3Forms submission + honeypot handling
+  lib/route-modules.tsx   lazy route loaders + synchronous preload cache
   pages/                  one component per SPA route
   index.css               design tokens, shared utility classes
 public/
@@ -63,7 +68,7 @@ public/
   _redirects              Stays subdomain rewrite and Plausible proxy
   products/               static product pages and their assets
 scripts/
-  prerender.mjs           writes per-route HTML and Netlify redirects
+  prerender.mjs           renders each route, writes HTML and Netlify redirects
   product-pages.mjs       generates the non-Stays product pages
   clean.mjs               cross-platform clean
 netlify/edge-functions/
@@ -73,13 +78,31 @@ netlify/edge-functions/
 ## Routing and metadata
 
 `src/data/page-meta.json` is the single source of truth for route metadata.
-`scripts/prerender.mjs` runs after Vite and:
+`npm run build` does three passes:
 
-1. Copies the built app shell into one HTML file per SPA route.
-2. Replaces title, description, Open Graph, Twitter and canonical tags.
-3. Removes the home-only FAQ JSON-LD from other routes.
-4. Writes a real `404.html` with `noindex`.
-5. Appends the route rewrites and trailing-slash redirects to `dist/_redirects`.
+1. Vite builds the client bundle into `dist/`.
+2. Vite builds `src/entry-server.tsx` into `dist-server/`. That entry preloads
+   every route chunk and uses `renderToString`, so no Suspense boundary falls
+   back to a loading placeholder and no inline streaming bootstrap script is
+   emitted (the CSP is `script-src 'self'`).
+3. `scripts/prerender.mjs` renders each URL, injects the app markup into
+   `<div id="root">`, replaces title/description/Open Graph/Twitter/canonical
+   tags, adds `BreadcrumbList` JSON-LD to every non-home route, removes the
+   home-only FAQ JSON-LD and the now-redundant `<noscript>` fallback, writes a
+   real `404.html` with `noindex`, and appends route rewrites plus trailing-slash
+   redirects to `dist/_redirects`.
+
+On the client, `main.tsx` preloads the current route's chunk before calling
+`hydrateRoot`, so the first render matches the prerendered HTML. Other route
+chunks still load on first navigation. The live product demos mount only after
+hydration because their timers and random sample values cannot be reproduced on
+the server.
+
+`index.html` carries the sitewide `Organization` and
+`SiteNavigationElement` JSON-LD. The latter declares the primary navigation
+(Services, Products, Case Studies, About, Contact) for crawlers that read the
+HTML before React runs. It does not force Google sitelinks, which remain
+algorithmic.
 
 There is no SPA catch-all. Unknown paths get a real 404 response.
 
